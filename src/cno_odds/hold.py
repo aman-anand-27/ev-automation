@@ -72,19 +72,17 @@ def _side_label(outcome: dict, market_key: str) -> str:
     return outcome["name"]
 
 
-def _consensus_implied(
+def _consensus_details(
     bookmakers: list[dict],
     dk_side: dict,
     market_key: str,
     exclude_keys: set,
-    min_books: int,
-) -> tuple[Optional[float], int]:
-    """Median implied prob (%) across all available books (exc. DK & Novig) on DK's side.
+) -> list[dict]:
+    """Return per-book price details for all available consensus books on DK's side.
 
-    Returns (median_pct, book_count). book_count is the number of books found regardless
-    of whether it met min_books, so the caller can show it in the UI.
+    Each entry: {book, price_dec, american, implied_pct}
     """
-    implieds: list[float] = []
+    details: list[dict] = []
     for bm in bookmakers:
         if bm["key"] in exclude_keys:
             continue
@@ -93,11 +91,14 @@ def _consensus_implied(
                 continue
             for o in mkt["outcomes"]:
                 if _same_side(o, dk_side, market_key):
-                    implieds.append(1.0 / o["price"] * 100.0)
+                    details.append({
+                        "book": bm["key"],
+                        "price_dec": o["price"],
+                        "american": decimal_to_american(o["price"]),
+                        "implied_pct": round(1.0 / o["price"] * 100.0, 3),
+                    })
                     break
-    if len(implieds) < min_books:
-        return None, len(implieds)
-    return median(implieds), len(implieds)
+    return details
 
 
 def _novig_rank(
@@ -143,6 +144,7 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
     exchange = cfg["target_books"]["exchange"]
     exclude_keys = {primary, exchange}
     min_books = cfg["thresholds"]["min_books_for_consensus"]
+    sharp_keys = set(cfg.get("sharp_books", []))
     rows: list[dict] = []
 
     for game in games:
@@ -180,16 +182,35 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 novig_price = novig_opp["price"]
                 hold_pct = compute_hold(dk_price, novig_price)
                 dk_impl_pct = 1.0 / dk_price * 100.0
-                consensus_impl_pct, consensus_count = _consensus_implied(
-                    bookmakers, dk_out, market_key, exclude_keys, min_books
-                )
-                rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)
 
-                consensus_american = (
-                    decimal_to_american(100.0 / consensus_impl_pct)
-                    if consensus_impl_pct is not None
-                    else None
+                # Per-book consensus details (all books except DK & Novig)
+                all_details = _consensus_details(
+                    bookmakers, dk_out, market_key, exclude_keys
                 )
+                book_count = len(all_details)
+
+                # Overall consensus (median across all available books)
+                if book_count >= min_books:
+                    consensus_impl_pct = median(d["implied_pct"] for d in all_details)
+                    consensus_american = decimal_to_american(100.0 / consensus_impl_pct)
+                else:
+                    consensus_impl_pct = None
+                    consensus_american = None
+
+                # Sharp-book consensus (median across sharp books only)
+                sharp_details = [d for d in all_details if d["book"] in sharp_keys]
+                if sharp_details:
+                    sharp_impl_pct = median(d["implied_pct"] for d in sharp_details)
+                    sharp_american = decimal_to_american(100.0 / sharp_impl_pct)
+                else:
+                    sharp_american = None
+
+                # Tooltip: each book and its American odds, one per line
+                consensus_tooltip = "\n".join(
+                    f"{d['book']}: {d['american']}" for d in all_details
+                )
+
+                rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)
 
                 rows.append({
                     "game_id": game["id"],
@@ -203,12 +224,14 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                     "dk_american": decimal_to_american(dk_price),
                     "novig_american": decimal_to_american(novig_price),
                     "consensus_american": consensus_american,
+                    "sharp_american": sharp_american,
+                    "consensus_tooltip": consensus_tooltip,
                     "hold_pct": round(hold_pct, 3),
                     "dk_implied_pct": round(dk_impl_pct, 3),
                     "consensus_implied_pct": round(consensus_impl_pct, 3)
                     if consensus_impl_pct is not None
                     else None,
-                    "consensus_book_count": consensus_count,
+                    "consensus_book_count": book_count,
                     "novig_rank": rank,
                     "is_live": is_live,
                     "qualified": False,

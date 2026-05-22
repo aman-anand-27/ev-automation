@@ -104,6 +104,32 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   margin-bottom: 1rem;
 }
 .toggle-btn:hover { border-color: var(--accent); }
+/* Tooltip on #Bks cells */
+[data-tip] {
+  position: relative;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  background: #1c2128;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4em 0.65em;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  white-space: pre;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+  z-index: 100;
+  min-width: 14rem;
+}
+[data-tip]:hover::after { opacity: 1; }
 </style>
 </head>
 <body>
@@ -111,7 +137,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
 <header>
   <h1>Low-Hold Dashboard</h1>
   <p class="meta">
-    {{ generated_at }} UTC
+    {{ generated_at }}
     &nbsp;·&nbsp; Hold ≤ {{ thresholds.hold_max_pct }}%
     &nbsp;·&nbsp; DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs consensus
     &nbsp;·&nbsp; ≥{{ thresholds.min_books_for_consensus }} consensus books
@@ -120,10 +146,37 @@ tr:hover td { background: rgba(255,255,255,0.025); }
 
 <div class="legend">
   <span><b>DK / Novig</b> — American odds for your two legs</span>
-  <span><b>Fair Odds</b> — consensus median price for DK's side (what DK "should" be)</span>
-  <span><b>DK vs Mkt</b> — pp deviation from consensus. 🟢 ≥0: DK at/behind market (good, looks ordinary). 🟡 slightly negative: DK a bit better than market. 🔴 very negative: DK significantly better than market (high CLV risk).</span>
-  <span><b>#Bks</b> — number of books in the consensus</span>
+  <span><b>Fair Odds</b> — median price across all consensus books for DK's side</span>
+  <span><b>Sharp</b> — median of FanDuel + Caesars only; closer to true fair value</span>
+  <span><b>DK vs Mkt</b> — pp from consensus. 🟢 ≥0pp: DK at/behind market (looks ordinary). 🟡 slightly negative: DK a bit better than market. 🔴 very negative: high CLV risk.</span>
+  <span><b>#Bks</b> — hover to see each book's price</span>
 </div>
+
+{# ── Macro: one table row ─────────────────────────────────────────────────── #}
+{# (Jinja2 macros keep the three tables DRY) #}
+{% macro row_cells(r) %}
+  <td>{{ r.commence_time | to_et }}</td>
+  <td>{{ r.sport }}</td>
+  <td>{{ r.game }}</td>
+  <td>{{ r.market }}</td>
+  <td>{{ r.side }}</td>
+  <td>{{ r.dk_american }}</td>
+  <td>{{ r.novig_american }}</td>
+  <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
+  <td>{{ r.sharp_american if r.sharp_american is not none else "—" }}</td>
+  <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
+    {{ r.hold_pct|round(2) }}%
+  </td>
+  <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
+    {% if r.consensus_implied_pct is not none %}
+      {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
+    {% else %}—{% endif %}
+  </td>
+  <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}"
+    {% if r.consensus_tooltip %}data-tip="{{ r.consensus_tooltip }}"{% endif %}>
+    {{ r.consensus_book_count }}
+  </td>
+{% endmacro %}
 
 {# ── Qualified ────────────────────────────────────────────────────────────── #}
 <section>
@@ -132,7 +185,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   <div class="wrap">
   <table id="t-q">
     <thead><tr>
-      <th>Commence</th>
+      <th>Commence (ET)</th>
       <th>Sport</th>
       <th>Game</th>
       <th>Mkt</th>
@@ -140,33 +193,14 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <th>DK</th>
       <th>Novig</th>
       <th>Fair Odds</th>
+      <th>Sharp</th>
       <th>Hold%</th>
       <th>DK vs Mkt</th>
       <th>#Bks</th>
     </tr></thead>
     <tbody>
     {% for r in qualified %}
-    <tr>
-      <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
-      <td>{{ r.sport }}</td>
-      <td>{{ r.game }}</td>
-      <td>{{ r.market }}</td>
-      <td>{{ r.side }}</td>
-      <td>{{ r.dk_american }}</td>
-      <td>{{ r.novig_american }}</td>
-      <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
-      <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
-        {{ r.hold_pct|round(2) }}%
-      </td>
-      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
-        {% if r.consensus_implied_pct is not none %}
-          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
-        {% else %}—{% endif %}
-      </td>
-      <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
-        {{ r.consensus_book_count }}
-      </td>
-    </tr>
+    <tr>{{ row_cells(r) }}</tr>
     {% endfor %}
     </tbody>
   </table>
@@ -183,7 +217,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   <div class="wrap">
   <table id="t-all">
     <thead><tr>
-      <th>Commence</th>
+      <th>Commence (ET)</th>
       <th>Sport</th>
       <th>Game</th>
       <th>Mkt</th>
@@ -191,6 +225,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <th>DK</th>
       <th>Novig</th>
       <th>Fair Odds</th>
+      <th>Sharp</th>
       <th>Hold%</th>
       <th>DK vs Mkt</th>
       <th>#Bks</th>
@@ -199,25 +234,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
     <tbody>
     {% for r in (qualified + unqualified)|sort(attribute='hold_pct') %}
     <tr>
-      <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
-      <td>{{ r.sport }}</td>
-      <td>{{ r.game }}</td>
-      <td>{{ r.market }}</td>
-      <td>{{ r.side }}</td>
-      <td>{{ r.dk_american }}</td>
-      <td>{{ r.novig_american }}</td>
-      <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
-      <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
-        {{ r.hold_pct|round(2) }}%
-      </td>
-      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
-        {% if r.consensus_implied_pct is not none %}
-          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
-        {% else %}—{% endif %}
-      </td>
-      <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
-        {{ r.consensus_book_count }}
-      </td>
+      {{ row_cells(r) }}
       <td>
         {% if r.qualified %}
           <span class="tag tag-ok">✓ qualified</span>
@@ -246,7 +263,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
     <div class="wrap">
     <table id="t-live">
       <thead><tr>
-        <th>Commence</th>
+        <th>Commence (ET)</th>
         <th>Sport</th>
         <th>Game</th>
         <th>Mkt</th>
@@ -254,6 +271,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
         <th>DK</th>
         <th>Novig</th>
         <th>Fair Odds</th>
+        <th>Sharp</th>
         <th>Hold%</th>
         <th>DK vs Mkt</th>
         <th>#Bks</th>
@@ -262,25 +280,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <tbody>
       {% for r in live_rows|sort(attribute='hold_pct') %}
       <tr>
-        <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
-        <td>{{ r.sport }}</td>
-        <td>{{ r.game }}</td>
-        <td>{{ r.market }}</td>
-        <td>{{ r.side }}</td>
-        <td>{{ r.dk_american }}</td>
-        <td>{{ r.novig_american }}</td>
-        <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
-        <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
-          {{ r.hold_pct|round(2) }}%
-        </td>
-        <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
-          {% if r.consensus_implied_pct is not none %}
-            {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
-          {% else %}—{% endif %}
-        </td>
-        <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
-          {{ r.consensus_book_count }}
-        </td>
+        {{ row_cells(r) }}
         <td>
           {% if r.qualified %}
             <span class="tag tag-ok">✓ qualified</span>

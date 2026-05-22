@@ -18,5 +18,9 @@ target_books:
   primary: draftkings
   exchange: novig
 
+# Sharp books used for a second consensus column (subset of whatever the API returns)
+# FanDuel and Caesars are the sharpest regularly-available US books
+sharp_books: [fanduel, caesars]
+
 # Books used to compute consensus (DK & Novig excluded automatically)
 consensus_books: [fanduel, betmgm, caesars, pointsbetus, betrivers, williamhill_us, pinnacle]
