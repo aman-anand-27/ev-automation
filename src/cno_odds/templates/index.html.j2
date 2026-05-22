@@ -121,7 +121,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
 <div class="legend">
   <span><b>DK / Novig</b> — American odds for your two legs</span>
   <span><b>Fair Odds</b> — consensus median price for DK's side (what DK "should" be)</span>
-  <span><b>DK vs Mkt</b> — how many pp DK's implied prob deviates from consensus (+ = DK shorter than market)</span>
+  <span><b>DK vs Mkt</b> — pp deviation from consensus. 🟢 ≥0: DK at/behind market (good, looks ordinary). 🟡 slightly negative: DK a bit better than market. 🔴 very negative: DK significantly better than market (high CLV risk).</span>
   <span><b>#Bks</b> — number of books in the consensus</span>
 </div>
 
@@ -158,7 +158,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
         {{ r.hold_pct|round(2) }}%
       </td>
-      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
+      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
         {% if r.consensus_implied_pct is not none %}
           {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
         {% else %}—{% endif %}
@@ -210,7 +210,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
         {{ r.hold_pct|round(2) }}%
       </td>
-      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
+      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
         {% if r.consensus_implied_pct is not none %}
           {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
         {% else %}—{% endif %}
@@ -273,7 +273,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
         <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
           {{ r.hold_pct|round(2) }}%
         </td>
-        <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
+        <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
           {% if r.consensus_implied_pct is not none %}
             {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
           {% else %}—{% endif %}

@@ -42,16 +42,22 @@ def test_disqualifies_no_consensus():
     assert any("consensus" in r for r in rows[0]["disqualify_reasons"])
 
 
-def test_disqualifies_dk_off_market():
-    # diff = 2.5pp > 1.5pp tolerance
-    rows = qualify_rows([_row(dk_implied_pct=57.0, consensus_implied_pct=54.5)], _CFG)
+def test_disqualifies_dk_ahead_of_market():
+    # diff = -2.5pp — DK significantly better than market = high CLV risk
+    rows = qualify_rows([_row(dk_implied_pct=52.0, consensus_implied_pct=54.5)], _CFG)
     assert rows[0]["qualified"] is False
     assert any("DK" in r for r in rows[0]["disqualify_reasons"])
 
 
 def test_qualifies_dk_at_tolerance_boundary():
-    # diff = exactly 1.5pp → should qualify
-    rows = qualify_rows([_row(dk_implied_pct=56.0, consensus_implied_pct=54.5)], _CFG)
+    # diff = exactly -1.5pp → at boundary, should qualify (> not >=)
+    rows = qualify_rows([_row(dk_implied_pct=53.0, consensus_implied_pct=54.5)], _CFG)
+    assert rows[0]["qualified"] is True
+
+
+def test_qualifies_dk_behind_market():
+    # diff = +3.0pp — DK behind market (looks ordinary) → should qualify
+    rows = qualify_rows([_row(dk_implied_pct=57.5, consensus_implied_pct=54.5)], _CFG)
     assert rows[0]["qualified"] is True
 
 
