@@ -9,6 +9,8 @@ def decimal_to_american(decimal: float) -> str:
     """Convert decimal odds to American odds string (+110, -150, etc.)."""
     if decimal >= 2.0:
         return f"+{round((decimal - 1) * 100)}"
+    if decimal <= 1.0:
+        return "N/A"  # degenerate price (locked/suspended market)
     return str(round(-100.0 / (decimal - 1)))
 
 
