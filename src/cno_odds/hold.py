@@ -68,13 +68,13 @@ def _consensus_implied(
     bookmakers: list[dict],
     dk_side: dict,
     market_key: str,
-    consensus_keys: set,
+    exclude_keys: set,
     min_books: int,
 ) -> Optional[float]:
-    """Median implied prob (%) across consensus books on DK's side. None if too few books."""
+    """Median implied prob (%) across all available books (exc. DK & Novig) on DK's side."""
     implieds: list[float] = []
     for bm in bookmakers:
-        if bm["key"] not in consensus_keys:
+        if bm["key"] in exclude_keys:
             continue
         for mkt in bm.get("markets", []):
             if mkt["key"] != market_key:
@@ -118,7 +118,7 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
     """
     primary = cfg["target_books"]["primary"]
     exchange = cfg["target_books"]["exchange"]
-    consensus_keys = set(cfg["consensus_books"])
+    exclude_keys = {primary, exchange}
     min_books = cfg["thresholds"]["min_books_for_consensus"]
     rows: list[dict] = []
 
@@ -157,7 +157,7 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 hold_pct = compute_hold(dk_price, novig_price)
                 dk_impl_pct = 1.0 / dk_price * 100.0
                 consensus_impl_pct = _consensus_implied(
-                    bookmakers, dk_out, market_key, consensus_keys, min_books
+                    bookmakers, dk_out, market_key, exclude_keys, min_books
                 )
                 rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)
 

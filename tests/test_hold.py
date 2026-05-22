@@ -131,7 +131,6 @@ def _make_game(**bm_extra):
 _CFG = {
     "markets": ["h2h"],
     "target_books": {"primary": "draftkings", "exchange": "novig"},
-    "consensus_books": [],
     "thresholds": {"min_books_for_consensus": 4},
 }
 
