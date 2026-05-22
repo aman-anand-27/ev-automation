@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Low-Hold Dashboard</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #21262d;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --red: #f85149;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 1rem;
+}
+a { color: var(--accent); }
+header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.meta { color: var(--muted); font-size: 0.8rem; }
+section { margin-bottom: 2.5rem; }
+h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+.empty { color: var(--muted); font-style: italic; padding: 0.4rem 0; }
+.wrap { overflow-x: auto; }
+table { width: max-content; min-width: 100%; border-collapse: collapse; }
+th, td {
+  padding: 0.35rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: left;
+}
+th {
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+th:hover { color: var(--text); }
+th[data-dir="asc"]::after  { content: " ↑"; color: var(--accent); }
+th[data-dir="desc"]::after { content: " ↓"; color: var(--accent); }
+tr:hover td { background: rgba(255,255,255,0.025); }
+.hold { font-weight: 600; }
+.g { color: var(--green); }
+.y { color: var(--yellow); }
+.r { color: var(--red); }
+.tag {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.72rem;
+}
+.tag-ok   { background: rgba(63,185,80,0.15);  color: var(--green); }
+.note     { color: var(--muted); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Low-Hold Dashboard</h1>
+  <p class="meta">
+    {{ generated_at }} UTC
+    &nbsp;·&nbsp; Hold ≤ {{ thresholds.hold_max_pct }}%
+    &nbsp;·&nbsp; DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs consensus
+    &nbsp;·&nbsp; Novig top-{{ thresholds.novig_best_rank }}
+  </p>
+</header>
+
+{# ── Qualified ────────────────────────────────────────────────────────────── #}
+<section>
+  <h2>✓ Qualified ({{ qualified|length }})</h2>
+  {% if qualified %}
+  <div class="wrap">
+  <table id="t-q">
+    <thead><tr>
+      <th>Commence</th>
+      <th>Sport</th>
+      <th>Game</th>
+      <th>Mkt</th>
+      <th>Side (DK)</th>
+      <th>DK</th>
+      <th>Novig</th>
+      <th>Hold%</th>
+      <th>DKΔpp</th>
+      <th>Novig#</th>
+    </tr></thead>
+    <tbody>
+    {% for r in qualified %}
+    <tr>
+      <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
+      <td>{{ r.sport }}</td>
+      <td>{{ r.game }}</td>
+      <td>{{ r.market }}</td>
+      <td>{{ r.side }}</td>
+      <td>{{ r.dk_price }}</td>
+      <td>{{ r.novig_price }}</td>
+      <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
+        {{ r.hold_pct|round(2) }}%
+      </td>
+      <td>
+        {% if r.consensus_implied_pct is not none %}
+          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}
+        {% else %}—{% endif %}
+      </td>
+      <td>{{ r.novig_rank }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="empty">No qualified opportunities in this snapshot.</p>
+  {% endif %}
+</section>
+
+{# ── All low-hold ─────────────────────────────────────────────────────────── #}
+<section>
+  <h2>All Low-Hold Lines ({{ (qualified|length) + (unqualified|length) }})</h2>
+  {% if (qualified|length + unqualified|length) > 0 %}
+  <div class="wrap">
+  <table id="t-all">
+    <thead><tr>
+      <th>Commence</th>
+      <th>Sport</th>
+      <th>Game</th>
+      <th>Mkt</th>
+      <th>Side (DK)</th>
+      <th>DK</th>
+      <th>Novig</th>
+      <th>Hold%</th>
+      <th>DKΔpp</th>
+      <th>Novig#</th>
+      <th>Status / Reason</th>
+    </tr></thead>
+    <tbody>
+    {% for r in (qualified + unqualified)|sort(attribute='hold_pct') %}
+    <tr>
+      <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
+      <td>{{ r.sport }}</td>
+      <td>{{ r.game }}</td>
+      <td>{{ r.market }}</td>
+      <td>{{ r.side }}</td>
+      <td>{{ r.dk_price }}</td>
+      <td>{{ r.novig_price }}</td>
+      <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
+        {{ r.hold_pct|round(2) }}%
+      </td>
+      <td>
+        {% if r.consensus_implied_pct is not none %}
+          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}
+        {% else %}—{% endif %}
+      </td>
+      <td>{{ r.novig_rank }}</td>
+      <td>
+        {% if r.qualified %}
+          <span class="tag tag-ok">✓ qualified</span>
+        {% else %}
+          <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <p class="empty">No lines within the hold threshold at this snapshot.</p>
+  {% endif %}
+</section>
+
+<script>
+document.querySelectorAll("table").forEach(tbl => {
+  tbl.querySelectorAll("th").forEach((th, col) => {
+    let dir = null;
+    th.addEventListener("click", () => {
+      tbl.querySelectorAll("th").forEach(h => h.removeAttribute("data-dir"));
+      dir = dir === "asc" ? "desc" : "asc";
+      th.setAttribute("data-dir", dir);
+      const asc = dir === "asc";
+      const tbody = tbl.querySelector("tbody");
+      Array.from(tbody.querySelectorAll("tr"))
+        .sort((a, b) => {
+          const av = a.cells[col].textContent.trim();
+          const bv = b.cells[col].textContent.trim();
+          const an = parseFloat(av), bn = parseFloat(bv);
+          const cmp = isNaN(an) || isNaN(bn) ? av.localeCompare(bv) : an - bn;
+          return asc ? cmp : -cmp;
+        })
+        .forEach(r => tbody.appendChild(r));
+    });
+  });
+});
+</script>
+
+</body>
+</html>

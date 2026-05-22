@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(mkdir -p \"/Users/amananand/EV Automation/src/cno_odds/templates\" \"/Users/amananand/EV Automation/config\" \"/Users/amananand/EV Automation/docs\" \"/Users/amananand/EV Automation/.github/workflows\" \"/Users/amananand/EV Automation/tests\")"
+    ]
+  }
+}

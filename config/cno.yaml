@@ -1,0 +1,22 @@
+odds_api:
+  base_url: https://api.the-odds-api.com/v4
+  # API key from env var ODDS_API_KEY (GitHub Secret), never in file
+  oddsFormat: decimal
+
+sports: [baseball_mlb, basketball_nba, basketball_wnba, icehockey_nhl]
+markets: [h2h, spreads, totals]
+regions: [us, us_ex]       # us_ex unlocks Novig; 4 sports × 3 × 2 = 24 credits/run
+
+# Filtering thresholds (the knobs you tune over time)
+thresholds:
+  hold_max_pct: 3.0                   # show in raw table if hold <= 3%
+  dk_consensus_tolerance_pp: 1.5      # DK within 1.5 percentage points of consensus implied prob
+  novig_best_rank: 2                  # Novig must be top-2 best on the opposing side
+  min_books_for_consensus: 4
+
+target_books:
+  primary: draftkings
+  exchange: novig
+
+# Books used to compute consensus (DK & Novig excluded automatically)
+consensus_books: [fanduel, betmgm, caesars, pointsbetus, betrivers, williamhill_us, pinnacle]
