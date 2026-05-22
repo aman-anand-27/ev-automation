@@ -17,8 +17,12 @@ def render(rows: list[dict], cfg: dict) -> None:
     threshold = cfg["thresholds"]["hold_max_pct"]
 
     display_rows = [r for r in rows if r["hold_pct"] <= threshold]
-    qualified = [r for r in display_rows if r["qualified"]]
-    unqualified = [r for r in display_rows if not r["qualified"]]
+
+    pre_game = [r for r in display_rows if not r.get("is_live")]
+    live_rows = [r for r in display_rows if r.get("is_live")]
+
+    qualified = [r for r in pre_game if r["qualified"]]
+    unqualified = [r for r in pre_game if not r["qualified"]]
 
     data = {
         "generated_at": now,
@@ -34,8 +38,12 @@ def render(rows: list[dict], cfg: dict) -> None:
         thresholds=cfg["thresholds"],
         qualified=qualified,
         unqualified=unqualified,
+        live_rows=live_rows,
     )
     (_DOCS / "index.html").write_text(html)
 
-    print(f"Dashboard: {len(qualified)} qualified, {len(unqualified)} unqualified low-hold rows.")
+    print(
+        f"Dashboard: {len(qualified)} qualified, {len(unqualified)} unqualified, "
+        f"{len(live_rows)} live (hidden by default)."
+    )
     print(f"Output: {_DOCS / 'index.html'}")

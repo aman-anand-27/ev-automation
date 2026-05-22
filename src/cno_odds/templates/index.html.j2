@@ -15,6 +15,7 @@
   --green: #3fb950;
   --yellow: #d29922;
   --red: #f85149;
+  --orange: #e3712a;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -72,6 +73,7 @@ tr:hover td { background: rgba(255,255,255,0.025); }
 .g { color: var(--green); }
 .y { color: var(--yellow); }
 .r { color: var(--red); }
+.muted { color: var(--muted); }
 .tag {
   display: inline-block;
   padding: 0.1em 0.45em;
@@ -79,7 +81,29 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   font-size: 0.72rem;
 }
 .tag-ok   { background: rgba(63,185,80,0.15);  color: var(--green); }
+.tag-live { background: rgba(227,113,42,0.15); color: var(--orange); }
 .note     { color: var(--muted); font-size: 0.8rem; }
+.legend {
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.legend span { display: inline-block; }
+.toggle-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.toggle-btn:hover { border-color: var(--accent); }
 </style>
 </head>
 <body>
@@ -90,9 +114,16 @@ tr:hover td { background: rgba(255,255,255,0.025); }
     {{ generated_at }} UTC
     &nbsp;·&nbsp; Hold ≤ {{ thresholds.hold_max_pct }}%
     &nbsp;·&nbsp; DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs consensus
-    &nbsp;·&nbsp; Novig top-{{ thresholds.novig_best_rank }}
+    &nbsp;·&nbsp; ≥{{ thresholds.min_books_for_consensus }} consensus books
   </p>
 </header>
+
+<div class="legend">
+  <span><b>DK / Novig</b> — American odds for your two legs</span>
+  <span><b>Fair Odds</b> — consensus median price for DK's side (what DK "should" be)</span>
+  <span><b>DK vs Mkt</b> — how many pp DK's implied prob deviates from consensus (+ = DK shorter than market)</span>
+  <span><b>#Bks</b> — number of books in the consensus</span>
+</div>
 
 {# ── Qualified ────────────────────────────────────────────────────────────── #}
 <section>
@@ -108,9 +139,10 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <th>Side (DK)</th>
       <th>DK</th>
       <th>Novig</th>
+      <th>Fair Odds</th>
       <th>Hold%</th>
-      <th>DKΔpp</th>
-      <th>Novig#</th>
+      <th>DK vs Mkt</th>
+      <th>#Bks</th>
     </tr></thead>
     <tbody>
     {% for r in qualified %}
@@ -120,17 +152,20 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <td>{{ r.game }}</td>
       <td>{{ r.market }}</td>
       <td>{{ r.side }}</td>
-      <td>{{ r.dk_price }}</td>
-      <td>{{ r.novig_price }}</td>
+      <td>{{ r.dk_american }}</td>
+      <td>{{ r.novig_american }}</td>
+      <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
       <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
         {{ r.hold_pct|round(2) }}%
       </td>
-      <td>
+      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
         {% if r.consensus_implied_pct is not none %}
-          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}
+          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
         {% else %}—{% endif %}
       </td>
-      <td>{{ r.novig_rank }}</td>
+      <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
+        {{ r.consensus_book_count }}
+      </td>
     </tr>
     {% endfor %}
     </tbody>
@@ -155,9 +190,10 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <th>Side (DK)</th>
       <th>DK</th>
       <th>Novig</th>
+      <th>Fair Odds</th>
       <th>Hold%</th>
-      <th>DKΔpp</th>
-      <th>Novig#</th>
+      <th>DK vs Mkt</th>
+      <th>#Bks</th>
       <th>Status / Reason</th>
     </tr></thead>
     <tbody>
@@ -168,17 +204,20 @@ tr:hover td { background: rgba(255,255,255,0.025); }
       <td>{{ r.game }}</td>
       <td>{{ r.market }}</td>
       <td>{{ r.side }}</td>
-      <td>{{ r.dk_price }}</td>
-      <td>{{ r.novig_price }}</td>
+      <td>{{ r.dk_american }}</td>
+      <td>{{ r.novig_american }}</td>
+      <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
       <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
         {{ r.hold_pct|round(2) }}%
       </td>
-      <td>
+      <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
         {% if r.consensus_implied_pct is not none %}
-          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}
+          {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
         {% else %}—{% endif %}
       </td>
-      <td>{{ r.novig_rank }}</td>
+      <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
+        {{ r.consensus_book_count }}
+      </td>
       <td>
         {% if r.qualified %}
           <span class="tag tag-ok">✓ qualified</span>
@@ -196,7 +235,77 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   {% endif %}
 </section>
 
+{# ── Live Lines ───────────────────────────────────────────────────────────── #}
+{% if live_rows %}
+<section>
+  <button class="toggle-btn" id="live-toggle" onclick="toggleLive()">
+    ▼ Show Live Lines ({{ live_rows|length }})
+  </button>
+  <div id="live-section" style="display:none">
+    <h2><span class="tag tag-live">LIVE</span> &nbsp;Low-Hold Lines ({{ live_rows|length }}) — filtered from main tables</h2>
+    <div class="wrap">
+    <table id="t-live">
+      <thead><tr>
+        <th>Commence</th>
+        <th>Sport</th>
+        <th>Game</th>
+        <th>Mkt</th>
+        <th>Side (DK)</th>
+        <th>DK</th>
+        <th>Novig</th>
+        <th>Fair Odds</th>
+        <th>Hold%</th>
+        <th>DK vs Mkt</th>
+        <th>#Bks</th>
+        <th>Status / Reason</th>
+      </tr></thead>
+      <tbody>
+      {% for r in live_rows|sort(attribute='hold_pct') %}
+      <tr>
+        <td>{{ r.commence_time[:10] }} {{ r.commence_time[11:16] }}</td>
+        <td>{{ r.sport }}</td>
+        <td>{{ r.game }}</td>
+        <td>{{ r.market }}</td>
+        <td>{{ r.side }}</td>
+        <td>{{ r.dk_american }}</td>
+        <td>{{ r.novig_american }}</td>
+        <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
+        <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
+          {{ r.hold_pct|round(2) }}%
+        </td>
+        <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff|abs <= 0.5 %}g{% elif diff|abs <= 1.5 %}y{% else %}r{% endif %}{% endif %}">
+          {% if r.consensus_implied_pct is not none %}
+            {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
+          {% else %}—{% endif %}
+        </td>
+        <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
+          {{ r.consensus_book_count }}
+        </td>
+        <td>
+          {% if r.qualified %}
+            <span class="tag tag-ok">✓ qualified</span>
+          {% else %}
+            <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <script>
+function toggleLive() {
+  const sec = document.getElementById('live-section');
+  const btn = document.getElementById('live-toggle');
+  const show = sec.style.display === 'none';
+  sec.style.display = show ? 'block' : 'none';
+  btn.textContent = (show ? '▲ Hide' : '▼ Show') + ' Live Lines ({{ live_rows|length }})';
+}
+
 document.querySelectorAll("table").forEach(tbl => {
   tbl.querySelectorAll("th").forEach((th, col) => {
     let dir = null;

@@ -6,7 +6,6 @@ _CFG = {
     "thresholds": {
         "hold_max_pct": 3.0,
         "dk_consensus_tolerance_pp": 1.5,
-        "novig_best_rank": 2,
         "min_books_for_consensus": 4,
     }
 }
@@ -56,23 +55,11 @@ def test_qualifies_dk_at_tolerance_boundary():
     assert rows[0]["qualified"] is True
 
 
-def test_disqualifies_novig_rank_too_low():
-    rows = qualify_rows([_row(novig_rank=3)], _CFG)
-    assert rows[0]["qualified"] is False
-    assert any("Novig" in r for r in rows[0]["disqualify_reasons"])
-
-
-def test_qualifies_novig_at_rank_boundary():
-    # rank=2, max_rank=2 → should qualify
-    rows = qualify_rows([_row(novig_rank=2)], _CFG)
-    assert rows[0]["qualified"] is True
-
-
 def test_all_failures_reported():
-    row = _row(hold_pct=5.0, novig_rank=5, consensus_implied_pct=None)
+    row = _row(hold_pct=5.0, consensus_implied_pct=None)
     rows = qualify_rows([row], _CFG)
     assert rows[0]["qualified"] is False
-    assert len(rows[0]["disqualify_reasons"]) == 3
+    assert len(rows[0]["disqualify_reasons"]) == 2  # hold + no consensus
 
 
 def test_mutates_rows_in_place():

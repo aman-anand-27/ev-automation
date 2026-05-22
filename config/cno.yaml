@@ -12,7 +12,7 @@ thresholds:
   hold_max_pct: 3.0                   # show in raw table if hold <= 3%
   dk_consensus_tolerance_pp: 1.5      # DK within 1.5 percentage points of consensus implied prob
   novig_best_rank: 2                  # Novig must be top-2 best on the opposing side
-  min_books_for_consensus: 4
+  min_books_for_consensus: 2
 
 target_books:
   primary: draftkings

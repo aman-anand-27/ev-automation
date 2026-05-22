@@ -6,7 +6,6 @@ def qualify_rows(rows: list[dict], cfg: dict) -> list[dict]:
     t = cfg["thresholds"]
     hold_max = t["hold_max_pct"]
     tolerance = t["dk_consensus_tolerance_pp"]
-    novig_max_rank = t["novig_best_rank"]
 
     for row in rows:
         reasons: list[str] = []
@@ -19,9 +18,6 @@ def qualify_rows(rows: list[dict], cfg: dict) -> list[dict]:
         elif abs(row["dk_implied_pct"] - row["consensus_implied_pct"]) > tolerance:
             diff = row["dk_implied_pct"] - row["consensus_implied_pct"]
             reasons.append(f"DK {diff:+.1f}pp vs consensus")
-
-        if row["novig_rank"] > novig_max_rank:
-            reasons.append(f"Novig rank {row['novig_rank']} (need ≤{novig_max_rank})")
 
         row["qualified"] = not reasons
         row["disqualify_reasons"] = reasons

@@ -1,7 +1,15 @@
 """Hold math: pair DK vs Novig outcomes, compute consensus implied prob and Novig rank."""
 
+from datetime import datetime, timezone
 from statistics import median
 from typing import Optional
+
+
+def decimal_to_american(decimal: float) -> str:
+    """Convert decimal odds to American odds string (+110, -150, etc.)."""
+    if decimal >= 2.0:
+        return f"+{round((decimal - 1) * 100)}"
+    return str(round(-100.0 / (decimal - 1)))
 
 
 def compute_hold(dk_price: float, novig_price: float) -> float:
@@ -70,8 +78,12 @@ def _consensus_implied(
     market_key: str,
     exclude_keys: set,
     min_books: int,
-) -> Optional[float]:
-    """Median implied prob (%) across all available books (exc. DK & Novig) on DK's side."""
+) -> tuple[Optional[float], int]:
+    """Median implied prob (%) across all available books (exc. DK & Novig) on DK's side.
+
+    Returns (median_pct, book_count). book_count is the number of books found regardless
+    of whether it met min_books, so the caller can show it in the UI.
+    """
     implieds: list[float] = []
     for bm in bookmakers:
         if bm["key"] in exclude_keys:
@@ -84,8 +96,8 @@ def _consensus_implied(
                     implieds.append(1.0 / o["price"] * 100.0)
                     break
     if len(implieds) < min_books:
-        return None
-    return median(implieds)
+        return None, len(implieds)
+    return median(implieds), len(implieds)
 
 
 def _novig_rank(
@@ -108,6 +120,17 @@ def _novig_rank(
                     break
     novig_price = novig_opp["price"]
     return 1 + sum(1 for p in other_prices if p > novig_price)
+
+
+def _is_live(game: dict) -> bool:
+    """Return True if the game is currently in-progress."""
+    if game.get("in_progress"):
+        return True
+    try:
+        commence = datetime.fromisoformat(game["commence_time"].replace("Z", "+00:00"))
+        return commence < datetime.now(timezone.utc)
+    except Exception:
+        return False
 
 
 def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
@@ -133,6 +156,7 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
 
         dk_mkts = {m["key"]: m for m in dk_bm.get("markets", [])}
         novig_mkts = {m["key"]: m for m in novig_bm.get("markets", [])}
+        is_live = _is_live(game)
 
         for market_key in cfg.get("markets", []):
             dk_mkt = dk_mkts.get(market_key)
@@ -156,10 +180,16 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 novig_price = novig_opp["price"]
                 hold_pct = compute_hold(dk_price, novig_price)
                 dk_impl_pct = 1.0 / dk_price * 100.0
-                consensus_impl_pct = _consensus_implied(
+                consensus_impl_pct, consensus_count = _consensus_implied(
                     bookmakers, dk_out, market_key, exclude_keys, min_books
                 )
                 rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)
+
+                consensus_american = (
+                    decimal_to_american(100.0 / consensus_impl_pct)
+                    if consensus_impl_pct is not None
+                    else None
+                )
 
                 rows.append({
                     "game_id": game["id"],
@@ -170,12 +200,17 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                     "side": _side_label(dk_out, market_key),
                     "dk_price": dk_price,
                     "novig_price": novig_price,
+                    "dk_american": decimal_to_american(dk_price),
+                    "novig_american": decimal_to_american(novig_price),
+                    "consensus_american": consensus_american,
                     "hold_pct": round(hold_pct, 3),
                     "dk_implied_pct": round(dk_impl_pct, 3),
                     "consensus_implied_pct": round(consensus_impl_pct, 3)
                     if consensus_impl_pct is not None
                     else None,
+                    "consensus_book_count": consensus_count,
                     "novig_rank": rank,
+                    "is_live": is_live,
                     "qualified": False,
                     "disqualify_reasons": [],
                 })
