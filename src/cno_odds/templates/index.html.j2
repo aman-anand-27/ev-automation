@@ -331,6 +331,31 @@ tr.calc-row > td {
   </td>
 {% endmacro %}
 
+{#
+  TODO: Book lines panel (above calculator in expanded row)
+  When a row is clicked, show a compact table of every consensus book's price
+  on BOTH sides of the market — mirroring the CNO layout. Needs:
+
+  Data side (hold.py / render.py):
+  - `consensus_tooltip` currently stores only DK's side per book as plain text.
+    Replace or supplement with a structured `book_lines` list on each row:
+      [{ book, dk_side_raw, opp_side_raw }, ...]   (American strings)
+    Emit this as a data attribute on the <tr> (JSON-encoded) so JS can read it.
+
+  Rendering (template):
+  - Inside calc_row_html (above .calc-panel), conditionally render a
+    `.book-lines-panel` div when book_lines is non-empty.
+  - Table columns: Book | DK side (American, colored if best) | Opp side (American)
+  - Highlight the best (highest) price per column in green, matching CNO's style.
+  - "Best" column = best available price on DK's side across all books shown.
+  - Keep it compact: same monospace font, small row height, no borders — just lines.
+  - Books sorted by DK-side price descending (best first).
+
+  JS side:
+  - On row click, parse `data-book-lines` from the data-row, build the table
+    innerHTML dynamically (same pattern as calcUpdate), inject into .book-lines-panel.
+  - No new network requests — all data is already embedded in the page.
+#}
 {% macro calc_row_html(ncols) %}
 <tr class="calc-row" style="display:none">
   <td colspan="{{ ncols }}">
