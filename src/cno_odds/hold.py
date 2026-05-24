@@ -29,24 +29,24 @@ def _same_side(outcome: dict, ref: dict, market_key: str) -> bool:
     ) < 0.01
 
 
-def _find_opposing(
-    dk_outcome: dict, novig_outcomes: list[dict], market_key: str
+def _find_opposite_outcome(
+    dk_outcome: dict, outcomes: list[dict], market_key: str
 ) -> Optional[dict]:
-    """Find the Novig outcome on the opposite side from dk_outcome.
+    """Find the outcome in `outcomes` on the opposite side from dk_outcome.
 
-    Spreads: DK TeamA -1.5 must pair with Novig TeamB +1.5 (exact flip).
-    Totals: DK Over 8.5 must pair with Novig Under 8.5 (same point, opposite label).
+    Spreads: DK TeamA -1.5 pairs with TeamB +1.5 (exact flip).
+    Totals: DK Over 8.5 pairs with Under 8.5 (same point, opposite label).
     Cross-handicap pairs are silently skipped — they are different bets.
     """
     if market_key == "h2h":
-        for o in novig_outcomes:
+        for o in outcomes:
             if o["name"] != dk_outcome["name"]:
                 return o
         return None
 
     if market_key == "spreads":
         target_point = -dk_outcome.get("point", 0.0)
-        for o in novig_outcomes:
+        for o in outcomes:
             if o["name"] != dk_outcome["name"] and abs(o.get("point", 0.0) - target_point) < 0.01:
                 return o
         return None
@@ -54,12 +54,19 @@ def _find_opposing(
     if market_key == "totals":
         target_name = "Under" if dk_outcome["name"] == "Over" else "Over"
         target_point = dk_outcome.get("point", 0.0)
-        for o in novig_outcomes:
+        for o in outcomes:
             if o["name"] == target_name and abs(o.get("point", 0.0) - target_point) < 0.01:
                 return o
         return None
 
     return None
+
+
+def _find_opposing(
+    dk_outcome: dict, novig_outcomes: list[dict], market_key: str
+) -> Optional[dict]:
+    """Find the Novig outcome on the opposite side from dk_outcome."""
+    return _find_opposite_outcome(dk_outcome, novig_outcomes, market_key)
 
 
 def _side_label(outcome: dict, market_key: str) -> str:
@@ -74,15 +81,21 @@ def _side_label(outcome: dict, market_key: str) -> str:
     return outcome["name"]
 
 
-def _consensus_details(
+def _devigged_consensus_details(
     bookmakers: list[dict],
     dk_side: dict,
     market_key: str,
     exclude_keys: set,
 ) -> list[dict]:
-    """Return per-book price details for all available consensus books on DK's side.
+    """Return per-book devigged fair probability for DK's side across consensus books.
 
-    Each entry: {book, price_dec, american, implied_pct}
+    For each book, finds both DK's side and the opposing side at the same
+    handicap, then removes the book's vig:
+        devigged = p_dk_raw / (p_dk_raw + p_opp_raw)
+
+    Books that don't price both sides at DK's exact line are skipped.
+
+    Each entry: {book, raw_american, devigged_implied_pct}
     """
     details: list[dict] = []
     for bm in bookmakers:
@@ -91,15 +104,26 @@ def _consensus_details(
         for mkt in bm.get("markets", []):
             if mkt["key"] != market_key:
                 continue
-            for o in mkt["outcomes"]:
-                if _same_side(o, dk_side, market_key):
-                    details.append({
-                        "book": bm["key"],
-                        "price_dec": o["price"],
-                        "american": decimal_to_american(o["price"]),
-                        "implied_pct": round(1.0 / o["price"] * 100.0, 3),
-                    })
-                    break
+            outcomes = mkt["outcomes"]
+
+            dk_in_book = next((o for o in outcomes if _same_side(o, dk_side, market_key)), None)
+            if dk_in_book is None:
+                break
+
+            opp_in_book = _find_opposite_outcome(dk_side, outcomes, market_key)
+            if opp_in_book is None:
+                break
+
+            p_dk = 1.0 / dk_in_book["price"]
+            p_opp = 1.0 / opp_in_book["price"]
+            devigged = p_dk / (p_dk + p_opp)
+
+            details.append({
+                "book": bm["key"],
+                "raw_american": decimal_to_american(dk_in_book["price"]),
+                "devigged_implied_pct": round(devigged * 100.0, 3),
+            })
+            break
     return details
 
 
@@ -185,31 +209,31 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 hold_pct = compute_hold(dk_price, novig_price)
                 dk_impl_pct = 1.0 / dk_price * 100.0
 
-                # Per-book consensus details (all books except DK & Novig)
-                all_details = _consensus_details(
+                # Per-book devigged consensus details (all books except DK & Novig)
+                all_details = _devigged_consensus_details(
                     bookmakers, dk_out, market_key, exclude_keys
                 )
                 book_count = len(all_details)
 
-                # Overall consensus (median across all available books)
+                # Overall consensus (median of devigged probs across all available books)
                 if book_count >= min_books:
-                    consensus_impl_pct = median(d["implied_pct"] for d in all_details)
+                    consensus_impl_pct = median(d["devigged_implied_pct"] for d in all_details)
                     consensus_american = decimal_to_american(100.0 / consensus_impl_pct)
                 else:
                     consensus_impl_pct = None
                     consensus_american = None
 
-                # Sharp-book consensus (median across sharp books only)
+                # Sharp-book consensus (median of devigged probs across sharp books only)
                 sharp_details = [d for d in all_details if d["book"] in sharp_keys]
                 if sharp_details:
-                    sharp_impl_pct = median(d["implied_pct"] for d in sharp_details)
+                    sharp_impl_pct = median(d["devigged_implied_pct"] for d in sharp_details)
                     sharp_american = decimal_to_american(100.0 / sharp_impl_pct)
                 else:
                     sharp_american = None
 
-                # Tooltip: each book and its American odds, one per line
+                # Tooltip: each book's raw offered American odds, one per line
                 consensus_tooltip = "\n".join(
-                    f"{d['book']}: {d['american']}" for d in all_details
+                    f"{d['book']}: {d['raw_american']}" for d in all_details
                 )
 
                 rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)

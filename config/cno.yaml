@@ -6,6 +6,7 @@ odds_api:
 sports: [baseball_mlb, basketball_nba, basketball_wnba, icehockey_nhl]
 markets: [h2h, spreads, totals]
 regions: [us, us_ex]       # us_ex unlocks Novig; 4 sports × 3 × 2 = 24 credits/run
+# TODO next quota: add us2 (circasports) and eu (pinnacle) → 4 × 3 × 4 = 48 credits/run
 
 # Filtering thresholds (the knobs you tune over time)
 thresholds:
@@ -18,9 +19,9 @@ target_books:
   primary: draftkings
   exchange: novig
 
-# Sharp books used for a second consensus column (subset of whatever the API returns)
-# FanDuel and Caesars are the sharpest regularly-available US books
-sharp_books: [fanduel, caesars]
+# True sharp books for the Sharp column. Currently empty in us/us_ex regions.
+# Will activate automatically once us2 (circasports) and eu (pinnacle) are added above.
+sharp_books: [pinnacle, circasports]
 
 # Books used to compute consensus (DK & Novig excluded automatically)
 consensus_books: [fanduel, betmgm, caesars, pointsbetus, betrivers, williamhill_us, pinnacle]

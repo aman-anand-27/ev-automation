@@ -502,7 +502,13 @@ document.addEventListener('mouseover', function(e) {
   const rect = tip.getBoundingClientRect();
   tip.classList.remove('tip-right', 'tip-below');
   if (rect.left + 240 > window.innerWidth - 8) tip.classList.add('tip-right');
-  if (rect.top < 130) tip.classList.add('tip-below');
+  const card = tip.closest('.card');
+  if (card) {
+    // Flip below when there isn't ~90px of room between cell and card top
+    if (rect.top - card.getBoundingClientRect().top < 90) tip.classList.add('tip-below');
+  } else if (rect.top < 130) {
+    tip.classList.add('tip-below');
+  }
 });
 
 // ── Wager calculator ──────────────────────────────────────────────

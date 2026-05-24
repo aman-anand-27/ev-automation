@@ -134,6 +134,13 @@ _CFG = {
     "thresholds": {"min_books_for_consensus": 4},
 }
 
+_CFG_1 = {
+    "markets": ["h2h"],
+    "target_books": {"primary": "draftkings", "exchange": "novig"},
+    "thresholds": {"min_books_for_consensus": 1},
+    "sharp_books": [],
+}
+
 
 def test_compute_rows_two_sides_per_game():
     rows = compute_rows([_make_game()], _CFG)
@@ -163,4 +170,73 @@ def test_compute_rows_skips_3way_h2h():
 def test_compute_rows_consensus_none_when_too_few_books():
     rows = compute_rows([_make_game()], _CFG)
     for r in rows:
+        assert r["consensus_implied_pct"] is None
+
+
+# ── devigged consensus ────────────────────────────────────────────────────────
+
+def _make_game_with_consensus(extra_bm: list[dict]) -> dict:
+    return {
+        "id": "g1",
+        "sport_key": "baseball_mlb",
+        "sport_title": "MLB",
+        "commence_time": "2025-05-21T17:00:00Z",
+        "home_team": "Yankees",
+        "away_team": "Red Sox",
+        "bookmakers": [
+            {
+                "key": "draftkings",
+                "markets": [{"key": "h2h", "outcomes": [
+                    {"name": "Yankees", "price": 1.83},
+                    {"name": "Red Sox", "price": 2.10},
+                ]}],
+            },
+            {
+                "key": "novig",
+                "markets": [{"key": "h2h", "outcomes": [
+                    {"name": "Yankees", "price": 1.90},
+                    {"name": "Red Sox", "price": 2.05},
+                ]}],
+            },
+        ] + extra_bm,
+    }
+
+
+def test_devig_symmetric_lines_yield_fifty_pct():
+    # Three books all -110/-110 → devigged prob exactly 50% each → consensus +100
+    book_outcomes = [{"name": "Yankees", "price": 1.909}, {"name": "Red Sox", "price": 1.909}]
+    extra = [
+        {"key": f"book{i}", "markets": [{"key": "h2h", "outcomes": book_outcomes}]}
+        for i in range(3)
+    ]
+    rows = compute_rows([_make_game_with_consensus(extra)], _CFG_1)
+    yankees_row = next(r for r in rows if r["side"] == "Yankees")
+    assert abs(yankees_row["consensus_implied_pct"] - 50.0) < 0.01
+    assert yankees_row["consensus_american"] == "+100"
+
+
+def test_devig_removes_vig_vs_raw_median():
+    # Raw one-sided median of (-110/-110) is 52.38% (includes vig).
+    # Devigged should be 50.0% — closer to true prob.
+    book_outcomes = [{"name": "Yankees", "price": 1.909}, {"name": "Red Sox", "price": 1.909}]
+    extra = [{"key": "book1", "markets": [{"key": "h2h", "outcomes": book_outcomes}]}]
+    rows = compute_rows([_make_game_with_consensus(extra)], _CFG_1)
+    yankees_row = next(r for r in rows if r["side"] == "Yankees")
+    assert yankees_row["consensus_implied_pct"] < 51.0  # devigged, not vigged 52.38%
+
+
+def test_devig_skips_book_missing_opposing_side():
+    # A book that only prices DK's side should be excluded from the consensus count.
+    extra = [
+        {
+            "key": "one_sided_book",
+            "markets": [{"key": "h2h", "outcomes": [
+                {"name": "Yankees", "price": 1.909},
+                # Red Sox outcome intentionally omitted
+            ]}],
+        }
+    ]
+    rows = compute_rows([_make_game_with_consensus(extra)], _CFG_1)
+    for r in rows:
+        assert r["consensus_book_count"] == 0
         assert r["consensus_implied_pct"] is None
