@@ -140,6 +140,7 @@ tr.data-row.qual > td:first-child {
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .num  { text-align: right; }
 .dim  { color: var(--muted); font-size: 0.72rem; }
+.time-cell { font-variant-numeric: tabular-nums; }
 
 .game-cell {
   max-width: 185px;
@@ -197,42 +198,29 @@ tr.data-row.qual > td:first-child {
 }
 .toggle-btn:hover { border-color: var(--accent); background: rgba(88,166,255,0.06); }
 
-/* ── Tooltip ────────────────────────────────────────────────────── */
-[data-tip] {
-  position: relative;
-  cursor: help;
-  text-decoration: underline dotted;
-  text-underline-offset: 3px;
-}
-[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 0;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.4em 0.7em;
-  border-radius: 5px;
-  font-size: 0.75rem;
-  font-family: var(--mono);
-  white-space: pre;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.12s;
-  z-index: 100;
-  min-width: 14rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-[data-tip]:hover::after { opacity: 1; }
-[data-tip].tip-right::after { left: auto; right: 0; }
-[data-tip].tip-below::after { bottom: auto; top: calc(100% + 6px); }
-
 /* ── Calculator row ─────────────────────────────────────────────── */
 tr.calc-row > td {
   padding: 0;
   background: rgba(88,166,255,0.04);
 }
+.calc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0.4rem 1rem 0;
+  padding: 0.2rem 0.6rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+.calc-toggle:hover { border-color: var(--accent); color: var(--text); }
+.calc-toggle.open  { border-color: var(--accent); color: var(--accent); }
 .calc-panel { padding: 0.65rem 1rem 0.8rem; }
 .calc-grid {
   display: flex;
@@ -282,6 +270,16 @@ tr.calc-row > td {
   color: var(--text);
   min-width: 5.5rem;
 }
+/* ── Book lines panel ───────────────────────────────────────────── */
+.book-lines-panel { font-family: var(--mono); font-size: 0.78rem; margin-bottom: 0.75rem; }
+.book-lines-panel:empty { display: none; }
+.book-lines-panel .bl-grid { display: flex; flex-wrap: wrap; gap: 0 0; align-items: start; }
+.book-lines-panel .bl-labels { display: flex; flex-direction: column; margin-right: 0.75rem; }
+.book-lines-panel .bl-label { color: var(--muted); font-family: var(--sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.6; }
+.book-lines-panel .bl-label:first-child { visibility: hidden; }
+.book-lines-panel .bl-book { display: flex; flex-direction: column; margin-right: 1.5rem; min-width: 3.5rem; text-align: right; }
+.book-lines-panel .bl-book-name { color: var(--muted); font-family: var(--sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1px; text-align: right; }
+.book-lines-panel .bl-val { font-variant-numeric: tabular-nums; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -289,7 +287,7 @@ tr.calc-row > td {
 <header>
   <h1>Low-Hold Dashboard</h1>
   <div class="meta-chips">
-    <span class="chip">2026-05-23 14:43 EDT</span>
+    <span class="chip">2026-05-24 15:18 EDT</span>
     <span class="chip">Hold ≤ 3.0%</span>
     <span class="chip">DK ±1.5pp vs market</span>
     <span class="chip">≥2 consensus books</span>
@@ -299,6 +297,7 @@ tr.calc-row > td {
 <div class="legend">
   <span><b>vs Mkt</b> — pp from consensus. 🟢 ≥0pp: DK at/behind market. 🟡 slightly negative: DK better. 🔴 very negative: CLV risk.</span>
 </div>
+
 
 
 
@@ -327,9 +326,9 @@ tr.calc-row > td {
     </tr></thead>
     <tbody>
     
-    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952">
+    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952" data-book-lines='[{"book": "DK", "dk_side_dec": 0.0, "dk_side_raw": "+110", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}, {"book": "Novig", "dk_side_dec": 0.0, "dk_side_raw": "-105", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}]'>
       
-  <td class="mono time-cell">5/23 07:10 PM EDT</td>
+  <td class="time-cell">5/23 07:10 PM EDT</td>
   <td class="sport-cell">
     MLB Baseball
     <span class="dim">h2h</span>
@@ -352,10 +351,7 @@ tr.calc-row > td {
       -0.5pp
     
   </td>
-  <td class="mono num y"
-    data-tip="fanduel: +109
-caesars: +106
-betmgm: +108">
+  <td class="mono num y">
     3
   </td>
 
@@ -363,7 +359,9 @@ betmgm: +108">
     
 <tr class="calc-row" style="display:none">
   <td colspan="9">
-    <div class="calc-panel">
+    <div class="book-lines-panel"></div>
+    <button class="calc-toggle" type="button">Calculator</button>
+    <div class="calc-panel" style="display:none">
       <div class="calc-grid">
         <div class="calc-field">
           <div class="calc-label">DK Stake</div>
@@ -427,9 +425,9 @@ betmgm: +108">
     </tr></thead>
     <tbody>
     
-    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952">
+    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952" data-book-lines='[{"book": "DK", "dk_side_dec": 0.0, "dk_side_raw": "+110", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}, {"book": "Novig", "dk_side_dec": 0.0, "dk_side_raw": "-105", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}]'>
       
-  <td class="mono time-cell">5/23 07:10 PM EDT</td>
+  <td class="time-cell">5/23 07:10 PM EDT</td>
   <td class="sport-cell">
     MLB Baseball
     <span class="dim">h2h</span>
@@ -452,10 +450,7 @@ betmgm: +108">
       -0.5pp
     
   </td>
-  <td class="mono num y"
-    data-tip="fanduel: +109
-caesars: +106
-betmgm: +108">
+  <td class="mono num y">
     3
   </td>
 
@@ -468,7 +463,9 @@ betmgm: +108">
     
 <tr class="calc-row" style="display:none">
   <td colspan="10">
-    <div class="calc-panel">
+    <div class="book-lines-panel"></div>
+    <button class="calc-toggle" type="button">Calculator</button>
+    <div class="calc-panel" style="display:none">
       <div class="calc-grid">
         <div class="calc-field">
           <div class="calc-label">DK Stake</div>
@@ -503,9 +500,9 @@ betmgm: +108">
 </tr>
 
     
-    <tr class="data-row " data-dk-dec="1.909" data-nov-dec="1.935">
+    <tr class="data-row " data-dk-dec="1.909" data-nov-dec="1.935" data-book-lines='[{"book": "DK", "dk_side_dec": 0.0, "dk_side_raw": "-110", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}, {"book": "Novig", "dk_side_dec": 0.0, "dk_side_raw": "-107", "opp_side_dec": 0.0, "opp_side_raw": "\u2014"}]'>
       
-  <td class="mono time-cell">5/24 01:00 PM EDT</td>
+  <td class="time-cell">5/24 01:00 PM EDT</td>
   <td class="sport-cell">
     NFL Football
     <span class="dim">spreads</span>
@@ -528,9 +525,7 @@ betmgm: +108">
       -0.4pp
     
   </td>
-  <td class="mono num y"
-    data-tip="fanduel: -111
-betmgm: -113">
+  <td class="mono num y">
     2
   </td>
 
@@ -543,7 +538,9 @@ betmgm: -113">
     
 <tr class="calc-row" style="display:none">
   <td colspan="10">
-    <div class="calc-panel">
+    <div class="book-lines-panel"></div>
+    <button class="calc-toggle" type="button">Calculator</button>
+    <div class="calc-panel" style="display:none">
       <div class="calc-grid">
         <div class="calc-field">
           <div class="calc-label">DK Stake</div>
@@ -588,22 +585,20 @@ betmgm: -113">
 
 
 <script>
-// ── Tooltip smart positioning ─────────────────────────────────────
-document.addEventListener('mouseover', function(e) {
-  const tip = e.target.closest('[data-tip]');
-  if (!tip) return;
-  const rect = tip.getBoundingClientRect();
-  tip.classList.remove('tip-right', 'tip-below');
-  if (rect.left + 240 > window.innerWidth - 8) tip.classList.add('tip-right');
-  const lines = (tip.dataset.tip.match(/\n/g) || []).length + 1;
-  const estTooltipH = lines * 18 + 24;
-  const card = tip.closest('.card');
-  if (card) {
-    if (rect.top - card.getBoundingClientRect().top < estTooltipH) tip.classList.add('tip-below');
-  } else if (rect.top < estTooltipH + 40) {
-    tip.classList.add('tip-below');
-  }
-});
+// ── Book lines panel ──────────────────────────────────────────────
+function renderBookLines(panel, lines) {
+  if (!lines || lines.length === 0) { panel.innerHTML = ''; return; }
+  lines.sort((a, b) => b.dk_side_dec - a.dk_side_dec);
+  const bestDk  = Math.max(...lines.map(l => l.dk_side_dec));
+  const bestOpp = Math.max(...lines.map(l => l.opp_side_dec));
+  const labels = `<div class="bl-labels"><span class="bl-label">Book</span><span class="bl-label">DK</span><span class="bl-label">Opp</span></div>`;
+  const cols = lines.map(l => {
+    const dkCls  = l.dk_side_dec  === bestDk  ? ' g' : '';
+    const oppCls = l.opp_side_dec === bestOpp ? ' g' : '';
+    return `<div class="bl-book"><span class="bl-book-name">${l.book}</span><span class="bl-val${dkCls}">${l.dk_side_raw}</span><span class="bl-val${oppCls}">${l.opp_side_raw}</span></div>`;
+  }).join('');
+  panel.innerHTML = `<div class="bl-grid">${labels}${cols}</div>`;
+}
 
 // ── Wager calculator ──────────────────────────────────────────────
 function calcUpdate(calcRow) {
@@ -636,9 +631,9 @@ function calcUpdate(calcRow) {
   calcRow.querySelector('.o-hold').textContent = effHold.toFixed(3) + '%';
 }
 
-// Click a data-row → toggle its inline calculator
+// Click a data-row → toggle expanded panel (book lines + hidden calculator)
 document.addEventListener('click', function(e) {
-  if (e.target.closest('.calc-panel')) return;
+  if (e.target.closest('.calc-row')) return;
   const row = e.target.closest('tr.data-row');
   if (!row) return;
   const calcRow = row.nextElementSibling;
@@ -646,12 +641,34 @@ document.addEventListener('click', function(e) {
 
   const isOpen = calcRow.style.display !== 'none';
 
-  document.querySelectorAll('tr.calc-row').forEach(cr => { cr.style.display = 'none'; });
+  document.querySelectorAll('tr.calc-row').forEach(cr => {
+    cr.style.display = 'none';
+    cr.querySelector('.calc-panel').style.display = 'none';
+    cr.querySelector('.calc-toggle').classList.remove('open');
+  });
   document.querySelectorAll('tr.data-row').forEach(r => r.classList.remove('calc-open'));
 
   if (!isOpen) {
     calcRow.style.display = '';
     row.classList.add('calc-open');
+    renderBookLines(calcRow.querySelector('.book-lines-panel'), JSON.parse(row.dataset.bookLines || '[]'));
+  }
+});
+
+// Click Calculator button → toggle the calc panel
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.calc-toggle');
+  if (!btn) return;
+  const calcRow = btn.closest('tr.calc-row');
+  if (!calcRow) return;
+  const panel = calcRow.querySelector('.calc-panel');
+  const isOpen = panel.style.display !== 'none';
+  if (isOpen) {
+    panel.style.display = 'none';
+    btn.classList.remove('open');
+  } else {
+    panel.style.display = '';
+    btn.classList.add('open');
     calcUpdate(calcRow);
     const inp = calcRow.querySelector('.calc-stake');
     inp.focus();
