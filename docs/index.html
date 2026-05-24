@@ -289,10 +289,10 @@ tr.calc-row > td {
 <header>
   <h1>Low-Hold Dashboard</h1>
   <div class="meta-chips">
-    <span class="chip">{{ generated_at }}</span>
-    <span class="chip">Hold ≤ {{ thresholds.hold_max_pct }}%</span>
-    <span class="chip">DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs market</span>
-    <span class="chip">≥{{ thresholds.min_books_for_consensus }} consensus books</span>
+    <span class="chip">2026-05-23 14:43 EDT</span>
+    <span class="chip">Hold ≤ 3.0%</span>
+    <span class="chip">DK ±1.5pp vs market</span>
+    <span class="chip">≥2 consensus books</span>
   </div>
 </header>
 
@@ -300,40 +300,69 @@ tr.calc-row > td {
   <span><b>vs Mkt</b> — pp from consensus. 🟢 ≥0pp: DK at/behind market. 🟡 slightly negative: DK better. 🔴 very negative: CLV risk.</span>
 </div>
 
-{# ── Macros ───────────────────────────────────────────────────────────────── #}
-{% macro row_cells(r) %}
-  <td class="mono time-cell">{{ r.commence_time | to_et }}</td>
-  <td class="sport-cell">
-    {{ r.sport }}
-    <span class="dim">{{ r.market }}</span>
-  </td>
-  <td class="game-cell" title="{{ r.game }}">{{ r.game }}</td>
-  <td class="side-cell" title="{{ r.side }}">{{ r.side }}</td>
-  <td class="odds-cell mono">
-    <div class="book-line"><span class="book-tag">DK</span>{{ r.dk_american }}</div>
-    <div class="book-line"><span class="book-tag">Nov</span>{{ r.novig_american }}</div>
-  </td>
-  <td class="odds-cell mono">
-    <div class="book-line">{{ r.consensus_american if r.consensus_american is not none else "—" }}</div>
-    <div class="book-line dim">{{ r.sharp_american if r.sharp_american is not none else "—" }}</div>
-  </td>
-  <td class="mono num hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
-    {{ r.hold_pct|round(2) }}%
-  </td>
-  <td class="mono num {% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
-    {% if r.consensus_implied_pct is not none %}
-      {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
-    {% else %}—{% endif %}
-  </td>
-  <td class="mono num {% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}"
-    {% if r.consensus_tooltip %}data-tip="{{ r.consensus_tooltip }}"{% endif %}>
-    {{ r.consensus_book_count }}
-  </td>
-{% endmacro %}
 
-{% macro calc_row_html(ncols) %}
+
+
+
+
+
+<div class="card">
+  <div class="card-header">
+    <h2>✓ Qualified</h2>
+    <span class="count-badge">1</span>
+  </div>
+  
+  <div class="wrap">
+  <table id="t-q">
+    <thead><tr>
+      <th>Time (ET)</th>
+      <th>Sport · Mkt</th>
+      <th>Game</th>
+      <th>Side (DK)</th>
+      <th>DK / Novig</th>
+      <th>Fair / Sharp</th>
+      <th>Hold%</th>
+      <th>vs Mkt</th>
+      <th>#Bks</th>
+    </tr></thead>
+    <tbody>
+    
+    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952">
+      
+  <td class="mono time-cell">5/23 07:10 PM EDT</td>
+  <td class="sport-cell">
+    MLB Baseball
+    <span class="dim">h2h</span>
+  </td>
+  <td class="game-cell" title="Los Angeles Angels @ New York Yankees">Los Angeles Angels @ New York Yankees</td>
+  <td class="side-cell" title="Los Angeles Angels">Los Angeles Angels</td>
+  <td class="odds-cell mono">
+    <div class="book-line"><span class="book-tag">DK</span>+110</div>
+    <div class="book-line"><span class="book-tag">Nov</span>-105</div>
+  </td>
+  <td class="odds-cell mono">
+    <div class="book-line">+108</div>
+    <div class="book-line dim">+107</div>
+  </td>
+  <td class="mono num hold g">
+    0.81%
+  </td>
+  <td class="mono num y">
+    
+      -0.5pp
+    
+  </td>
+  <td class="mono num y"
+    data-tip="fanduel: +109
+caesars: +106
+betmgm: +108">
+    3
+  </td>
+
+    </tr>
+    
 <tr class="calc-row" style="display:none">
-  <td colspan="{{ ncols }}">
+  <td colspan="9">
     <div class="calc-panel">
       <div class="calc-grid">
         <div class="calc-field">
@@ -367,51 +396,21 @@ tr.calc-row > td {
     </div>
   </td>
 </tr>
-{% endmacro %}
 
-{# TODO: add filters bar (date, sport, market) above the tables #}
-{# ── Qualified ────────────────────────────────────────────────────────────── #}
-<div class="card">
-  <div class="card-header">
-    <h2>✓ Qualified</h2>
-    <span class="count-badge">{{ qualified|length }}</span>
-  </div>
-  {% if qualified %}
-  <div class="wrap">
-  <table id="t-q">
-    <thead><tr>
-      <th>Time (ET)</th>
-      <th>Sport · Mkt</th>
-      <th>Game</th>
-      <th>Side (DK)</th>
-      <th>DK / Novig</th>
-      <th>Fair / Sharp</th>
-      <th>Hold%</th>
-      <th>vs Mkt</th>
-      <th>#Bks</th>
-    </tr></thead>
-    <tbody>
-    {% for r in qualified %}
-    <tr class="data-row qual" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
-      {{ row_cells(r) }}
-    </tr>
-    {{ calc_row_html(9) }}
-    {% endfor %}
+    
     </tbody>
   </table>
   </div>
-  {% else %}
-  <p class="empty">No qualified opportunities in this snapshot.</p>
-  {% endif %}
+  
 </div>
 
-{# ── All low-hold ─────────────────────────────────────────────────────────── #}
+
 <div class="card">
   <div class="card-header">
     <h2>All Low-Hold Lines</h2>
-    <span class="count-badge">{{ (qualified|length) + (unqualified|length) }}</span>
+    <span class="count-badge">2</span>
   </div>
-  {% if (qualified|length + unqualified|length) > 0 %}
+  
   <div class="wrap">
   <table id="t-all">
     <thead><tr>
@@ -427,70 +426,166 @@ tr.calc-row > td {
       <th>Status</th>
     </tr></thead>
     <tbody>
-    {% for r in (qualified + unqualified)|sort(attribute='hold_pct') %}
-    <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
-      {{ row_cells(r) }}
+    
+    <tr class="data-row qual" data-dk-dec="2.1" data-nov-dec="1.952">
+      
+  <td class="mono time-cell">5/23 07:10 PM EDT</td>
+  <td class="sport-cell">
+    MLB Baseball
+    <span class="dim">h2h</span>
+  </td>
+  <td class="game-cell" title="Los Angeles Angels @ New York Yankees">Los Angeles Angels @ New York Yankees</td>
+  <td class="side-cell" title="Los Angeles Angels">Los Angeles Angels</td>
+  <td class="odds-cell mono">
+    <div class="book-line"><span class="book-tag">DK</span>+110</div>
+    <div class="book-line"><span class="book-tag">Nov</span>-105</div>
+  </td>
+  <td class="odds-cell mono">
+    <div class="book-line">+108</div>
+    <div class="book-line dim">+107</div>
+  </td>
+  <td class="mono num hold g">
+    0.81%
+  </td>
+  <td class="mono num y">
+    
+      -0.5pp
+    
+  </td>
+  <td class="mono num y"
+    data-tip="fanduel: +109
+caesars: +106
+betmgm: +108">
+    3
+  </td>
+
       <td>
-        {% if r.qualified %}
+        
           <span class="tag tag-ok">✓</span>
-        {% else %}
-          <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
-        {% endif %}
+        
       </td>
     </tr>
-    {{ calc_row_html(10) }}
-    {% endfor %}
+    
+<tr class="calc-row" style="display:none">
+  <td colspan="10">
+    <div class="calc-panel">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <div class="calc-label">DK Stake</div>
+          <div class="calc-input-wrap">
+            <span class="dolsign">$</span>
+            <input class="calc-stake" type="number" value="100" min="1" step="1">
+          </div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Novig Stake</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-nov-stake">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Total Risk</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-total">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if DK wins</div>
+          <div class="calc-output"><span class="o-net-dk">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if Nov wins</div>
+          <div class="calc-output"><span class="o-net-nov">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Eff. Hold</div>
+          <div class="calc-output"><span class="o-hold">—</span></div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>
+
+    
+    <tr class="data-row " data-dk-dec="1.909" data-nov-dec="1.935">
+      
+  <td class="mono time-cell">5/24 01:00 PM EDT</td>
+  <td class="sport-cell">
+    NFL Football
+    <span class="dim">spreads</span>
+  </td>
+  <td class="game-cell" title="Kansas City Chiefs @ Philadelphia Eagles">Kansas City Chiefs @ Philadelphia Eagles</td>
+  <td class="side-cell" title="Chiefs +3.5">Chiefs +3.5</td>
+  <td class="odds-cell mono">
+    <div class="book-line"><span class="book-tag">DK</span>-110</div>
+    <div class="book-line"><span class="book-tag">Nov</span>-107</div>
+  </td>
+  <td class="odds-cell mono">
+    <div class="book-line">-112</div>
+    <div class="book-line dim">—</div>
+  </td>
+  <td class="mono num hold y">
+    1.67%
+  </td>
+  <td class="mono num y">
+    
+      -0.4pp
+    
+  </td>
+  <td class="mono num y"
+    data-tip="fanduel: -111
+betmgm: -113">
+    2
+  </td>
+
+      <td>
+        
+          <span class="note">Novig rank 2 &gt; threshold 1</span>
+        
+      </td>
+    </tr>
+    
+<tr class="calc-row" style="display:none">
+  <td colspan="10">
+    <div class="calc-panel">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <div class="calc-label">DK Stake</div>
+          <div class="calc-input-wrap">
+            <span class="dolsign">$</span>
+            <input class="calc-stake" type="number" value="100" min="1" step="1">
+          </div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Novig Stake</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-nov-stake">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Total Risk</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-total">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if DK wins</div>
+          <div class="calc-output"><span class="o-net-dk">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if Nov wins</div>
+          <div class="calc-output"><span class="o-net-nov">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Eff. Hold</div>
+          <div class="calc-output"><span class="o-hold">—</span></div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>
+
+    
     </tbody>
   </table>
   </div>
-  {% else %}
-  <p class="empty">No lines within the hold threshold at this snapshot.</p>
-  {% endif %}
+  
 </div>
 
-{# ── Live Lines ───────────────────────────────────────────────────────────── #}
-{% if live_rows %}
-<div class="card">
-  <div class="card-header">
-    <h2><span class="tag tag-live">LIVE</span> &nbsp;Low-Hold Lines</h2>
-    <span class="count-badge">{{ live_rows|length }}</span>
-    <button class="toggle-btn" id="live-toggle" onclick="toggleLive()">▼ Show</button>
-  </div>
-  <div id="live-section" style="display:none">
-    <div class="wrap">
-    <table id="t-live">
-      <thead><tr>
-        <th>Time (ET)</th>
-        <th>Sport · Mkt</th>
-        <th>Game</th>
-        <th>Side (DK)</th>
-        <th>DK / Novig</th>
-        <th>Fair / Sharp</th>
-        <th>Hold%</th>
-        <th>vs Mkt</th>
-        <th>#Bks</th>
-        <th>Status</th>
-      </tr></thead>
-      <tbody>
-      {% for r in live_rows|sort(attribute='hold_pct') %}
-      <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
-        {{ row_cells(r) }}
-        <td>
-          {% if r.qualified %}
-            <span class="tag tag-ok">✓</span>
-          {% else %}
-            <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
-          {% endif %}
-        </td>
-      </tr>
-      {{ calc_row_html(10) }}
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-  </div>
-</div>
-{% endif %}
+
+
 
 <script>
 // ── Tooltip smart positioning ─────────────────────────────────────
