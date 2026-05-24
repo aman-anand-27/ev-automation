@@ -95,7 +95,7 @@ def _devigged_consensus_details(
 
     Books that don't price both sides at DK's exact line are skipped.
 
-    Each entry: {book, raw_american, devigged_implied_pct}
+    Each entry: {book, raw_american, opp_american, dk_side_dec, opp_side_dec, devigged_implied_pct}
     """
     details: list[dict] = []
     for bm in bookmakers:
@@ -121,6 +121,9 @@ def _devigged_consensus_details(
             details.append({
                 "book": bm["key"],
                 "raw_american": decimal_to_american(dk_in_book["price"]),
+                "opp_american": decimal_to_american(opp_in_book["price"]),
+                "dk_side_dec": dk_in_book["price"],
+                "opp_side_dec": opp_in_book["price"],
                 "devigged_implied_pct": round(devigged * 100.0, 3),
             })
             break
@@ -231,10 +234,16 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 else:
                     sharp_american = None
 
-                # Tooltip: each book's raw offered American odds, one per line
-                consensus_tooltip = "\n".join(
-                    f"{d['book']}: {d['raw_american']}" for d in all_details
-                )
+                book_lines = [
+                    {
+                        "book": d["book"],
+                        "dk_side_raw": d["raw_american"],
+                        "opp_side_raw": d["opp_american"],
+                        "dk_side_dec": d["dk_side_dec"],
+                        "opp_side_dec": d["opp_side_dec"],
+                    }
+                    for d in all_details
+                ]
 
                 rank = _novig_rank(bookmakers, novig_opp, market_key, exchange)
 
@@ -251,7 +260,7 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                     "novig_american": decimal_to_american(novig_price),
                     "consensus_american": consensus_american,
                     "sharp_american": sharp_american,
-                    "consensus_tooltip": consensus_tooltip,
+                    "book_lines": book_lines,
                     "hold_pct": round(hold_pct, 3),
                     "dk_implied_pct": round(dk_impl_pct, 3),
                     "consensus_implied_pct": round(consensus_impl_pct, 3)

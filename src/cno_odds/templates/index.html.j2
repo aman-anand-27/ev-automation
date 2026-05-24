@@ -197,37 +197,6 @@ tr.data-row.qual > td:first-child {
 }
 .toggle-btn:hover { border-color: var(--accent); background: rgba(88,166,255,0.06); }
 
-/* ── Tooltip ────────────────────────────────────────────────────── */
-[data-tip] {
-  position: relative;
-  cursor: help;
-  text-decoration: underline dotted;
-  text-underline-offset: 3px;
-}
-[data-tip]::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 0;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.4em 0.7em;
-  border-radius: 5px;
-  font-size: 0.75rem;
-  font-family: var(--mono);
-  white-space: pre;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.12s;
-  z-index: 100;
-  min-width: 14rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-[data-tip]:hover::after { opacity: 1; }
-[data-tip].tip-right::after { left: auto; right: 0; }
-[data-tip].tip-below::after { bottom: auto; top: calc(100% + 6px); }
-
 /* ── Calculator row ─────────────────────────────────────────────── */
 tr.calc-row > td {
   padding: 0;
@@ -282,6 +251,15 @@ tr.calc-row > td {
   color: var(--text);
   min-width: 5.5rem;
 }
+/* ── Book lines panel ───────────────────────────────────────────── */
+.book-lines-panel { font-family: var(--mono); font-size: 0.78rem; margin-bottom: 0.75rem; }
+.book-lines-panel:empty { display: none; }
+.book-lines-panel table { border-collapse: collapse; }
+.book-lines-panel th,
+.book-lines-panel td { padding: 2px 1.5rem 2px 0; text-align: right; font-variant-numeric: tabular-nums; }
+.book-lines-panel th:first-child,
+.book-lines-panel td:first-child { text-align: left; padding-right: 2rem; }
+.book-lines-panel th { color: var(--muted); font-weight: 500; font-family: var(--sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; padding-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -325,40 +303,15 @@ tr.calc-row > td {
       {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
     {% else %}—{% endif %}
   </td>
-  <td class="mono num {% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}"
-    {% if r.consensus_tooltip %}data-tip="{{ r.consensus_tooltip }}"{% endif %}>
+  <td class="mono num {% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}">
     {{ r.consensus_book_count }}
   </td>
 {% endmacro %}
 
-{#
-  TODO: Book lines panel (above calculator in expanded row)
-  When a row is clicked, show a compact table of every consensus book's price
-  on BOTH sides of the market — mirroring the CNO layout. Needs:
-
-  Data side (hold.py / render.py):
-  - `consensus_tooltip` currently stores only DK's side per book as plain text.
-    Replace or supplement with a structured `book_lines` list on each row:
-      [{ book, dk_side_raw, opp_side_raw }, ...]   (American strings)
-    Emit this as a data attribute on the <tr> (JSON-encoded) so JS can read it.
-
-  Rendering (template):
-  - Inside calc_row_html (above .calc-panel), conditionally render a
-    `.book-lines-panel` div when book_lines is non-empty.
-  - Table columns: Book | DK side (American, colored if best) | Opp side (American)
-  - Highlight the best (highest) price per column in green, matching CNO's style.
-  - "Best" column = best available price on DK's side across all books shown.
-  - Keep it compact: same monospace font, small row height, no borders — just lines.
-  - Books sorted by DK-side price descending (best first).
-
-  JS side:
-  - On row click, parse `data-book-lines` from the data-row, build the table
-    innerHTML dynamically (same pattern as calcUpdate), inject into .book-lines-panel.
-  - No new network requests — all data is already embedded in the page.
-#}
 {% macro calc_row_html(ncols) %}
 <tr class="calc-row" style="display:none">
   <td colspan="{{ ncols }}">
+    <div class="book-lines-panel"></div>
     <div class="calc-panel">
       <div class="calc-grid">
         <div class="calc-field">
@@ -417,7 +370,7 @@ tr.calc-row > td {
     </tr></thead>
     <tbody>
     {% for r in qualified %}
-    <tr class="data-row qual" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
+    <tr class="data-row qual" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}" data-book-lines='{{ r.book_lines|tojson }}'>
       {{ row_cells(r) }}
     </tr>
     {{ calc_row_html(9) }}
@@ -453,7 +406,7 @@ tr.calc-row > td {
     </tr></thead>
     <tbody>
     {% for r in (qualified + unqualified)|sort(attribute='hold_pct') %}
-    <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
+    <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}" data-book-lines='{{ r.book_lines|tojson }}'>
       {{ row_cells(r) }}
       <td>
         {% if r.qualified %}
@@ -498,7 +451,7 @@ tr.calc-row > td {
       </tr></thead>
       <tbody>
       {% for r in live_rows|sort(attribute='hold_pct') %}
-      <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
+      <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}" data-book-lines='{{ r.book_lines|tojson }}'>
         {{ row_cells(r) }}
         <td>
           {% if r.qualified %}
@@ -518,22 +471,19 @@ tr.calc-row > td {
 {% endif %}
 
 <script>
-// ── Tooltip smart positioning ─────────────────────────────────────
-document.addEventListener('mouseover', function(e) {
-  const tip = e.target.closest('[data-tip]');
-  if (!tip) return;
-  const rect = tip.getBoundingClientRect();
-  tip.classList.remove('tip-right', 'tip-below');
-  if (rect.left + 240 > window.innerWidth - 8) tip.classList.add('tip-right');
-  const lines = (tip.dataset.tip.match(/\n/g) || []).length + 1;
-  const estTooltipH = lines * 18 + 24;
-  const card = tip.closest('.card');
-  if (card) {
-    if (rect.top - card.getBoundingClientRect().top < estTooltipH) tip.classList.add('tip-below');
-  } else if (rect.top < estTooltipH + 40) {
-    tip.classList.add('tip-below');
-  }
-});
+// ── Book lines panel ──────────────────────────────────────────────
+function renderBookLines(panel, lines) {
+  if (!lines || lines.length === 0) { panel.innerHTML = ''; return; }
+  lines.sort((a, b) => b.dk_side_dec - a.dk_side_dec);
+  const bestDk  = Math.max(...lines.map(l => l.dk_side_dec));
+  const bestOpp = Math.max(...lines.map(l => l.opp_side_dec));
+  const rows = lines.map(l => {
+    const dkCls  = l.dk_side_dec  === bestDk  ? ' class="g"' : '';
+    const oppCls = l.opp_side_dec === bestOpp ? ' class="g"' : '';
+    return `<tr><td>${l.book}</td><td${dkCls}>${l.dk_side_raw}</td><td${oppCls}>${l.opp_side_raw}</td></tr>`;
+  }).join('');
+  panel.innerHTML = `<table><thead><tr><th>Book</th><th>DK side</th><th>Opp side</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
 
 // ── Wager calculator ──────────────────────────────────────────────
 function calcUpdate(calcRow) {
@@ -583,6 +533,7 @@ document.addEventListener('click', function(e) {
     calcRow.style.display = '';
     row.classList.add('calc-open');
     calcUpdate(calcRow);
+    renderBookLines(calcRow.querySelector('.book-lines-panel'), JSON.parse(row.dataset.bookLines || '[]'));
     const inp = calcRow.querySelector('.calc-stake');
     inp.focus();
     inp.select();
