@@ -8,6 +8,7 @@
 :root {
   --bg: #0d1117;
   --surface: #161b22;
+  --surface2: #1c2128;
   --border: #21262d;
   --text: #c9d1d9;
   --muted: #8b949e;
@@ -16,47 +17,104 @@
   --yellow: #d29922;
   --red: #f85149;
   --orange: #e3712a;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, ui-sans-serif, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-family: var(--sans);
   font-size: 13px;
   line-height: 1.5;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
 }
 a { color: var(--accent); }
+
+/* ── Header ─────────────────────────────────────────────────────── */
 header {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
 }
-h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
-.meta { color: var(--muted); font-size: 0.8rem; }
-section { margin-bottom: 2.5rem; }
-h2 {
+h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.meta-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.1em 0.65em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ── Legend ─────────────────────────────────────────────────────── */
+.legend {
+  color: var(--muted);
   font-size: 0.75rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+h2 {
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 0.75rem;
 }
-.empty { color: var(--muted); font-style: italic; padding: 0.4rem 0; }
+.count-badge {
+  background: var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.05em 0.55em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--mono);
+}
+.empty { color: var(--muted); font-style: italic; padding: 0.75rem 1rem; font-size: 0.85rem; }
+
+/* ── Table ──────────────────────────────────────────────────────── */
 .wrap { overflow-x: auto; }
-table { width: max-content; min-width: 100%; border-collapse: collapse; }
+table { width: 100%; border-collapse: collapse; }
 th, td {
-  padding: 0.35rem 0.8rem;
+  padding: 0.3rem 0.6rem;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
   vertical-align: middle;
   text-align: left;
+  font-size: 12.5px;
 }
 th {
-  background: var(--surface);
+  background: var(--surface2);
   color: var(--muted);
-  font-size: 0.72rem;
+  font-family: var(--sans);
+  font-size: 0.67rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -65,46 +123,81 @@ th {
   top: 0;
   z-index: 1;
 }
-th:hover { color: var(--text); }
-th[data-dir="asc"]::after  { content: " ↑"; color: var(--accent); }
-th[data-dir="desc"]::after { content: " ↓"; color: var(--accent); }
-tr:hover td { background: rgba(255,255,255,0.025); }
+th:hover { color: var(--text); background: var(--border); }
+th[data-dir] { background: rgba(88,166,255,0.09); color: var(--accent); }
+th[data-dir="asc"]::after  { content: " ↑"; }
+th[data-dir="desc"]::after { content: " ↓"; }
+
+tr.data-row { cursor: pointer; }
+tr.data-row:hover td { background: rgba(255,255,255,0.04); }
+tr.data-row.calc-open > td { background: rgba(88,166,255,0.05); }
+tr.data-row.qual > td:first-child {
+  border-left: 2px solid rgba(63,185,80,0.5);
+  padding-left: calc(0.6rem - 2px);
+}
+
+/* ── Cell variants ──────────────────────────────────────────────── */
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.num  { text-align: right; }
+.dim  { color: var(--muted); font-size: 0.72rem; }
+
+.game-cell {
+  max-width: 185px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.side-cell {
+  max-width: 145px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sport-cell { font-size: 12px; line-height: 1.25; }
+.sport-cell .dim { display: block; }
+
+.odds-cell { line-height: 1.3; }
+.book-line { display: flex; align-items: baseline; gap: 0.3em; }
+.book-tag {
+  color: var(--muted);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  min-width: 2.2em;
+}
+
 .hold { font-weight: 600; }
 .g { color: var(--green); }
 .y { color: var(--yellow); }
 .r { color: var(--red); }
 .muted { color: var(--muted); }
+
+/* ── Tags ───────────────────────────────────────────────────────── */
 .tag {
   display: inline-block;
   padding: 0.1em 0.45em;
   border-radius: 3px;
   font-size: 0.72rem;
+  font-family: var(--sans);
 }
-.tag-ok   { background: rgba(63,185,80,0.15);  color: var(--green); }
+.tag-ok   { background: rgba(63,185,80,0.15);  color: var(--green);  }
 .tag-live { background: rgba(227,113,42,0.15); color: var(--orange); }
-.note     { color: var(--muted); font-size: 0.8rem; }
-.legend {
-  color: var(--muted);
-  font-size: 0.75rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.legend span { display: inline-block; }
+.note     { color: var(--muted); font-size: 0.75rem; }
+
+/* ── Live toggle button ─────────────────────────────────────────── */
 .toggle-btn {
-  background: var(--surface);
+  background: transparent;
   border: 1px solid var(--border);
   color: var(--accent);
-  font-family: inherit;
-  font-size: 0.8rem;
-  padding: 0.3rem 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-left: auto;
 }
-.toggle-btn:hover { border-color: var(--accent); }
-/* Tooltip on #Bks cells */
+.toggle-btn:hover { border-color: var(--accent); background: rgba(88,166,255,0.06); }
+
+/* ── Tooltip ────────────────────────────────────────────────────── */
 [data-tip] {
   position: relative;
   cursor: help;
@@ -114,93 +207,197 @@ tr:hover td { background: rgba(255,255,255,0.025); }
 [data-tip]::after {
   content: attr(data-tip);
   position: absolute;
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + 6px);
   left: 0;
-  background: #1c2128;
+  background: var(--surface2);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 0.4em 0.65em;
+  padding: 0.4em 0.7em;
   border-radius: 5px;
   font-size: 0.75rem;
+  font-family: var(--mono);
   white-space: pre;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.12s;
   z-index: 100;
   min-width: 14rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 [data-tip]:hover::after { opacity: 1; }
+[data-tip].tip-right::after { left: auto; right: 0; }
+[data-tip].tip-below::after { bottom: auto; top: calc(100% + 6px); }
+
+/* ── Calculator row ─────────────────────────────────────────────── */
+tr.calc-row > td {
+  padding: 0;
+  background: rgba(88,166,255,0.04);
+}
+.calc-panel { padding: 0.65rem 1rem 0.8rem; }
+.calc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: flex-end;
+}
+.calc-field { display: flex; flex-direction: column; gap: 0.25rem; }
+.calc-label {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.calc-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  gap: 0.1rem;
+}
+.dolsign { color: var(--muted); font-family: var(--mono); font-size: 0.85rem; }
+.calc-stake {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  width: 6em;
+  outline: none;
+  padding: 0;
+}
+.calc-stake::-webkit-inner-spin-button,
+.calc-stake::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-output {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  padding: 0.2rem 0;
+  color: var(--text);
+  min-width: 5.5rem;
+}
 </style>
 </head>
 <body>
 
 <header>
   <h1>Low-Hold Dashboard</h1>
-  <p class="meta">
-    {{ generated_at }}
-    &nbsp;·&nbsp; Hold ≤ {{ thresholds.hold_max_pct }}%
-    &nbsp;·&nbsp; DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs consensus
-    &nbsp;·&nbsp; ≥{{ thresholds.min_books_for_consensus }} consensus books
-  </p>
+  <div class="meta-chips">
+    <span class="chip">{{ generated_at }}</span>
+    <span class="chip">Hold ≤ {{ thresholds.hold_max_pct }}%</span>
+    <span class="chip">DK ±{{ thresholds.dk_consensus_tolerance_pp }}pp vs market</span>
+    <span class="chip">≥{{ thresholds.min_books_for_consensus }} consensus books</span>
+  </div>
 </header>
 
 <div class="legend">
-  <span><b>DK / Novig</b> — American odds for your two legs</span>
-  <span><b>Fair Odds</b> — median price across all consensus books for DK's side</span>
-  <span><b>Sharp</b> — median of FanDuel + Caesars only; closer to true fair value</span>
-  <span><b>DK vs Mkt</b> — pp from consensus. 🟢 ≥0pp: DK at/behind market (looks ordinary). 🟡 slightly negative: DK a bit better than market. 🔴 very negative: high CLV risk.</span>
+  <span><b>DK / Novig</b> — American odds for your two legs &middot; click any row for the hedge calculator</span>
+  <span><b>Fair / Sharp</b> — median of all consensus books / sharp books only</span>
+  <span><b>vs Mkt</b> — pp from consensus. 🟢 ≥0pp: DK at/behind market. 🟡 slightly negative: DK better. 🔴 very negative: CLV risk.</span>
   <span><b>#Bks</b> — hover to see each book's price</span>
 </div>
 
-{# ── Macro: one table row ─────────────────────────────────────────────────── #}
-{# (Jinja2 macros keep the three tables DRY) #}
+{# ── Macros ───────────────────────────────────────────────────────────────── #}
 {% macro row_cells(r) %}
-  <td>{{ r.commence_time | to_et }}</td>
-  <td>{{ r.sport }}</td>
-  <td>{{ r.game }}</td>
-  <td>{{ r.market }}</td>
-  <td>{{ r.side }}</td>
-  <td>{{ r.dk_american }}</td>
-  <td>{{ r.novig_american }}</td>
-  <td>{{ r.consensus_american if r.consensus_american is not none else "—" }}</td>
-  <td>{{ r.sharp_american if r.sharp_american is not none else "—" }}</td>
-  <td class="hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
+  <td class="mono time-cell">{{ r.commence_time | to_et }}</td>
+  <td class="sport-cell">
+    {{ r.sport }}
+    <span class="dim">{{ r.market }}</span>
+  </td>
+  <td class="game-cell" title="{{ r.game }}">{{ r.game }}</td>
+  <td class="side-cell" title="{{ r.side }}">{{ r.side }}</td>
+  <td class="odds-cell mono">
+    <div class="book-line"><span class="book-tag">DK</span>{{ r.dk_american }}</div>
+    <div class="book-line"><span class="book-tag">Nov</span>{{ r.novig_american }}</div>
+  </td>
+  <td class="odds-cell mono">
+    <div class="book-line">{{ r.consensus_american if r.consensus_american is not none else "—" }}</div>
+    <div class="book-line dim">{{ r.sharp_american if r.sharp_american is not none else "—" }}</div>
+  </td>
+  <td class="mono num hold {% if r.hold_pct < 1.0 %}g{% elif r.hold_pct < 2.0 %}y{% else %}r{% endif %}">
     {{ r.hold_pct|round(2) }}%
   </td>
-  <td class="{% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
+  <td class="mono num {% if r.consensus_implied_pct is not none %}{% set diff = r.dk_implied_pct - r.consensus_implied_pct %}{% if diff >= 0 %}g{% elif diff >= -1.5 %}y{% else %}r{% endif %}{% endif %}">
     {% if r.consensus_implied_pct is not none %}
       {{ "%+.1f"|format(r.dk_implied_pct - r.consensus_implied_pct) }}pp
     {% else %}—{% endif %}
   </td>
-  <td class="{% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}"
+  <td class="mono num {% if r.consensus_book_count >= 4 %}g{% elif r.consensus_book_count >= 2 %}y{% else %}muted{% endif %}"
     {% if r.consensus_tooltip %}data-tip="{{ r.consensus_tooltip }}"{% endif %}>
     {{ r.consensus_book_count }}
   </td>
 {% endmacro %}
 
+{% macro calc_row_html(ncols) %}
+<tr class="calc-row" style="display:none">
+  <td colspan="{{ ncols }}">
+    <div class="calc-panel">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <div class="calc-label">DK Stake</div>
+          <div class="calc-input-wrap">
+            <span class="dolsign">$</span>
+            <input class="calc-stake" type="number" value="100" min="1" step="1">
+          </div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Novig Stake</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-nov-stake">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Total Risk</div>
+          <div class="calc-output"><span class="dolsign">$</span><span class="o-total">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if DK wins</div>
+          <div class="calc-output"><span class="o-net-dk">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Net if Nov wins</div>
+          <div class="calc-output"><span class="o-net-nov">—</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label">Eff. Hold</div>
+          <div class="calc-output"><span class="o-hold">—</span></div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>
+{% endmacro %}
+
 {# ── Qualified ────────────────────────────────────────────────────────────── #}
-<section>
-  <h2>✓ Qualified ({{ qualified|length }})</h2>
+<div class="card">
+  <div class="card-header">
+    <h2>✓ Qualified</h2>
+    <span class="count-badge">{{ qualified|length }}</span>
+  </div>
   {% if qualified %}
   <div class="wrap">
   <table id="t-q">
     <thead><tr>
-      <th>Commence (ET)</th>
-      <th>Sport</th>
+      <th>Time (ET)</th>
+      <th>Sport · Mkt</th>
       <th>Game</th>
-      <th>Mkt</th>
       <th>Side (DK)</th>
-      <th>DK</th>
-      <th>Novig</th>
-      <th>Fair Odds</th>
-      <th>Sharp</th>
+      <th>DK / Novig</th>
+      <th>Fair / Sharp</th>
       <th>Hold%</th>
-      <th>DK vs Mkt</th>
+      <th>vs Mkt</th>
       <th>#Bks</th>
     </tr></thead>
     <tbody>
     {% for r in qualified %}
-    <tr>{{ row_cells(r) }}</tr>
+    <tr class="data-row qual" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
+      {{ row_cells(r) }}
+    </tr>
+    {{ calc_row_html(9) }}
     {% endfor %}
     </tbody>
   </table>
@@ -208,41 +405,42 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   {% else %}
   <p class="empty">No qualified opportunities in this snapshot.</p>
   {% endif %}
-</section>
+</div>
 
 {# ── All low-hold ─────────────────────────────────────────────────────────── #}
-<section>
-  <h2>All Low-Hold Lines ({{ (qualified|length) + (unqualified|length) }})</h2>
+<div class="card">
+  <div class="card-header">
+    <h2>All Low-Hold Lines</h2>
+    <span class="count-badge">{{ (qualified|length) + (unqualified|length) }}</span>
+  </div>
   {% if (qualified|length + unqualified|length) > 0 %}
   <div class="wrap">
   <table id="t-all">
     <thead><tr>
-      <th>Commence (ET)</th>
-      <th>Sport</th>
+      <th>Time (ET)</th>
+      <th>Sport · Mkt</th>
       <th>Game</th>
-      <th>Mkt</th>
       <th>Side (DK)</th>
-      <th>DK</th>
-      <th>Novig</th>
-      <th>Fair Odds</th>
-      <th>Sharp</th>
+      <th>DK / Novig</th>
+      <th>Fair / Sharp</th>
       <th>Hold%</th>
-      <th>DK vs Mkt</th>
+      <th>vs Mkt</th>
       <th>#Bks</th>
-      <th>Status / Reason</th>
+      <th>Status</th>
     </tr></thead>
     <tbody>
     {% for r in (qualified + unqualified)|sort(attribute='hold_pct') %}
-    <tr>
+    <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
       {{ row_cells(r) }}
       <td>
         {% if r.qualified %}
-          <span class="tag tag-ok">✓ qualified</span>
+          <span class="tag tag-ok">✓</span>
         {% else %}
           <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
         {% endif %}
       </td>
     </tr>
+    {{ calc_row_html(10) }}
     {% endfor %}
     </tbody>
   </table>
@@ -250,80 +448,165 @@ tr:hover td { background: rgba(255,255,255,0.025); }
   {% else %}
   <p class="empty">No lines within the hold threshold at this snapshot.</p>
   {% endif %}
-</section>
+</div>
 
 {# ── Live Lines ───────────────────────────────────────────────────────────── #}
 {% if live_rows %}
-<section>
-  <button class="toggle-btn" id="live-toggle" onclick="toggleLive()">
-    ▼ Show Live Lines ({{ live_rows|length }})
-  </button>
+<div class="card">
+  <div class="card-header">
+    <h2><span class="tag tag-live">LIVE</span> &nbsp;Low-Hold Lines</h2>
+    <span class="count-badge">{{ live_rows|length }}</span>
+    <button class="toggle-btn" id="live-toggle" onclick="toggleLive()">▼ Show</button>
+  </div>
   <div id="live-section" style="display:none">
-    <h2><span class="tag tag-live">LIVE</span> &nbsp;Low-Hold Lines ({{ live_rows|length }}) — filtered from main tables</h2>
     <div class="wrap">
     <table id="t-live">
       <thead><tr>
-        <th>Commence (ET)</th>
-        <th>Sport</th>
+        <th>Time (ET)</th>
+        <th>Sport · Mkt</th>
         <th>Game</th>
-        <th>Mkt</th>
         <th>Side (DK)</th>
-        <th>DK</th>
-        <th>Novig</th>
-        <th>Fair Odds</th>
-        <th>Sharp</th>
+        <th>DK / Novig</th>
+        <th>Fair / Sharp</th>
         <th>Hold%</th>
-        <th>DK vs Mkt</th>
+        <th>vs Mkt</th>
         <th>#Bks</th>
-        <th>Status / Reason</th>
+        <th>Status</th>
       </tr></thead>
       <tbody>
       {% for r in live_rows|sort(attribute='hold_pct') %}
-      <tr>
+      <tr class="data-row {% if r.qualified %}qual{% endif %}" data-dk-dec="{{ r.dk_price|round(6) }}" data-nov-dec="{{ r.novig_price|round(6) }}">
         {{ row_cells(r) }}
         <td>
           {% if r.qualified %}
-            <span class="tag tag-ok">✓ qualified</span>
+            <span class="tag tag-ok">✓</span>
           {% else %}
             <span class="note">{{ r.disqualify_reasons|join("; ") }}</span>
           {% endif %}
         </td>
       </tr>
+      {{ calc_row_html(10) }}
       {% endfor %}
       </tbody>
     </table>
     </div>
   </div>
-</section>
+</div>
 {% endif %}
 
 <script>
+// ── Tooltip smart positioning ─────────────────────────────────────
+document.addEventListener('mouseover', function(e) {
+  const tip = e.target.closest('[data-tip]');
+  if (!tip) return;
+  const rect = tip.getBoundingClientRect();
+  tip.classList.remove('tip-right', 'tip-below');
+  if (rect.left + 240 > window.innerWidth - 8) tip.classList.add('tip-right');
+  if (rect.top < 130) tip.classList.add('tip-below');
+});
+
+// ── Wager calculator ──────────────────────────────────────────────
+function calcUpdate(calcRow) {
+  const dataRow = calcRow.previousElementSibling;
+  const dkDec  = parseFloat(dataRow.dataset.dkDec);
+  const novDec = parseFloat(dataRow.dataset.novDec);
+  const dkStake = parseFloat(calcRow.querySelector('.calc-stake').value) || 100;
+
+  const novStake  = dkStake * dkDec / novDec;
+  const totalRisk = dkStake + novStake;
+  const payoutDk  = dkStake * dkDec;
+  const netDk     = payoutDk - totalRisk;
+  const netNov    = (novStake * novDec) - totalRisk;
+  const effHold   = (totalRisk / payoutDk - 1) * 100;
+
+  const fmt = n => n.toFixed(2);
+  const fmtS = n => (n >= 0 ? '+$' : '-$') + Math.abs(n).toFixed(2);
+
+  calcRow.querySelector('.o-nov-stake').textContent = fmt(novStake);
+  calcRow.querySelector('.o-total').textContent = fmt(totalRisk);
+
+  const netDkEl = calcRow.querySelector('.o-net-dk');
+  netDkEl.textContent = fmtS(netDk);
+  netDkEl.className = 'o-net-dk ' + (netDk >= 0 ? 'g' : 'r');
+
+  const netNovEl = calcRow.querySelector('.o-net-nov');
+  netNovEl.textContent = fmtS(netNov);
+  netNovEl.className = 'o-net-nov ' + (netNov >= 0 ? 'g' : 'r');
+
+  calcRow.querySelector('.o-hold').textContent = effHold.toFixed(3) + '%';
+}
+
+// Click a data-row → toggle its inline calculator
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.calc-panel')) return;
+  const row = e.target.closest('tr.data-row');
+  if (!row) return;
+  const calcRow = row.nextElementSibling;
+  if (!calcRow || !calcRow.classList.contains('calc-row')) return;
+
+  const isOpen = calcRow.style.display !== 'none';
+
+  document.querySelectorAll('tr.calc-row').forEach(cr => { cr.style.display = 'none'; });
+  document.querySelectorAll('tr.data-row').forEach(r => r.classList.remove('calc-open'));
+
+  if (!isOpen) {
+    calcRow.style.display = '';
+    row.classList.add('calc-open');
+    calcUpdate(calcRow);
+    const inp = calcRow.querySelector('.calc-stake');
+    inp.focus();
+    inp.select();
+  }
+});
+
+// Live recalc as user types
+document.addEventListener('input', function(e) {
+  if (!e.target.classList.contains('calc-stake')) return;
+  const calcRow = e.target.closest('tr.calc-row');
+  if (calcRow) calcUpdate(calcRow);
+});
+
+// ── Live lines toggle ─────────────────────────────────────────────
 function toggleLive() {
   const sec = document.getElementById('live-section');
   const btn = document.getElementById('live-toggle');
   const show = sec.style.display === 'none';
-  sec.style.display = show ? 'block' : 'none';
-  btn.textContent = (show ? '▲ Hide' : '▼ Show') + ' Live Lines ({{ live_rows|length }})';
+  sec.style.display = show ? '' : 'none';
+  btn.textContent = show ? '▲ Hide' : '▼ Show';
 }
 
-document.querySelectorAll("table").forEach(tbl => {
-  tbl.querySelectorAll("th").forEach((th, col) => {
+// ── Column sort (keeps data-row + calc-row pairs together) ────────
+document.querySelectorAll('table').forEach(tbl => {
+  tbl.querySelectorAll('th').forEach((th, col) => {
     let dir = null;
-    th.addEventListener("click", () => {
-      tbl.querySelectorAll("th").forEach(h => h.removeAttribute("data-dir"));
-      dir = dir === "asc" ? "desc" : "asc";
-      th.setAttribute("data-dir", dir);
-      const asc = dir === "asc";
-      const tbody = tbl.querySelector("tbody");
-      Array.from(tbody.querySelectorAll("tr"))
-        .sort((a, b) => {
-          const av = a.cells[col].textContent.trim();
-          const bv = b.cells[col].textContent.trim();
-          const an = parseFloat(av), bn = parseFloat(bv);
-          const cmp = isNaN(an) || isNaN(bn) ? av.localeCompare(bv) : an - bn;
-          return asc ? cmp : -cmp;
-        })
-        .forEach(r => tbody.appendChild(r));
+    th.addEventListener('click', () => {
+      tbl.querySelectorAll('th').forEach(h => h.removeAttribute('data-dir'));
+      dir = dir === 'asc' ? 'desc' : 'asc';
+      th.setAttribute('data-dir', dir);
+      const asc = dir === 'asc';
+      const tbody = tbl.querySelector('tbody');
+      const rows = Array.from(tbody.rows);
+      const pairs = [];
+      for (let i = 0; i < rows.length; i++) {
+        if (rows[i].classList.contains('data-row')) {
+          const next = rows[i + 1];
+          pairs.push({
+            dr: rows[i],
+            cr: (next && next.classList.contains('calc-row')) ? next : null,
+          });
+        }
+      }
+      pairs.sort((a, b) => {
+        const av = a.dr.cells[col].textContent.trim();
+        const bv = b.dr.cells[col].textContent.trim();
+        const an = parseFloat(av), bn = parseFloat(bv);
+        const cmp = isNaN(an) || isNaN(bn) ? av.localeCompare(bv) : an - bn;
+        return asc ? cmp : -cmp;
+      });
+      pairs.forEach(({ dr, cr }) => {
+        tbody.appendChild(dr);
+        if (cr) tbody.appendChild(cr);
+      });
     });
   });
 });
