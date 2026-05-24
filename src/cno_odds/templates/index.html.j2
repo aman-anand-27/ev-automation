@@ -275,9 +275,6 @@ tr.calc-row > td {
 .book-lines-panel { font-family: var(--mono); font-size: 0.78rem; margin-bottom: 0.75rem; }
 .book-lines-panel:empty { display: none; }
 .book-lines-panel .bl-grid { display: flex; flex-wrap: wrap; gap: 0 0; align-items: start; }
-.book-lines-panel .bl-labels { display: flex; flex-direction: column; margin-right: 0.75rem; }
-.book-lines-panel .bl-label { color: var(--muted); font-family: var(--sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.6; }
-.book-lines-panel .bl-label:first-child { visibility: hidden; }
 .book-lines-panel .bl-book { display: flex; flex-direction: column; margin-right: 1.5rem; min-width: 3.5rem; text-align: right; }
 .book-lines-panel .bl-book-name { color: var(--muted); font-family: var(--sans); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1px; text-align: right; }
 .book-lines-panel .bl-val { font-variant-numeric: tabular-nums; line-height: 1.6; }
@@ -496,16 +493,18 @@ tr.calc-row > td {
 // ── Book lines panel ──────────────────────────────────────────────
 function renderBookLines(panel, lines) {
   if (!lines || lines.length === 0) { panel.innerHTML = ''; return; }
-  lines.sort((a, b) => b.dk_side_dec - a.dk_side_dec);
-  const bestDk  = Math.max(...lines.map(l => l.dk_side_dec));
-  const bestOpp = Math.max(...lines.map(l => l.opp_side_dec));
-  const labels = `<div class="bl-labels"><span class="bl-label">Book</span><span class="bl-label">DK</span><span class="bl-label">Opp</span></div>`;
-  const cols = lines.map(l => {
-    const dkCls  = l.dk_side_dec  === bestDk  ? ' g' : '';
-    const oppCls = l.opp_side_dec === bestOpp ? ' g' : '';
-    return `<div class="bl-book"><span class="bl-book-name">${l.book}</span><span class="bl-val${dkCls}">${l.dk_side_raw}</span><span class="bl-val${oppCls}">${l.opp_side_raw}</span></div>`;
+  const dk    = lines.filter(l => l.book === 'DK');
+  const novig = lines.filter(l => l.book === 'Novig');
+  const field = lines.filter(l => l.book !== 'DK' && l.book !== 'Novig')
+                     .sort((a, b) => b.dk_side_dec - a.dk_side_dec);
+  const ordered = [...dk, ...novig, ...field];
+  const best = Math.max(...lines.map(l => l.dk_side_dec));
+  const cols = ordered.map(l => {
+    const cls = l.dk_side_dec === best ? ' g' : '';
+    return `<div class="bl-book"><span class="bl-book-name">${l.book}</span>`
+         + `<span class="bl-val${cls}">${l.dk_side_raw}</span></div>`;
   }).join('');
-  panel.innerHTML = `<div class="bl-grid">${labels}${cols}</div>`;
+  panel.innerHTML = `<div class="bl-grid">${cols}</div>`;
 }
 
 // ── Wager calculator ──────────────────────────────────────────────

@@ -234,13 +234,26 @@ def compute_rows(games: list[dict], cfg: dict) -> list[dict]:
                 else:
                     sharp_american = None
 
-                book_lines = [
+                book_lines = [{
+                    "book": "DK",
+                    "dk_side_raw": decimal_to_american(dk_price),
+                    "dk_side_dec": dk_price,
+                }]
+                novig_same = next(
+                    (o for o in novig_outcomes if _same_side(o, dk_out, market_key)),
+                    None,
+                )
+                if novig_same:
+                    book_lines.append({
+                        "book": "Novig",
+                        "dk_side_raw": decimal_to_american(novig_same["price"]),
+                        "dk_side_dec": novig_same["price"],
+                    })
+                book_lines += [
                     {
                         "book": d["book"],
                         "dk_side_raw": d["raw_american"],
-                        "opp_side_raw": d["opp_american"],
                         "dk_side_dec": d["dk_side_dec"],
-                        "opp_side_dec": d["opp_side_dec"],
                     }
                     for d in all_details
                 ]
