@@ -209,18 +209,19 @@ tr.calc-row > td {
   gap: 0.3em;
   margin: 0.4rem 1rem 0;
   padding: 0.2rem 0.6rem;
-  background: transparent;
-  border: 1px solid var(--border);
+  background: rgba(88,166,255,0.08);
+  border: 1px solid rgba(88,166,255,0.25);
   border-radius: 4px;
-  color: var(--muted);
+  color: var(--accent);
   font-family: var(--sans);
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
-.calc-toggle:hover { border-color: var(--accent); color: var(--text); }
-.calc-toggle.open  { border-color: var(--accent); color: var(--accent); }
+.calc-toggle:hover { background: rgba(88,166,255,0.15); border-color: var(--accent); }
+.calc-toggle.open  { background: rgba(88,166,255,0.18); border-color: var(--accent); }
 .calc-panel { padding: 0.65rem 1rem 0.8rem; }
 .calc-grid {
   display: flex;
@@ -287,7 +288,7 @@ tr.calc-row > td {
 <header>
   <h1>Low-Hold Dashboard</h1>
   <div class="meta-chips">
-    <span class="chip">2026-05-24 15:18 EDT</span>
+    <span class="chip">2026-05-24 15:28 EDT</span>
     <span class="chip">Hold ≤ 3.0%</span>
     <span class="chip">DK ±1.5pp vs market</span>
     <span class="chip">≥2 consensus books</span>
