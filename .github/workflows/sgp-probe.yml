@@ -1,0 +1,38 @@
+name: SGP Free-Tier Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_credits:
+        description: Hard cap on API credits the probe may spend
+        default: "40"
+
+concurrency:
+  group: sgp-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Probe The Odds API (free tier)
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/probe_free_tier.py --max-credits "${{ inputs.max_credits }}"
+
+      - name: Upload raw responses + summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-results
+          path: probe_results/
+          retention-days: 7
