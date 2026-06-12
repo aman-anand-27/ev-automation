@@ -1,0 +1,72 @@
+name: Sharp SGP Finder
+
+on:
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: Sport to scan (one per run — credit discipline)
+        type: choice
+        options: [mlb, nba, soccer]
+        required: true
+      window_hours:
+        description: Per-event extras only for games within this many hours
+        default: "12"
+      extras:
+        description: Alternate-line fetching (auto = capped, off = featured only)
+        type: choice
+        options: [auto, "off"]
+        default: auto
+
+# Same group as the hold-scanner workflow: serializes gh-pages deploys
+concurrency:
+  group: dashboard-update
+  cancel-in-progress: false
+
+jobs:
+  sgp:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build SGP dashboard
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: >
+          python -m src.sgp_finder.main
+          --sport "${{ inputs.sport }}"
+          --window-hours "${{ inputs.window_hours }}"
+          --extras "${{ inputs.extras }}"
+
+      # docs/sgp/data.json accumulates one block per sport; committing it back
+      # keeps the other sports' latest runs alive in the next deploy.
+      - name: Commit dashboard data back to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/sgp
+          if git diff --cached --quiet; then
+            echo "no dashboard changes"
+          else
+            git commit -m "sgp: ${{ inputs.sport }} dashboard update"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          force_orphan: true

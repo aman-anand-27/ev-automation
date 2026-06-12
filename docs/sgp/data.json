@@ -1,0 +1,6723 @@
+{
+ "sports": {
+  "mlb": {
+   "sport_key": "baseball_mlb",
+   "sport_title": "MLB",
+   "generated_at": "2026-06-12 18:20 UTC",
+   "target_book": "sport888",
+   "target_label": "888sport",
+   "target_is_proxy": true,
+   "target_regions": [
+    "eu"
+   ],
+   "anchors": {
+    "pinnacle": [
+     "eu"
+    ],
+    "matchbook": [
+     "eu"
+    ],
+    "betfair_ex_eu": [
+     "eu"
+    ]
+   },
+   "regions_scanned": [
+    "eu"
+   ],
+   "devig_method": "multiplicative",
+   "boost_defaults": {
+    "default_boost_pct": 50,
+    "default_min_odds": "+100",
+    "gate_on_boosted": false
+   },
+   "credits_est": 0,
+   "notes": [
+    "target book: 888sport (sport888) from region(s) eu \u2014 PROXY: bet365 does not return on the free key",
+    "sharp anchors: pinnacle(eu), matchbook(eu), betfair_ex_eu(eu)",
+    "regions scanned: eu",
+    "extras: 5 candidate events in next 12h; fetching 5 \u00d7 \u22642 markets \u00d7 1 region \u2248 10 credits (cap 12)",
+    "credits: \u22480 spent this run; remaining=n/a (cache replay)"
+   ],
+   "games": [
+    {
+     "id": "54d2ed057ce3fb965cccd98462801587",
+     "game": "Miami Marlins @ Pittsburgh Pirates",
+     "commence_time": "2026-06-12T22:41:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Miami Marlins ML",
+         "name": "Miami Marlins",
+         "point": null,
+         "team": "Miami Marlins",
+         "target_price": 2.2,
+         "target_american": "+120",
+         "target_implied": 0.45455,
+         "fair_p": 0.4397,
+         "fair_decimal": 2.2743,
+         "fair_american": "+127",
+         "fair_source": "pinnacle",
+         "ev": -0.03266
+        },
+        {
+         "market": "spreads",
+         "label": "Miami Marlins +1.5",
+         "name": "Miami Marlins",
+         "point": 1.5,
+         "team": "Miami Marlins",
+         "target_price": 1.57,
+         "target_american": "-175",
+         "target_implied": 0.63694,
+         "fair_p": 0.60976,
+         "fair_decimal": 1.64,
+         "fair_american": "-156",
+         "fair_source": "pinnacle",
+         "ev": -0.04268
+        },
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49742,
+         "fair_decimal": 2.0104,
+         "fair_american": "+101",
+         "fair_source": "pinnacle",
+         "ev": -0.04992
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Miami Marlins ML \u00d7 Miami Marlins +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Miami Marlins ML \u00d7 Over 8.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Miami Marlins +1.5 \u00d7 Over 8.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.21647,
+       "p_naive": 0.13336,
+       "premium": 1.623,
+       "fair_decimal": 4.62,
+       "fair_american": "+362",
+       "offered_decimal_est": 4.231,
+       "offered_american_est": "+323",
+       "ev_at_offered": -0.08419,
+       "break_even_boost": 12.0,
+       "effective_legs": 2.28,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49742,
+         "fair_decimal": 2.0104,
+         "fair_american": "+101",
+         "fair_source": "pinnacle",
+         "ev": -0.04992
+        },
+        {
+         "market": "spreads",
+         "label": "Pittsburgh Pirates -1.5",
+         "name": "Pittsburgh Pirates",
+         "point": -1.5,
+         "team": "Pittsburgh Pirates",
+         "target_price": 2.4,
+         "target_american": "+140",
+         "target_implied": 0.41667,
+         "fair_p": 0.39024,
+         "fair_decimal": 2.5625,
+         "fair_american": "+156",
+         "fair_source": "pinnacle",
+         "ev": -0.06341
+        },
+        {
+         "market": "h2h",
+         "label": "Pittsburgh Pirates ML",
+         "name": "Pittsburgh Pirates",
+         "point": null,
+         "team": "Pittsburgh Pirates",
+         "target_price": 1.67,
+         "target_american": "-149",
+         "target_implied": 0.5988,
+         "fair_p": 0.5603,
+         "fair_decimal": 1.7848,
+         "fair_american": "-127",
+         "fair_source": "pinnacle",
+         "ev": -0.0643
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 8.5 \u00d7 Pittsburgh Pirates -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 8.5 \u00d7 Pittsburgh Pirates ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Pittsburgh Pirates -1.5 \u00d7 Pittsburgh Pirates ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.19993,
+       "p_naive": 0.10876,
+       "premium": 1.838,
+       "fair_decimal": 5.002,
+       "fair_american": "+400",
+       "offered_decimal_est": 4.44,
+       "offered_american_est": "+344",
+       "ev_at_offered": -0.11242,
+       "break_even_boost": 16.3,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "58c428c5386f2b32f686e9edcd8a59c1",
+     "game": "Seattle Mariners @ Washington Nationals",
+     "commence_time": "2026-06-12T22:46:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Washington Nationals ML",
+         "name": "Washington Nationals",
+         "point": null,
+         "team": "Washington Nationals",
+         "target_price": 2.2,
+         "target_american": "+120",
+         "target_implied": 0.45455,
+         "fair_p": 0.43609,
+         "fair_decimal": 2.2931,
+         "fair_american": "+129",
+         "fair_source": "pinnacle",
+         "ev": -0.0406
+        },
+        {
+         "market": "spreads",
+         "label": "Washington Nationals +1.5",
+         "name": "Washington Nationals",
+         "point": 1.5,
+         "team": "Washington Nationals",
+         "target_price": 1.75,
+         "target_american": "-133",
+         "target_implied": 0.57143,
+         "fair_p": 0.54822,
+         "fair_decimal": 1.8241,
+         "fair_american": "-121",
+         "fair_source": "pinnacle",
+         "ev": -0.04061
+        },
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.47558,
+         "fair_decimal": 2.1027,
+         "fair_american": "+110",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.04884
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Washington Nationals ML \u00d7 Washington Nationals +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Washington Nationals ML \u00d7 Over 9.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Washington Nationals +1.5 \u00d7 Over 9.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.19959,
+       "p_naive": 0.1137,
+       "premium": 1.755,
+       "fair_decimal": 5.01,
+       "fair_american": "+401",
+       "offered_decimal_est": 4.562,
+       "offered_american_est": "+356",
+       "ev_at_offered": -0.08955,
+       "break_even_boost": 12.6,
+       "effective_legs": 2.22,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.47558,
+         "fair_decimal": 2.1027,
+         "fair_american": "+110",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.04884
+        },
+        {
+         "market": "h2h",
+         "label": "Seattle Mariners ML",
+         "name": "Seattle Mariners",
+         "point": null,
+         "team": "Seattle Mariners",
+         "target_price": 1.67,
+         "target_american": "-149",
+         "target_implied": 0.5988,
+         "fair_p": 0.56391,
+         "fair_decimal": 1.7733,
+         "fair_american": "-129",
+         "fair_source": "pinnacle",
+         "ev": -0.05827
+        },
+        {
+         "market": "spreads",
+         "label": "Seattle Mariners -1.5",
+         "name": "Seattle Mariners",
+         "point": -1.5,
+         "team": "Seattle Mariners",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.45178,
+         "fair_decimal": 2.2135,
+         "fair_american": "+121",
+         "fair_source": "pinnacle",
+         "ev": -0.07386
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 Seattle Mariners ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Over 9.5 \u00d7 Seattle Mariners -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Seattle Mariners ML \u00d7 Seattle Mariners -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.21326,
+       "p_naive": 0.12116,
+       "premium": 1.76,
+       "fair_decimal": 4.689,
+       "fair_american": "+369",
+       "offered_decimal_est": 4.138,
+       "offered_american_est": "+314",
+       "ev_at_offered": -0.11764,
+       "break_even_boost": 17.6,
+       "effective_legs": 2.2,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "425b34215a513158ef4e31dfba783680",
+     "game": "San Diego Padres @ Baltimore Orioles",
+     "commence_time": "2026-06-12T23:06:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.1,
+         "target_american": "+110",
+         "target_implied": 0.47619,
+         "fair_p": 0.46701,
+         "fair_decimal": 2.1413,
+         "fair_american": "+114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.01929
+        },
+        {
+         "market": "spreads",
+         "label": "San Diego Padres +1.5",
+         "name": "San Diego Padres",
+         "point": 1.5,
+         "team": "San Diego Padres",
+         "target_price": 1.6,
+         "target_american": "-167",
+         "target_implied": 0.625,
+         "fair_p": 0.60197,
+         "fair_decimal": 1.6612,
+         "fair_american": "-151",
+         "fair_source": "pinnacle",
+         "ev": -0.03686
+        },
+        {
+         "market": "h2h",
+         "label": "San Diego Padres ML",
+         "name": "San Diego Padres",
+         "point": null,
+         "team": "San Diego Padres",
+         "target_price": 2.2,
+         "target_american": "+120",
+         "target_implied": 0.45455,
+         "fair_p": 0.43609,
+         "fair_decimal": 2.2931,
+         "fair_american": "+129",
+         "fair_source": "pinnacle",
+         "ev": -0.0406
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 San Diego Padres +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 9.5 \u00d7 San Diego Padres ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "San Diego Padres +1.5 \u00d7 San Diego Padres ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.20178,
+       "p_naive": 0.1226,
+       "premium": 1.646,
+       "fair_decimal": 4.956,
+       "fair_american": "+396",
+       "offered_decimal_est": 4.652,
+       "offered_american_est": "+365",
+       "ev_at_offered": -0.06121,
+       "break_even_boost": 8.3,
+       "effective_legs": 2.29,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.1,
+         "target_american": "+110",
+         "target_implied": 0.47619,
+         "fair_p": 0.46701,
+         "fair_decimal": 2.1413,
+         "fair_american": "+114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.01929
+        },
+        {
+         "market": "h2h",
+         "label": "Baltimore Orioles ML",
+         "name": "Baltimore Orioles",
+         "point": null,
+         "team": "Baltimore Orioles",
+         "target_price": 1.67,
+         "target_american": "-149",
+         "target_implied": 0.5988,
+         "fair_p": 0.56391,
+         "fair_decimal": 1.7733,
+         "fair_american": "-129",
+         "fair_source": "pinnacle",
+         "ev": -0.05827
+        },
+        {
+         "market": "spreads",
+         "label": "Baltimore Orioles -1.5",
+         "name": "Baltimore Orioles",
+         "point": -1.5,
+         "team": "Baltimore Orioles",
+         "target_price": 2.35,
+         "target_american": "+135",
+         "target_implied": 0.42553,
+         "fair_p": 0.39803,
+         "fair_decimal": 2.5123,
+         "fair_american": "+151",
+         "fair_source": "pinnacle",
+         "ev": -0.06462
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 Baltimore Orioles ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Over 9.5 \u00d7 Baltimore Orioles -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Baltimore Orioles ML \u00d7 Baltimore Orioles -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.19204,
+       "p_naive": 0.10482,
+       "premium": 1.832,
+       "fair_decimal": 5.207,
+       "fair_american": "+421",
+       "offered_decimal_est": 4.763,
+       "offered_american_est": "+376",
+       "ev_at_offered": -0.08528,
+       "break_even_boost": 11.8,
+       "effective_legs": 2.19,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "858a2c7b380050783a8afc9416d83cd0",
+     "game": "Arizona Diamondbacks @ Cincinnati Reds",
+     "commence_time": "2026-06-12T23:16:00Z",
+     "n_candidate_legs": 4,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.49614,
+         "fair_decimal": 2.0155,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.00771
+        },
+        {
+         "market": "spreads",
+         "label": "Cincinnati Reds +1.5",
+         "name": "Cincinnati Reds",
+         "point": 1.5,
+         "team": "Cincinnati Reds",
+         "target_price": 1.6,
+         "target_american": "-167",
+         "target_implied": 0.625,
+         "fair_p": 0.61314,
+         "fair_decimal": 1.631,
+         "fair_american": "-158",
+         "fair_source": "pinnacle",
+         "ev": -0.01898
+        },
+        {
+         "market": "h2h",
+         "label": "Cincinnati Reds ML",
+         "name": "Cincinnati Reds",
+         "point": null,
+         "team": "Cincinnati Reds",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.50891,
+         "fair_decimal": 1.965,
+         "fair_american": "-104",
+         "fair_source": "pinnacle",
+         "ev": -0.02799
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 Cincinnati Reds +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 9.5 \u00d7 Cincinnati Reds ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Cincinnati Reds +1.5 \u00d7 Cincinnati Reds ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.2436,
+       "p_naive": 0.15481,
+       "premium": 1.574,
+       "fair_decimal": 4.105,
+       "fair_american": "+311",
+       "offered_decimal_est": 3.959,
+       "offered_american_est": "+296",
+       "ev_at_offered": -0.03557,
+       "break_even_boost": 4.9,
+       "effective_legs": 2.27,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "95ee6055d18281317e28c6c18e624606",
+     "game": "New York Yankees @ Toronto Blue Jays",
+     "commence_time": "2026-06-12T23:37:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 7.5",
+         "name": "Over",
+         "point": 7.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.53333,
+         "fair_decimal": 1.875,
+         "fair_american": "-114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.04
+        },
+        {
+         "market": "spreads",
+         "label": "New York Yankees -1.5",
+         "name": "New York Yankees",
+         "point": -1.5,
+         "team": "New York Yankees",
+         "target_price": 2.55,
+         "target_american": "+155",
+         "target_implied": 0.39216,
+         "fair_p": 0.36993,
+         "fair_decimal": 2.7032,
+         "fair_american": "+170",
+         "fair_source": "pinnacle",
+         "ev": -0.05668
+        },
+        {
+         "market": "h2h",
+         "label": "New York Yankees ML",
+         "name": "New York Yankees",
+         "point": null,
+         "team": "New York Yankees",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49235,
+         "fair_decimal": 2.0311,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.05962
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 7.5 \u00d7 New York Yankees -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 7.5 \u00d7 New York Yankees ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "New York Yankees -1.5 \u00d7 New York Yankees ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.19442,
+       "p_naive": 0.09714,
+       "premium": 2.001,
+       "fair_decimal": 5.144,
+       "fair_american": "+414",
+       "offered_decimal_est": 4.636,
+       "offered_american_est": "+364",
+       "ev_at_offered": -0.09868,
+       "break_even_boost": 14.0,
+       "effective_legs": 2.11,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 7.5",
+         "name": "Over",
+         "point": 7.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.53333,
+         "fair_decimal": 1.875,
+         "fair_american": "-114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.04
+        },
+        {
+         "market": "spreads",
+         "label": "Toronto Blue Jays +1.5",
+         "name": "Toronto Blue Jays",
+         "point": 1.5,
+         "team": "Toronto Blue Jays",
+         "target_price": 1.5,
+         "target_american": "-200",
+         "target_implied": 0.66667,
+         "fair_p": 0.63007,
+         "fair_decimal": 1.5871,
+         "fair_american": "-170",
+         "fair_source": "pinnacle",
+         "ev": -0.05489
+        },
+        {
+         "market": "h2h",
+         "label": "Toronto Blue Jays ML",
+         "name": "Toronto Blue Jays",
+         "point": null,
+         "team": "Toronto Blue Jays",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.50765,
+         "fair_decimal": 1.9698,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.06084
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 7.5 \u00d7 Toronto Blue Jays +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 7.5 \u00d7 Toronto Blue Jays ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Toronto Blue Jays +1.5 \u00d7 Toronto Blue Jays ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.26281,
+       "p_naive": 0.17059,
+       "premium": 1.541,
+       "fair_decimal": 3.805,
+       "fair_american": "+281",
+       "offered_decimal_est": 3.416,
+       "offered_american_est": "+242",
+       "ev_at_offered": -0.10214,
+       "break_even_boost": 16.1,
+       "effective_legs": 2.27,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "93fc5b52fd02b67ae146d8a43e98b1ae",
+     "game": "Los Angeles Dodgers @ Chicago White Sox",
+     "commence_time": "2026-06-12T23:41:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Los Angeles Dodgers -1.5",
+         "name": "Los Angeles Dodgers",
+         "point": -1.5,
+         "team": "Los Angeles Dodgers",
+         "target_price": 2.15,
+         "target_american": "+115",
+         "target_implied": 0.46512,
+         "fair_p": 0.45178,
+         "fair_decimal": 2.2135,
+         "fair_american": "+121",
+         "fair_source": "pinnacle",
+         "ev": -0.02868
+        },
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.53944,
+         "fair_decimal": 1.8538,
+         "fair_american": "-117",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.02901
+        },
+        {
+         "market": "h2h",
+         "label": "Los Angeles Dodgers ML",
+         "name": "Los Angeles Dodgers",
+         "point": null,
+         "team": "Los Angeles Dodgers",
+         "target_price": 1.65,
+         "target_american": "-154",
+         "target_implied": 0.60606,
+         "fair_p": 0.57606,
+         "fair_decimal": 1.7359,
+         "fair_american": "-136",
+         "fair_source": "pinnacle",
+         "ev": -0.0495
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Los Angeles Dodgers -1.5 \u00d7 Over 8.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Los Angeles Dodgers -1.5 \u00d7 Los Angeles Dodgers ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Over 8.5 \u00d7 Los Angeles Dodgers ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        }
+       ],
+       "p_fair": 0.24165,
+       "p_naive": 0.14039,
+       "premium": 1.721,
+       "fair_decimal": 4.138,
+       "fair_american": "+314",
+       "offered_decimal_est": 3.862,
+       "offered_american_est": "+286",
+       "ev_at_offered": -0.06675,
+       "break_even_boost": 9.7,
+       "effective_legs": 2.17,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.53944,
+         "fair_decimal": 1.8538,
+         "fair_american": "-117",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.02901
+        },
+        {
+         "market": "h2h",
+         "label": "Chicago White Sox ML",
+         "name": "Chicago White Sox",
+         "point": null,
+         "team": "Chicago White Sox",
+         "target_price": 2.25,
+         "target_american": "+125",
+         "target_implied": 0.44444,
+         "fair_p": 0.42394,
+         "fair_decimal": 2.3588,
+         "fair_american": "+136",
+         "fair_source": "pinnacle",
+         "ev": -0.04613
+        },
+        {
+         "market": "spreads",
+         "label": "Chicago White Sox +1.5",
+         "name": "Chicago White Sox",
+         "point": 1.5,
+         "team": "Chicago White Sox",
+         "target_price": 1.71,
+         "target_american": "-141",
+         "target_implied": 0.5848,
+         "fair_p": 0.54822,
+         "fair_decimal": 1.8241,
+         "fair_american": "-121",
+         "fair_source": "pinnacle",
+         "ev": -0.06254
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 8.5 \u00d7 Chicago White Sox ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Over 8.5 \u00d7 Chicago White Sox +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Chicago White Sox ML \u00d7 Chicago White Sox +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.21977,
+       "p_naive": 0.12537,
+       "premium": 1.753,
+       "fair_decimal": 4.55,
+       "fair_american": "+355",
+       "offered_decimal_est": 4.174,
+       "offered_american_est": "+317",
+       "ev_at_offered": -0.08274,
+       "break_even_boost": 11.9,
+       "effective_legs": 2.19,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "01293f413b449db8f908c6d51539ea15",
+     "game": "Philadelphia Phillies @ Milwaukee Brewers",
+     "commence_time": "2026-06-12T23:41:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Philadelphia Phillies +1.5",
+         "name": "Philadelphia Phillies",
+         "point": 1.5,
+         "team": "Philadelphia Phillies",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49744,
+         "fair_decimal": 2.0103,
+         "fair_american": "+101",
+         "fair_source": "pinnacle",
+         "ev": -0.0499
+        },
+        {
+         "market": "h2h",
+         "label": "Philadelphia Phillies ML",
+         "name": "Philadelphia Phillies",
+         "point": null,
+         "team": "Philadelphia Phillies",
+         "target_price": 3.05,
+         "target_american": "+205",
+         "target_implied": 0.32787,
+         "fair_p": 0.31072,
+         "fair_decimal": 3.2183,
+         "fair_american": "+222",
+         "fair_source": "pinnacle",
+         "ev": -0.0523
+        },
+        {
+         "market": "totals",
+         "label": "Over 7.5",
+         "name": "Over",
+         "point": 7.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51671,
+         "fair_decimal": 1.9353,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06992
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Philadelphia Phillies +1.5 \u00d7 Philadelphia Phillies ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Philadelphia Phillies +1.5 \u00d7 Over 7.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Philadelphia Phillies ML \u00d7 Over 7.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        }
+       ],
+       "p_fair": 0.15885,
+       "p_naive": 0.07987,
+       "premium": 1.989,
+       "fair_decimal": 6.295,
+       "fair_american": "+530",
+       "offered_decimal_est": 5.55,
+       "offered_american_est": "+455",
+       "ev_at_offered": -0.11843,
+       "break_even_boost": 16.4,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Milwaukee Brewers ML",
+         "name": "Milwaukee Brewers",
+         "point": null,
+         "team": "Milwaukee Brewers",
+         "target_price": 1.36,
+         "target_american": "-278",
+         "target_implied": 0.73529,
+         "fair_p": 0.68928,
+         "fair_decimal": 1.4508,
+         "fair_american": "-222",
+         "fair_source": "pinnacle",
+         "ev": -0.06258
+        },
+        {
+         "market": "totals",
+         "label": "Over 7.5",
+         "name": "Over",
+         "point": 7.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51671,
+         "fair_decimal": 1.9353,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06992
+        },
+        {
+         "market": "spreads",
+         "label": "Milwaukee Brewers -1.5",
+         "name": "Milwaukee Brewers",
+         "point": -1.5,
+         "team": "Milwaukee Brewers",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.50256,
+         "fair_decimal": 1.9898,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": -0.07026
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Milwaukee Brewers ML \u00d7 Over 7.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Milwaukee Brewers ML \u00d7 Milwaukee Brewers -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Over 7.5 \u00d7 Milwaukee Brewers -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.26949,
+       "p_naive": 0.17899,
+       "premium": 1.506,
+       "fair_decimal": 3.711,
+       "fair_american": "+271",
+       "offered_decimal_est": 3.212,
+       "offered_american_est": "+221",
+       "ev_at_offered": -0.13447,
+       "break_even_boost": 22.6,
+       "effective_legs": 2.29,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "f5978dc3ccd113075da44542f6ee1e9a",
+     "game": "Houston Astros @ Kansas City Royals",
+     "commence_time": "2026-06-13T00:11:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.48586,
+         "fair_decimal": 2.0582,
+         "fair_american": "+106",
+         "fair_source": "pinnacle",
+         "ev": -0.02828
+        },
+        {
+         "market": "h2h",
+         "label": "Houston Astros ML",
+         "name": "Houston Astros",
+         "point": null,
+         "team": "Houston Astros",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.51276,
+         "fair_decimal": 1.9502,
+         "fair_american": "-105",
+         "fair_source": "pinnacle",
+         "ev": -0.0514
+        },
+        {
+         "market": "spreads",
+         "label": "Houston Astros -1.5",
+         "name": "Houston Astros",
+         "point": -1.5,
+         "team": "Houston Astros",
+         "target_price": 2.3,
+         "target_american": "+130",
+         "target_implied": 0.43478,
+         "fair_p": 0.40594,
+         "fair_decimal": 2.4634,
+         "fair_american": "+146",
+         "fair_source": "pinnacle",
+         "ev": -0.06634
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 Houston Astros ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Over 9.5 \u00d7 Houston Astros -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Houston Astros ML \u00d7 Houston Astros -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.19379,
+       "p_naive": 0.10113,
+       "premium": 1.916,
+       "fair_decimal": 5.16,
+       "fair_american": "+416",
+       "offered_decimal_est": 4.686,
+       "offered_american_est": "+369",
+       "ev_at_offered": -0.09184,
+       "break_even_boost": 12.9,
+       "effective_legs": 2.15,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 9.5",
+         "name": "Over",
+         "point": 9.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.48586,
+         "fair_decimal": 2.0582,
+         "fair_american": "+106",
+         "fair_source": "pinnacle",
+         "ev": -0.02828
+        },
+        {
+         "market": "spreads",
+         "label": "Kansas City Royals +1.5",
+         "name": "Kansas City Royals",
+         "point": 1.5,
+         "team": "Kansas City Royals",
+         "target_price": 1.62,
+         "target_american": "-161",
+         "target_implied": 0.61728,
+         "fair_p": 0.59406,
+         "fair_decimal": 1.6833,
+         "fair_american": "-146",
+         "fair_source": "pinnacle",
+         "ev": -0.03762
+        },
+        {
+         "market": "h2h",
+         "label": "Kansas City Royals ML",
+         "name": "Kansas City Royals",
+         "point": null,
+         "team": "Kansas City Royals",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.48724,
+         "fair_decimal": 2.0524,
+         "fair_american": "+105",
+         "fair_source": "pinnacle",
+         "ev": -0.06936
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 9.5 \u00d7 Kansas City Royals +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 9.5 \u00d7 Kansas City Royals ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Kansas City Royals +1.5 \u00d7 Kansas City Royals ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.22831,
+       "p_naive": 0.14063,
+       "premium": 1.623,
+       "fair_decimal": 4.38,
+       "fair_american": "+338",
+       "offered_decimal_est": 3.977,
+       "offered_american_est": "+298",
+       "ev_at_offered": -0.09205,
+       "break_even_boost": 13.5,
+       "effective_legs": 2.26,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "4be65ae4c2c4b00e97e31396ea055fa7",
+     "game": "St. Louis Cardinals @ Minnesota Twins",
+     "commence_time": "2026-06-13T00:11:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Minnesota Twins ML",
+         "name": "Minnesota Twins",
+         "point": null,
+         "team": "Minnesota Twins",
+         "target_price": 1.71,
+         "target_american": "-141",
+         "target_implied": 0.5848,
+         "fair_p": 0.56391,
+         "fair_decimal": 1.7733,
+         "fair_american": "-129",
+         "fair_source": "pinnacle",
+         "ev": -0.03571
+        },
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.50386,
+         "fair_decimal": 1.9847,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.03763
+        },
+        {
+         "market": "spreads",
+         "label": "Minnesota Twins -1.5",
+         "name": "Minnesota Twins",
+         "point": -1.5,
+         "team": "Minnesota Twins",
+         "target_price": 2.45,
+         "target_american": "+145",
+         "target_implied": 0.40816,
+         "fair_p": 0.38686,
+         "fair_decimal": 2.5849,
+         "fair_american": "+158",
+         "fair_source": "pinnacle",
+         "ev": -0.05219
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Minnesota Twins ML \u00d7 Over 8.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Minnesota Twins ML \u00d7 Minnesota Twins -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Over 8.5 \u00d7 Minnesota Twins -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.20143,
+       "p_naive": 0.10992,
+       "premium": 1.833,
+       "fair_decimal": 4.964,
+       "fair_american": "+396",
+       "offered_decimal_est": 4.547,
+       "offered_american_est": "+355",
+       "ev_at_offered": -0.08404,
+       "break_even_boost": 11.8,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.50386,
+         "fair_decimal": 1.9847,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.03763
+        },
+        {
+         "market": "spreads",
+         "label": "St. Louis Cardinals +1.5",
+         "name": "St. Louis Cardinals",
+         "point": 1.5,
+         "team": "St. Louis Cardinals",
+         "target_price": 1.53,
+         "target_american": "-189",
+         "target_implied": 0.65359,
+         "fair_p": 0.61314,
+         "fair_decimal": 1.631,
+         "fair_american": "-158",
+         "fair_source": "pinnacle",
+         "ev": -0.0619
+        },
+        {
+         "market": "h2h",
+         "label": "St. Louis Cardinals ML",
+         "name": "St. Louis Cardinals",
+         "point": null,
+         "team": "St. Louis Cardinals",
+         "target_price": 2.15,
+         "target_american": "+115",
+         "target_implied": 0.46512,
+         "fair_p": 0.43609,
+         "fair_decimal": 2.2931,
+         "fair_american": "+129",
+         "fair_source": "pinnacle",
+         "ev": -0.06241
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 8.5 \u00d7 St. Louis Cardinals +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 8.5 \u00d7 St. Louis Cardinals ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "St. Louis Cardinals +1.5 \u00d7 St. Louis Cardinals ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.21792,
+       "p_naive": 0.13472,
+       "premium": 1.618,
+       "fair_decimal": 4.589,
+       "fair_american": "+359",
+       "offered_decimal_est": 4.122,
+       "offered_american_est": "+312",
+       "ev_at_offered": -0.10171,
+       "break_even_boost": 14.9,
+       "effective_legs": 2.28,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "1972be0f278db4fe870972f2d97254c2",
+     "game": "Tampa Bay Rays @ Los Angeles Angels",
+     "commence_time": "2026-06-13T01:39:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Los Angeles Angels +1.5",
+         "name": "Los Angeles Angels",
+         "point": 1.5,
+         "team": "Los Angeles Angels",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.50895,
+         "fair_decimal": 1.9648,
+         "fair_american": "-104",
+         "fair_source": "pinnacle",
+         "ev": -0.05844
+        },
+        {
+         "market": "h2h",
+         "label": "Los Angeles Angels ML",
+         "name": "Los Angeles Angels",
+         "point": null,
+         "team": "Los Angeles Angels",
+         "target_price": 2.4,
+         "target_american": "+140",
+         "target_implied": 0.41667,
+         "fair_p": 0.39078,
+         "fair_decimal": 2.559,
+         "fair_american": "+156",
+         "fair_source": "pinnacle",
+         "ev": -0.06214
+        },
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51795,
+         "fair_decimal": 1.9307,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06769
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Los Angeles Angels +1.5 \u00d7 Los Angeles Angels ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Los Angeles Angels +1.5 \u00d7 Over 8.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Los Angeles Angels ML \u00d7 Over 8.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        }
+       ],
+       "p_fair": 0.19351,
+       "p_naive": 0.10301,
+       "premium": 1.878,
+       "fair_decimal": 5.168,
+       "fair_american": "+417",
+       "offered_decimal_est": 4.509,
+       "offered_american_est": "+351",
+       "ev_at_offered": -0.12754,
+       "break_even_boost": 18.8,
+       "effective_legs": 2.17,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Tampa Bay Rays ML",
+         "name": "Tampa Bay Rays",
+         "point": null,
+         "team": "Tampa Bay Rays",
+         "target_price": 1.57,
+         "target_american": "-175",
+         "target_implied": 0.63694,
+         "fair_p": 0.60922,
+         "fair_decimal": 1.6414,
+         "fair_american": "-156",
+         "fair_source": "pinnacle",
+         "ev": -0.04352
+        },
+        {
+         "market": "spreads",
+         "label": "Tampa Bay Rays -1.5",
+         "name": "Tampa Bay Rays",
+         "point": -1.5,
+         "team": "Tampa Bay Rays",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49105,
+         "fair_decimal": 2.0365,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": -0.0621
+        },
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51795,
+         "fair_decimal": 1.9307,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06769
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Tampa Bay Rays ML \u00d7 Tampa Bay Rays -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Tampa Bay Rays ML \u00d7 Over 8.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Tampa Bay Rays -1.5 \u00d7 Over 8.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.25279,
+       "p_naive": 0.15495,
+       "premium": 1.631,
+       "fair_decimal": 3.956,
+       "fair_american": "+296",
+       "offered_decimal_est": 3.478,
+       "offered_american_est": "+248",
+       "ev_at_offered": -0.12069,
+       "break_even_boost": 19.3,
+       "effective_legs": 2.21,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "6cf3e8040acf1a1d7d7e7f5b1c0ce4e8",
+     "game": "Colorado Rockies @ Athletics",
+     "commence_time": "2026-06-13T02:06:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Colorado Rockies +1.5",
+         "name": "Colorado Rockies",
+         "point": 1.5,
+         "team": "Colorado Rockies",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.51026,
+         "fair_decimal": 1.9598,
+         "fair_american": "-104",
+         "fair_source": "pinnacle",
+         "ev": -0.05603
+        },
+        {
+         "market": "totals",
+         "label": "Over 13.5",
+         "name": "Over",
+         "point": 13.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51671,
+         "fair_decimal": 1.9353,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06992
+        },
+        {
+         "market": "h2h",
+         "label": "Colorado Rockies ML",
+         "name": "Colorado Rockies",
+         "point": null,
+         "team": "Colorado Rockies",
+         "target_price": 2.55,
+         "target_american": "+155",
+         "target_implied": 0.39216,
+         "fair_p": 0.36407,
+         "fair_decimal": 2.7468,
+         "fair_american": "+175",
+         "fair_source": "pinnacle",
+         "ev": -0.07163
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Colorado Rockies +1.5 \u00d7 Over 13.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Colorado Rockies +1.5 \u00d7 Colorado Rockies ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Over 13.5 \u00d7 Colorado Rockies ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        }
+       ],
+       "p_fair": 0.18258,
+       "p_naive": 0.09599,
+       "premium": 1.902,
+       "fair_decimal": 5.477,
+       "fair_american": "+448",
+       "offered_decimal_est": 4.734,
+       "offered_american_est": "+373",
+       "ev_at_offered": -0.13565,
+       "break_even_boost": 19.9,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Athletics ML",
+         "name": "Athletics",
+         "point": null,
+         "team": "Athletics",
+         "target_price": 1.5,
+         "target_american": "-200",
+         "target_implied": 0.66667,
+         "fair_p": 0.63593,
+         "fair_decimal": 1.5725,
+         "fair_american": "-175",
+         "fair_source": "pinnacle",
+         "ev": -0.0461
+        },
+        {
+         "market": "spreads",
+         "label": "Athletics -1.5",
+         "name": "Athletics",
+         "point": -1.5,
+         "team": "Athletics",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.48974,
+         "fair_decimal": 2.0419,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": -0.06459
+        },
+        {
+         "market": "totals",
+         "label": "Over 13.5",
+         "name": "Over",
+         "point": 13.5,
+         "team": null,
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.51671,
+         "fair_decimal": 1.9353,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.06992
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Athletics ML \u00d7 Athletics -1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "Athletics ML \u00d7 Over 13.5",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Athletics -1.5 \u00d7 Over 13.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.25649,
+       "p_naive": 0.16092,
+       "premium": 1.594,
+       "fair_decimal": 3.899,
+       "fair_american": "+290",
+       "offered_decimal_est": 3.41,
+       "offered_american_est": "+241",
+       "ev_at_offered": -0.12539,
+       "break_even_boost": 20.3,
+       "effective_legs": 2.23,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "f22b44b04b70c9956c01233a8b94b5cd",
+     "game": "Chicago Cubs @ San Francisco Giants",
+     "commence_time": "2026-06-13T02:16:00Z",
+     "n_candidate_legs": 5,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.491,
+         "fair_decimal": 2.0366,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": -0.01799
+        },
+        {
+         "market": "spreads",
+         "label": "Chicago Cubs -1.5",
+         "name": "Chicago Cubs",
+         "point": -1.5,
+         "team": "Chicago Cubs",
+         "target_price": 2.55,
+         "target_american": "+155",
+         "target_implied": 0.39216,
+         "fair_p": 0.3717,
+         "fair_decimal": 2.6903,
+         "fair_american": "+169",
+         "fair_source": "pinnacle",
+         "ev": -0.05216
+        },
+        {
+         "market": "h2h",
+         "label": "Chicago Cubs ML",
+         "name": "Chicago Cubs",
+         "point": null,
+         "team": "Chicago Cubs",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49109,
+         "fair_decimal": 2.0363,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": -0.06201
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 8.5 \u00d7 Chicago Cubs -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 8.5 \u00d7 Chicago Cubs ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "Chicago Cubs -1.5 \u00d7 Chicago Cubs ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.18085,
+       "p_naive": 0.08963,
+       "premium": 2.018,
+       "fair_decimal": 5.53,
+       "fair_american": "+453",
+       "offered_decimal_est": 5.098,
+       "offered_american_est": "+410",
+       "ev_at_offered": -0.07803,
+       "break_even_boost": 10.5,
+       "effective_legs": 2.13,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 8.5",
+         "name": "Over",
+         "point": 8.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.491,
+         "fair_decimal": 2.0366,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": -0.01799
+        },
+        {
+         "market": "spreads",
+         "label": "San Francisco Giants +1.5",
+         "name": "San Francisco Giants",
+         "point": 1.5,
+         "team": "San Francisco Giants",
+         "target_price": 1.5,
+         "target_american": "-200",
+         "target_implied": 0.66667,
+         "fair_p": 0.6283,
+         "fair_decimal": 1.5916,
+         "fair_american": "-169",
+         "fair_source": "pinnacle",
+         "ev": -0.05755
+        },
+        {
+         "market": "h2h",
+         "label": "San Francisco Giants ML",
+         "name": "San Francisco Giants",
+         "point": null,
+         "team": "San Francisco Giants",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.50891,
+         "fair_decimal": 1.965,
+         "fair_american": "-104",
+         "fair_source": "pinnacle",
+         "ev": -0.05852
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 8.5 \u00d7 San Francisco Giants +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 8.5 \u00d7 San Francisco Giants ML",
+         "relation": "ml_vs_total",
+         "rho": 0.05
+        },
+        {
+         "legs": "San Francisco Giants +1.5 \u00d7 San Francisco Giants ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        }
+       ],
+       "p_fair": 0.24321,
+       "p_naive": 0.157,
+       "premium": 1.549,
+       "fair_decimal": 4.112,
+       "fair_american": "+311",
+       "offered_decimal_est": 3.777,
+       "offered_american_est": "+278",
+       "ev_at_offered": -0.08131,
+       "break_even_boost": 12.0,
+       "effective_legs": 2.29,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    }
+   ],
+   "n_sgps": 23
+  },
+  "nba": {
+   "sport_key": "basketball_nba",
+   "sport_title": "NBA",
+   "generated_at": "2026-06-12 18:20 UTC",
+   "target_book": "sport888",
+   "target_label": "888sport",
+   "target_is_proxy": true,
+   "target_regions": [
+    "eu"
+   ],
+   "anchors": {
+    "pinnacle": [
+     "eu"
+    ],
+    "matchbook": [
+     "eu"
+    ],
+    "betfair_ex_eu": [
+     "eu"
+    ]
+   },
+   "regions_scanned": [
+    "eu"
+   ],
+   "devig_method": "multiplicative",
+   "boost_defaults": {
+    "default_boost_pct": 50,
+    "default_min_odds": "+100",
+    "gate_on_boosted": false
+   },
+   "credits_est": 0,
+   "notes": [
+    "target book: 888sport (sport888) from region(s) eu \u2014 PROXY: bet365 does not return on the free key",
+    "sharp anchors: pinnacle(eu), matchbook(eu), betfair_ex_eu(eu)",
+    "regions scanned: eu",
+    "extras: no event within window needs alternate lines \u2014 skipped",
+    "credits: \u22480 spent this run; remaining=n/a (cache replay)"
+   ],
+   "games": [
+    {
+     "id": "6cc5c3b9cfcb1d94bed9f3ca972b3114",
+     "game": "New York Knicks @ San Antonio Spurs",
+     "commence_time": "2026-06-14T00:40:00Z",
+     "n_candidate_legs": 4,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "San Antonio Spurs -5.5",
+         "name": "San Antonio Spurs",
+         "point": -5.5,
+         "team": "San Antonio Spurs",
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.49105,
+         "fair_decimal": 2.0365,
+         "fair_american": "+104",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.0179
+        },
+        {
+         "market": "h2h",
+         "label": "San Antonio Spurs ML",
+         "name": "San Antonio Spurs",
+         "point": null,
+         "team": "San Antonio Spurs",
+         "target_price": 1.5,
+         "target_american": "-200",
+         "target_implied": 0.66667,
+         "fair_p": 0.64623,
+         "fair_decimal": 1.5474,
+         "fair_american": "-183",
+         "fair_source": "pinnacle",
+         "ev": -0.03066
+        },
+        {
+         "market": "totals",
+         "label": "Over 216.5",
+         "name": "Over",
+         "point": 216.5,
+         "team": null,
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.49871,
+         "fair_decimal": 2.0052,
+         "fair_american": "+101",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.04746
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "San Antonio Spurs -5.5 \u00d7 San Antonio Spurs ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.85
+        },
+        {
+         "legs": "San Antonio Spurs -5.5 \u00d7 Over 216.5",
+         "relation": "spread_vs_total",
+         "rho": 0.12
+        },
+        {
+         "legs": "San Antonio Spurs ML \u00d7 Over 216.5",
+         "relation": "ml_vs_total",
+         "rho": 0.1
+        }
+       ],
+       "p_fair": 0.24854,
+       "p_naive": 0.15826,
+       "premium": 1.571,
+       "fair_decimal": 4.023,
+       "fair_american": "+302",
+       "offered_decimal_est": 3.754,
+       "offered_american_est": "+275",
+       "ev_at_offered": -0.06706,
+       "break_even_boost": 9.8,
+       "effective_legs": 2.27,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    }
+   ],
+   "n_sgps": 1
+  },
+  "soccer": {
+   "sport_key": "soccer_fifa_world_cup",
+   "sport_title": "FIFA World Cup",
+   "generated_at": "2026-06-12 18:20 UTC",
+   "target_book": "betonlineag",
+   "target_label": "BetOnline",
+   "target_is_proxy": true,
+   "target_regions": [
+    "eu"
+   ],
+   "anchors": {
+    "pinnacle": [
+     "eu"
+    ],
+    "matchbook": [
+     "eu"
+    ],
+    "betfair_ex_eu": [
+     "eu"
+    ]
+   },
+   "regions_scanned": [
+    "eu"
+   ],
+   "devig_method": "multiplicative",
+   "boost_defaults": {
+    "default_boost_pct": 50,
+    "default_min_odds": "+100",
+    "gate_on_boosted": false
+   },
+   "credits_est": 0,
+   "notes": [
+    "target book: BetOnline (betonlineag) from region(s) eu \u2014 PROXY: bet365 does not return on the free key",
+    "sharp anchors: pinnacle(eu), matchbook(eu), betfair_ex_eu(eu)",
+    "regions scanned: eu",
+    "extras: 2 candidate events in next 12h; fetching 2 \u00d7 \u22642 markets \u00d7 1 region \u2248 4 credits (cap 12)",
+    "credits: \u22480 spent this run; remaining=n/a (cache replay)"
+   ],
+   "games": [
+    {
+     "id": "c12986f447a515fbe641addd786dbb24",
+     "game": "USA vs Paraguay",
+     "commence_time": "2026-06-13T01:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Paraguay ML",
+         "name": "Paraguay",
+         "point": null,
+         "team": "Paraguay",
+         "target_price": 4.05,
+         "target_american": "+305",
+         "target_implied": 0.24691,
+         "fair_p": 0.24436,
+         "fair_decimal": 4.0924,
+         "fair_american": "+309",
+         "fair_source": "pinnacle",
+         "ev": -0.01036
+        },
+        {
+         "market": "spreads",
+         "label": "Paraguay +0.5",
+         "name": "Paraguay",
+         "point": 0.5,
+         "team": "Paraguay",
+         "target_price": 1.81,
+         "target_american": "-123",
+         "target_implied": 0.55249,
+         "fair_p": 0.54,
+         "fair_decimal": 1.8519,
+         "fair_american": "-117",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.0226
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.5243,
+         "fair_decimal": 1.9073,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.03005
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Paraguay ML \u00d7 Paraguay +0.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Paraguay ML \u00d7 Over 2",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Paraguay +0.5 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.1454,
+       "p_naive": 0.06918,
+       "premium": 2.102,
+       "fair_decimal": 6.877,
+       "fair_american": "+588",
+       "offered_decimal_est": 6.627,
+       "offered_american_est": "+563",
+       "ev_at_offered": -0.03635,
+       "break_even_boost": 4.4,
+       "effective_legs": 2.17,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.5243,
+         "fair_decimal": 1.9073,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.03005
+        },
+        {
+         "market": "spreads",
+         "label": "USA -0.5",
+         "name": "USA",
+         "point": -0.5,
+         "team": "USA",
+         "target_price": 2.08,
+         "target_american": "+108",
+         "target_implied": 0.48077,
+         "fair_p": 0.46,
+         "fair_decimal": 2.1739,
+         "fair_american": "+117",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.0432
+        },
+        {
+         "market": "h2h",
+         "label": "USA ML",
+         "name": "USA",
+         "point": null,
+         "team": "USA",
+         "target_price": 2.08,
+         "target_american": "+108",
+         "target_implied": 0.48077,
+         "fair_p": 0.45674,
+         "fair_decimal": 2.1894,
+         "fair_american": "+119",
+         "fair_source": "pinnacle",
+         "ev": -0.04998
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2 \u00d7 USA -0.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2 \u00d7 USA ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "USA -0.5 \u00d7 USA ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.22619,
+       "p_naive": 0.11016,
+       "premium": 2.053,
+       "fair_decimal": 4.421,
+       "fair_american": "+342",
+       "offered_decimal_est": 4.087,
+       "offered_american_est": "+309",
+       "ev_at_offered": -0.07557,
+       "break_even_boost": 10.8,
+       "effective_legs": 2.02,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "5ae41a06735c926eeb7f74006933adce",
+     "game": "Haiti vs Scotland",
+     "commence_time": "2026-06-14T01:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Haiti ML",
+         "name": "Haiti",
+         "point": null,
+         "team": "Haiti",
+         "target_price": 6.04,
+         "target_american": "+504",
+         "target_implied": 0.16556,
+         "fair_p": 0.16516,
+         "fair_decimal": 6.0548,
+         "fair_american": "+505",
+         "fair_source": "pinnacle",
+         "ev": -0.00244
+        },
+        {
+         "market": "spreads",
+         "label": "Haiti +1",
+         "name": "Haiti",
+         "point": 1.0,
+         "team": "Haiti",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.52041,
+         "fair_decimal": 1.9216,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.00602
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.50386,
+         "fair_decimal": 1.9847,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.05275
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Haiti ML \u00d7 Haiti +1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Haiti ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Haiti +1 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.09775,
+       "p_naive": 0.04331,
+       "premium": 2.257,
+       "fair_decimal": 10.231,
+       "fair_american": "+923",
+       "offered_decimal_est": 9.757,
+       "offered_american_est": "+876",
+       "ev_at_offered": -0.04626,
+       "break_even_boost": 5.4,
+       "effective_legs": 2.22,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Scotland ML",
+         "name": "Scotland",
+         "point": null,
+         "team": "Scotland",
+         "target_price": 1.58,
+         "target_american": "-172",
+         "target_implied": 0.63291,
+         "fair_p": 0.60558,
+         "fair_decimal": 1.6513,
+         "fair_american": "-154",
+         "fair_source": "pinnacle",
+         "ev": -0.04318
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.50386,
+         "fair_decimal": 1.9847,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.05275
+        },
+        {
+         "market": "spreads",
+         "label": "Scotland -1",
+         "name": "Scotland",
+         "point": -1.0,
+         "team": "Scotland",
+         "target_price": 1.94,
+         "target_american": "-106",
+         "target_implied": 0.51546,
+         "fair_p": 0.47959,
+         "fair_decimal": 2.0851,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.06959
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Scotland ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Scotland ML \u00d7 Scotland -1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Scotland -1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.25308,
+       "p_naive": 0.14634,
+       "premium": 1.729,
+       "fair_decimal": 3.951,
+       "fair_american": "+295",
+       "offered_decimal_est": 3.518,
+       "offered_american_est": "+252",
+       "ev_at_offered": -0.10955,
+       "break_even_boost": 17.2,
+       "effective_legs": 2.14,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "d79edbd6aaeb578d33e313446b18d333",
+     "game": "Germany vs Cura\u00e7ao",
+     "commence_time": "2026-06-14T17:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 4.5",
+         "name": "Over",
+         "point": 4.5,
+         "team": null,
+         "target_price": 2.14,
+         "target_american": "+114",
+         "target_implied": 0.46729,
+         "fair_p": 0.455,
+         "fair_decimal": 2.1978,
+         "fair_american": "+120",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.0263
+        },
+        {
+         "market": "h2h",
+         "label": "Germany ML",
+         "name": "Germany",
+         "point": null,
+         "team": "Germany",
+         "target_price": 1.05,
+         "target_american": "-2000",
+         "target_implied": 0.95238,
+         "fair_p": 0.92584,
+         "fair_decimal": 1.0801,
+         "fair_american": "-1248",
+         "fair_source": "pinnacle",
+         "ev": -0.02787
+        },
+        {
+         "market": "spreads",
+         "label": "Germany -3.5",
+         "name": "Germany",
+         "point": -3.5,
+         "team": "Germany",
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.47532,
+         "fair_decimal": 2.1038,
+         "fair_american": "+110",
+         "fair_source": "pinnacle",
+         "ev": -0.03984
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 4.5 \u00d7 Germany ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 4.5 \u00d7 Germany -3.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Germany ML \u00d7 Germany -3.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.24004,
+       "p_naive": 0.20023,
+       "premium": 1.199,
+       "fair_decimal": 4.166,
+       "fair_american": "+317",
+       "offered_decimal_est": 3.918,
+       "offered_american_est": "+292",
+       "ev_at_offered": -0.05945,
+       "break_even_boost": 8.5,
+       "effective_legs": 2.66,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "32ec06abda2398ac41501c86eb9aa376",
+     "game": "Netherlands vs Japan",
+     "commence_time": "2026-06-14T20:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Netherlands -0.5",
+         "name": "Netherlands",
+         "point": -0.5,
+         "team": "Netherlands",
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48849,
+         "fair_decimal": 2.0471,
+         "fair_american": "+105",
+         "fair_source": "pinnacle",
+         "ev": -0.01325
+        },
+        {
+         "market": "h2h",
+         "label": "Netherlands ML",
+         "name": "Netherlands",
+         "point": null,
+         "team": "Netherlands",
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48561,
+         "fair_decimal": 2.0593,
+         "fair_american": "+106",
+         "fair_source": "pinnacle",
+         "ev": -0.01907
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.97,
+         "target_american": "-103",
+         "target_implied": 0.50761,
+         "fair_p": 0.49614,
+         "fair_decimal": 2.0155,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.0226
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Netherlands -0.5 \u00d7 Netherlands ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Netherlands -0.5 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Netherlands ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.22986,
+       "p_naive": 0.11769,
+       "premium": 1.953,
+       "fair_decimal": 4.351,
+       "fair_american": "+335",
+       "offered_decimal_est": 4.188,
+       "offered_american_est": "+319",
+       "ev_at_offered": -0.03727,
+       "break_even_boost": 5.1,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.97,
+         "target_american": "-103",
+         "target_implied": 0.50761,
+         "fair_p": 0.49614,
+         "fair_decimal": 2.0155,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.0226
+        },
+        {
+         "market": "h2h",
+         "label": "Japan ML",
+         "name": "Japan",
+         "point": null,
+         "team": "Japan",
+         "target_price": 3.82,
+         "target_american": "+282",
+         "target_implied": 0.26178,
+         "fair_p": 0.25035,
+         "fair_decimal": 3.9943,
+         "fair_american": "+299",
+         "fair_source": "pinnacle",
+         "ev": -0.04365
+        },
+        {
+         "market": "spreads",
+         "label": "Japan +0.5",
+         "name": "Japan",
+         "point": 0.5,
+         "team": "Japan",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.51151,
+         "fair_decimal": 1.955,
+         "fair_american": "-105",
+         "fair_source": "pinnacle",
+         "ev": -0.05371
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 Japan ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Japan +0.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Japan ML \u00d7 Japan +0.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.14107,
+       "p_naive": 0.06353,
+       "premium": 2.22,
+       "fair_decimal": 7.089,
+       "fair_american": "+609",
+       "offered_decimal_est": 6.644,
+       "offered_american_est": "+564",
+       "ev_at_offered": -0.06268,
+       "break_even_boost": 7.9,
+       "effective_legs": 2.13,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "c54f00b11925751d2b62988775c6c239",
+     "game": "Spain vs Cape Verde",
+     "commence_time": "2026-06-15T16:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Spain ML",
+         "name": "Spain",
+         "point": null,
+         "team": "Spain",
+         "target_price": 1.1,
+         "target_american": "-1000",
+         "target_implied": 0.90909,
+         "fair_p": 0.88435,
+         "fair_decimal": 1.1308,
+         "fair_american": "-765",
+         "fair_source": "pinnacle",
+         "ev": -0.02721
+        },
+        {
+         "market": "spreads",
+         "label": "Spain -2.5",
+         "name": "Spain",
+         "point": -2.5,
+         "team": "Spain",
+         "target_price": 1.89,
+         "target_american": "-112",
+         "target_implied": 0.5291,
+         "fair_p": 0.5039,
+         "fair_decimal": 1.9845,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.04764
+        },
+        {
+         "market": "totals",
+         "label": "Over 3.5",
+         "name": "Over",
+         "point": 3.5,
+         "team": null,
+         "target_price": 1.86,
+         "target_american": "-116",
+         "target_implied": 0.53763,
+         "fair_p": 0.49608,
+         "fair_decimal": 2.0158,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.07728
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Spain ML \u00d7 Spain -2.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Spain ML \u00d7 Over 3.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Spain -2.5 \u00d7 Over 3.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.27385,
+       "p_naive": 0.22107,
+       "premium": 1.239,
+       "fair_decimal": 3.652,
+       "fair_american": "+265",
+       "offered_decimal_est": 3.244,
+       "offered_american_est": "+224",
+       "ev_at_offered": -0.1115,
+       "break_even_boost": 18.1,
+       "effective_legs": 2.57,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "fbfb95c62003fd6d828b309f96ee1f9b",
+     "game": "Belgium vs Egypt",
+     "commence_time": "2026-06-15T19:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Belgium ML",
+         "name": "Belgium",
+         "point": null,
+         "team": "Belgium",
+         "target_price": 1.65,
+         "target_american": "-154",
+         "target_implied": 0.60606,
+         "fair_p": 0.60005,
+         "fair_decimal": 1.6665,
+         "fair_american": "-150",
+         "fair_source": "pinnacle",
+         "ev": -0.00992
+        },
+        {
+         "market": "spreads",
+         "label": "Belgium -1",
+         "name": "Belgium",
+         "point": -1.0,
+         "team": "Belgium",
+         "target_price": 2.14,
+         "target_american": "+114",
+         "target_implied": 0.46729,
+         "fair_p": 0.46056,
+         "fair_decimal": 2.1713,
+         "fair_american": "+117",
+         "fair_source": "pinnacle",
+         "ev": -0.0144
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.01,
+         "target_american": "+101",
+         "target_implied": 0.49751,
+         "fair_p": 0.48329,
+         "fair_decimal": 2.0691,
+         "fair_american": "+107",
+         "fair_source": "pinnacle",
+         "ev": -0.02859
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Belgium ML \u00d7 Belgium -1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Belgium ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Belgium -1 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.23582,
+       "p_naive": 0.13356,
+       "premium": 1.766,
+       "fair_decimal": 4.241,
+       "fair_american": "+324",
+       "offered_decimal_est": 4.075,
+       "offered_american_est": "+307",
+       "ev_at_offered": -0.03916,
+       "break_even_boost": 5.4,
+       "effective_legs": 2.15,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "ec51b9c44ad5e34552f3ab53f7262813",
+     "game": "Iran vs New Zealand",
+     "commence_time": "2026-06-16T01:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "New Zealand +0.5",
+         "name": "New Zealand",
+         "point": 0.5,
+         "team": "New Zealand",
+         "target_price": 2.04,
+         "target_american": "+104",
+         "target_implied": 0.4902,
+         "fair_p": 0.4757,
+         "fair_decimal": 2.1022,
+         "fair_american": "+110",
+         "fair_source": "pinnacle",
+         "ev": -0.02957
+        },
+        {
+         "market": "h2h",
+         "label": "New Zealand ML",
+         "name": "New Zealand",
+         "point": null,
+         "team": "New Zealand",
+         "target_price": 4.75,
+         "target_american": "+375",
+         "target_implied": 0.21053,
+         "fair_p": 0.20406,
+         "fair_decimal": 4.9005,
+         "fair_american": "+390",
+         "fair_source": "pinnacle",
+         "ev": -0.03071
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.75,
+         "target_american": "-133",
+         "target_implied": 0.57143,
+         "fair_p": 0.53077,
+         "fair_decimal": 1.8841,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.07115
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "New Zealand +0.5 \u00d7 New Zealand ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "New Zealand +0.5 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "New Zealand ML \u00d7 Over 2",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.12353,
+       "p_naive": 0.05152,
+       "premium": 2.398,
+       "fair_decimal": 8.095,
+       "fair_american": "+710",
+       "offered_decimal_est": 7.38,
+       "offered_american_est": "+638",
+       "ev_at_offered": -0.08835,
+       "break_even_boost": 11.2,
+       "effective_legs": 2.12,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Iran -0.5",
+         "name": "Iran",
+         "point": -0.5,
+         "team": "Iran",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.5243,
+         "fair_decimal": 1.9073,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.04054
+        },
+        {
+         "market": "h2h",
+         "label": "Iran ML",
+         "name": "Iran",
+         "point": null,
+         "team": "Iran",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.52173,
+         "fair_decimal": 1.9167,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.04523
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.75,
+         "target_american": "-133",
+         "target_implied": 0.57143,
+         "fair_p": 0.53077,
+         "fair_decimal": 1.8841,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.07115
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Iran -0.5 \u00d7 Iran ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Iran -0.5 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Iran ML \u00d7 Over 2",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.26365,
+       "p_naive": 0.14519,
+       "premium": 1.816,
+       "fair_decimal": 3.793,
+       "fair_american": "+279",
+       "offered_decimal_est": 3.385,
+       "offered_american_est": "+239",
+       "ev_at_offered": -0.10754,
+       "break_even_boost": 17.1,
+       "effective_legs": 2.07,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "73a4fcd14cc9766b9b9bfd50b8ca153a",
+     "game": "France vs Senegal",
+     "commence_time": "2026-06-16T19:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Senegal ML",
+         "name": "Senegal",
+         "point": null,
+         "team": "Senegal",
+         "target_price": 7.75,
+         "target_american": "+675",
+         "target_implied": 0.12903,
+         "fair_p": 0.13227,
+         "fair_decimal": 7.5602,
+         "fair_american": "+656",
+         "fair_source": "pinnacle",
+         "ev": 0.0251
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48329,
+         "fair_decimal": 2.0691,
+         "fair_american": "+107",
+         "fair_source": "pinnacle",
+         "ev": -0.02375
+        },
+        {
+         "market": "spreads",
+         "label": "Senegal +1",
+         "name": "Senegal",
+         "point": 1.0,
+         "team": "Senegal",
+         "target_price": 2.07,
+         "target_american": "+107",
+         "target_implied": 0.48309,
+         "fair_p": 0.46565,
+         "fair_decimal": 2.1475,
+         "fair_american": "+115",
+         "fair_source": "pinnacle",
+         "ev": -0.03611
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Senegal ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Senegal ML \u00d7 Senegal +1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Senegal +1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.07647,
+       "p_naive": 0.02977,
+       "premium": 2.569,
+       "fair_decimal": 13.077,
+       "fair_american": "+1208",
+       "offered_decimal_est": 13.111,
+       "offered_american_est": "+1211",
+       "ev_at_offered": 0.00265,
+       "break_even_boost": -0.3,
+       "effective_legs": 2.19,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48329,
+         "fair_decimal": 2.0691,
+         "fair_american": "+107",
+         "fair_source": "pinnacle",
+         "ev": -0.02375
+        },
+        {
+         "market": "spreads",
+         "label": "France -1",
+         "name": "France",
+         "point": -1.0,
+         "team": "France",
+         "target_price": 1.81,
+         "target_american": "-123",
+         "target_implied": 0.55249,
+         "fair_p": 0.53435,
+         "fair_decimal": 1.8714,
+         "fair_american": "-115",
+         "fair_source": "pinnacle",
+         "ev": -0.03282
+        },
+        {
+         "market": "h2h",
+         "label": "France ML",
+         "name": "France",
+         "point": null,
+         "team": "France",
+         "target_price": 1.47,
+         "target_american": "-213",
+         "target_implied": 0.68027,
+         "fair_p": 0.65153,
+         "fair_decimal": 1.5349,
+         "fair_american": "-187",
+         "fair_source": "pinnacle",
+         "ev": -0.04226
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 France -1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 France ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "France -1 \u00d7 France ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.26989,
+       "p_naive": 0.16826,
+       "premium": 1.604,
+       "fair_decimal": 3.705,
+       "fair_american": "+271",
+       "offered_decimal_est": 3.49,
+       "offered_american_est": "+249",
+       "ev_at_offered": -0.05801,
+       "break_even_boost": 8.6,
+       "effective_legs": 2.2,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "4d4f2b9b78182b557d4fbf8dcf4f4af2",
+     "game": "Iraq vs Norway",
+     "commence_time": "2026-06-16T22:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Norway ML",
+         "name": "Norway",
+         "point": null,
+         "team": "Norway",
+         "target_price": 1.22,
+         "target_american": "-455",
+         "target_implied": 0.81967,
+         "fair_p": 0.80146,
+         "fair_decimal": 1.2477,
+         "fair_american": "-404",
+         "fair_source": "pinnacle",
+         "ev": -0.02221
+        },
+        {
+         "market": "spreads",
+         "label": "Norway -2",
+         "name": "Norway",
+         "point": -2.0,
+         "team": "Norway",
+         "target_price": 2.06,
+         "target_american": "+106",
+         "target_implied": 0.48544,
+         "fair_p": 0.46565,
+         "fair_decimal": 2.1475,
+         "fair_american": "+115",
+         "fair_source": "pinnacle",
+         "ev": -0.04076
+        },
+        {
+         "market": "totals",
+         "label": "Over 3",
+         "name": "Over",
+         "point": 3.0,
+         "team": null,
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.49614,
+         "fair_decimal": 2.0155,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.06725
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Norway ML \u00d7 Norway -2",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Norway ML \u00d7 Over 3",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Norway -2 \u00d7 Over 3",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.25437,
+       "p_naive": 0.18516,
+       "premium": 1.374,
+       "fair_decimal": 3.931,
+       "fair_american": "+293",
+       "offered_decimal_est": 3.551,
+       "offered_american_est": "+255",
+       "ev_at_offered": -0.09663,
+       "break_even_boost": 14.9,
+       "effective_legs": 2.44,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "289bc2e9f5adad8ae4d9a75a7c5461ad",
+     "game": "Switzerland vs Bosnia & Herzegovina",
+     "commence_time": "2026-06-18T19:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Bosnia & Herzegovina ML",
+         "name": "Bosnia & Herzegovina",
+         "point": null,
+         "team": "Bosnia & Herzegovina",
+         "target_price": 6.2,
+         "target_american": "+520",
+         "target_implied": 0.16129,
+         "fair_p": 0.17627,
+         "fair_decimal": 5.6731,
+         "fair_american": "+467",
+         "fair_source": "pinnacle",
+         "ev": 0.09288
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.09,
+         "target_american": "+109",
+         "target_implied": 0.47847,
+         "fair_p": 0.46803,
+         "fair_decimal": 2.1366,
+         "fair_american": "+114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.02182
+        },
+        {
+         "market": "spreads",
+         "label": "Bosnia & Herzegovina +1",
+         "name": "Bosnia & Herzegovina",
+         "point": 1.0,
+         "team": "Bosnia & Herzegovina",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.53141,
+         "fair_decimal": 1.8818,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.02751
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Bosnia & Herzegovina ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Bosnia & Herzegovina ML \u00d7 Bosnia & Herzegovina +1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Bosnia & Herzegovina +1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.0977,
+       "p_naive": 0.04384,
+       "premium": 2.228,
+       "fair_decimal": 10.235,
+       "fair_american": "+924",
+       "offered_decimal_est": 10.909,
+       "offered_american_est": "+991",
+       "ev_at_offered": 0.06582,
+       "break_even_boost": -6.8,
+       "effective_legs": 2.23,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.09,
+         "target_american": "+109",
+         "target_implied": 0.47847,
+         "fair_p": 0.46803,
+         "fair_decimal": 2.1366,
+         "fair_american": "+114",
+         "fair_source": "exchange_consensus(matchbook)",
+         "ev": -0.02182
+        },
+        {
+         "market": "spreads",
+         "label": "Switzerland -1",
+         "name": "Switzerland",
+         "point": -1.0,
+         "team": "Switzerland",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.46859,
+         "fair_decimal": 2.1341,
+         "fair_american": "+113",
+         "fair_source": "pinnacle",
+         "ev": -0.0394
+        },
+        {
+         "market": "h2h",
+         "label": "Switzerland ML",
+         "name": "Switzerland",
+         "point": null,
+         "team": "Switzerland",
+         "target_price": 1.57,
+         "target_american": "-175",
+         "target_implied": 0.63694,
+         "fair_p": 0.58646,
+         "fair_decimal": 1.7051,
+         "fair_american": "-142",
+         "fair_source": "pinnacle",
+         "ev": -0.07926
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 Switzerland -1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Switzerland ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Switzerland -1 \u00d7 Switzerland ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.23046,
+       "p_naive": 0.12862,
+       "premium": 1.792,
+       "fair_decimal": 4.339,
+       "fair_american": "+334",
+       "offered_decimal_est": 4.03,
+       "offered_american_est": "+303",
+       "ev_at_offered": -0.07125,
+       "break_even_boost": 10.2,
+       "effective_legs": 2.15,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "fa9502285b257b03e62968d50d9229fc",
+     "game": "Canada vs Qatar",
+     "commence_time": "2026-06-18T22:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Qatar ML",
+         "name": "Qatar",
+         "point": null,
+         "team": "Qatar",
+         "target_price": 10.6,
+         "target_american": "+960",
+         "target_implied": 0.09434,
+         "fair_p": 0.0951,
+         "fair_decimal": 10.5147,
+         "fair_american": "+951",
+         "fair_source": "pinnacle",
+         "ev": 0.00811
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.96,
+         "target_american": "-104",
+         "target_implied": 0.5102,
+         "fair_p": 0.4934,
+         "fair_decimal": 2.0267,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.03293
+        },
+        {
+         "market": "spreads",
+         "label": "Qatar +1.5",
+         "name": "Qatar",
+         "point": 1.5,
+         "team": "Qatar",
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.51316,
+         "fair_decimal": 1.9487,
+         "fair_american": "-105",
+         "fair_source": "pinnacle",
+         "ev": -0.03526
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Qatar ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Qatar ML \u00d7 Qatar +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Qatar +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.057,
+       "p_naive": 0.02408,
+       "premium": 2.367,
+       "fair_decimal": 17.543,
+       "fair_american": "+1654",
+       "offered_decimal_est": 17.207,
+       "offered_american_est": "+1621",
+       "ev_at_offered": -0.01919,
+       "break_even_boost": 2.1,
+       "effective_legs": 2.31,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.96,
+         "target_american": "-104",
+         "target_implied": 0.5102,
+         "fair_p": 0.4934,
+         "fair_decimal": 2.0267,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.03293
+        },
+        {
+         "market": "spreads",
+         "label": "Canada -1.5",
+         "name": "Canada",
+         "point": -1.5,
+         "team": "Canada",
+         "target_price": 1.98,
+         "target_american": "-102",
+         "target_implied": 0.50505,
+         "fair_p": 0.48684,
+         "fair_decimal": 2.0541,
+         "fair_american": "+105",
+         "fair_source": "pinnacle",
+         "ev": -0.03605
+        },
+        {
+         "market": "h2h",
+         "label": "Canada ML",
+         "name": "Canada",
+         "point": null,
+         "team": "Canada",
+         "target_price": 1.32,
+         "target_american": "-312",
+         "target_implied": 0.75758,
+         "fair_p": 0.7225,
+         "fair_decimal": 1.3841,
+         "fair_american": "-260",
+         "fair_source": "pinnacle",
+         "ev": -0.0463
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 Canada -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Canada ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Canada -1.5 \u00d7 Canada ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.26107,
+       "p_naive": 0.17355,
+       "premium": 1.504,
+       "fair_decimal": 3.83,
+       "fair_american": "+283",
+       "offered_decimal_est": 3.579,
+       "offered_american_est": "+258",
+       "ev_at_offered": -0.06554,
+       "break_even_boost": 9.7,
+       "effective_legs": 2.3,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "0f2aeae6ac8e77223848d23a4ca86b0d",
+     "game": "Mexico vs South Korea",
+     "commence_time": "2026-06-19T01:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "South Korea ML",
+         "name": "South Korea",
+         "point": null,
+         "team": "South Korea",
+         "target_price": 4.23,
+         "target_american": "+323",
+         "target_implied": 0.23641,
+         "fair_p": 0.23816,
+         "fair_decimal": 4.1988,
+         "fair_american": "+320",
+         "fair_source": "pinnacle",
+         "ev": 0.00743
+        },
+        {
+         "market": "spreads",
+         "label": "South Korea +0.5",
+         "name": "South Korea",
+         "point": 0.5,
+         "team": "South Korea",
+         "target_price": 1.86,
+         "target_american": "-116",
+         "target_implied": 0.53763,
+         "fair_p": 0.51928,
+         "fair_decimal": 1.9257,
+         "fair_american": "-108",
+         "fair_source": "pinnacle",
+         "ev": -0.03414
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.79,
+         "target_american": "-127",
+         "target_implied": 0.55866,
+         "fair_p": 0.52956,
+         "fair_decimal": 1.8883,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.05208
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "South Korea ML \u00d7 South Korea +0.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "South Korea ML \u00d7 Over 2",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "South Korea +0.5 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.14283,
+       "p_naive": 0.06549,
+       "premium": 2.181,
+       "fair_decimal": 7.001,
+       "fair_american": "+600",
+       "offered_decimal_est": 6.719,
+       "offered_american_est": "+572",
+       "ev_at_offered": -0.04038,
+       "break_even_boost": 4.9,
+       "effective_legs": 2.14,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Mexico -0.5",
+         "name": "Mexico",
+         "point": -0.5,
+         "team": "Mexico",
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.48072,
+         "fair_decimal": 2.0802,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.03856
+        },
+        {
+         "market": "h2h",
+         "label": "Mexico ML",
+         "name": "Mexico",
+         "point": null,
+         "team": "Mexico",
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.47633,
+         "fair_decimal": 2.0994,
+         "fair_american": "+110",
+         "fair_source": "pinnacle",
+         "ev": -0.04735
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.79,
+         "target_american": "-127",
+         "target_implied": 0.55866,
+         "fair_p": 0.52956,
+         "fair_decimal": 1.8883,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.05208
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Mexico -0.5 \u00d7 Mexico ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Mexico -0.5 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Mexico ML \u00d7 Over 2",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.23903,
+       "p_naive": 0.12126,
+       "premium": 1.971,
+       "fair_decimal": 4.184,
+       "fair_american": "+318",
+       "offered_decimal_est": 3.804,
+       "offered_american_est": "+280",
+       "ev_at_offered": -0.09072,
+       "break_even_boost": 13.5,
+       "effective_legs": 2.03,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "4f0c518545b0096c68326daf25bffc1e",
+     "game": "Netherlands vs Sweden",
+     "commence_time": "2026-06-20T17:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Sweden ML",
+         "name": "Sweden",
+         "point": null,
+         "team": "Sweden",
+         "target_price": 5.35,
+         "target_american": "+435",
+         "target_implied": 0.18692,
+         "fair_p": 0.18847,
+         "fair_decimal": 5.3059,
+         "fair_american": "+431",
+         "fair_source": "pinnacle",
+         "ev": 0.00832
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.50265,
+         "fair_decimal": 1.9895,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": 0.00529
+        },
+        {
+         "market": "spreads",
+         "label": "Sweden +1",
+         "name": "Sweden",
+         "point": 1.0,
+         "team": "Sweden",
+         "target_price": 1.75,
+         "target_american": "-133",
+         "target_implied": 0.57143,
+         "fair_p": 0.53281,
+         "fair_decimal": 1.8768,
+         "fair_american": "-114",
+         "fair_source": "pinnacle",
+         "ev": -0.06759
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Sweden ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Sweden ML \u00d7 Sweden +1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Sweden +1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.11041,
+       "p_naive": 0.05048,
+       "premium": 2.187,
+       "fair_decimal": 9.057,
+       "fair_american": "+806",
+       "offered_decimal_est": 9.149,
+       "offered_american_est": "+815",
+       "ev_at_offered": 0.0102,
+       "break_even_boost": -1.1,
+       "effective_legs": 2.21,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Netherlands -1",
+         "name": "Netherlands",
+         "point": -1.0,
+         "team": "Netherlands",
+         "target_price": 2.17,
+         "target_american": "+117",
+         "target_implied": 0.46083,
+         "fair_p": 0.46719,
+         "fair_decimal": 2.1404,
+         "fair_american": "+114",
+         "fair_source": "pinnacle",
+         "ev": 0.01381
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.50265,
+         "fair_decimal": 1.9895,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": 0.00529
+        },
+        {
+         "market": "h2h",
+         "label": "Netherlands ML",
+         "name": "Netherlands",
+         "point": null,
+         "team": "Netherlands",
+         "target_price": 1.65,
+         "target_american": "-154",
+         "target_implied": 0.60606,
+         "fair_p": 0.57946,
+         "fair_decimal": 1.7258,
+         "fair_american": "-138",
+         "fair_source": "pinnacle",
+         "ev": -0.04389
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Netherlands -1 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Netherlands -1 \u00d7 Netherlands ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Netherlands ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.2443,
+       "p_naive": 0.13608,
+       "premium": 1.795,
+       "fair_decimal": 4.093,
+       "fair_american": "+309",
+       "offered_decimal_est": 4.099,
+       "offered_american_est": "+310",
+       "ev_at_offered": 0.0015,
+       "break_even_boost": -0.2,
+       "effective_legs": 2.12,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "fd8533b650e655030f6a7946f8795db2",
+     "game": "Jordan vs Algeria",
+     "commence_time": "2026-06-23T03:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Algeria -1",
+         "name": "Algeria",
+         "point": -1.0,
+         "team": "Algeria",
+         "target_price": 1.96,
+         "target_american": "-104",
+         "target_implied": 0.5102,
+         "fair_p": 0.51579,
+         "fair_decimal": 1.9388,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": 0.01095
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.98,
+         "target_american": "-102",
+         "target_implied": 0.50505,
+         "fair_p": 0.50265,
+         "fair_decimal": 1.9895,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": -0.00476
+        },
+        {
+         "market": "h2h",
+         "label": "Algeria ML",
+         "name": "Algeria",
+         "point": null,
+         "team": "Algeria",
+         "target_price": 1.53,
+         "target_american": "-189",
+         "target_implied": 0.65359,
+         "fair_p": 0.6275,
+         "fair_decimal": 1.5936,
+         "fair_american": "-168",
+         "fair_source": "pinnacle",
+         "ev": -0.03993
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Algeria -1 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Algeria -1 \u00d7 Algeria ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Algeria ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.26937,
+       "p_naive": 0.16269,
+       "premium": 1.656,
+       "fair_decimal": 3.712,
+       "fair_american": "+271",
+       "offered_decimal_est": 3.681,
+       "offered_american_est": "+268",
+       "ev_at_offered": -0.00832,
+       "break_even_boost": 1.2,
+       "effective_legs": 2.17,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "c9ef5822ee64fd5275f7c73251bb56c7",
+     "game": "Switzerland vs Canada",
+     "commence_time": "2026-06-24T19:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Switzerland ML",
+         "name": "Switzerland",
+         "point": null,
+         "team": "Switzerland",
+         "target_price": 2.2,
+         "target_american": "+120",
+         "target_implied": 0.45455,
+         "fair_p": 0.44621,
+         "fair_decimal": 2.2411,
+         "fair_american": "+124",
+         "fair_source": "pinnacle",
+         "ev": -0.01834
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03532
+        },
+        {
+         "market": "spreads",
+         "label": "Switzerland -0.25",
+         "name": "Switzerland",
+         "point": -0.25,
+         "team": "Switzerland",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.52231,
+         "fair_decimal": 1.9146,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.04417
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Switzerland ML \u00d7 Over 2.25",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Switzerland ML \u00d7 Switzerland -0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Switzerland -0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.23321,
+       "p_naive": 0.12023,
+       "premium": 1.94,
+       "fair_decimal": 4.288,
+       "fair_american": "+329",
+       "offered_decimal_est": 4.03,
+       "offered_american_est": "+303",
+       "ev_at_offered": -0.0601,
+       "break_even_boost": 8.5,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Canada +0.25",
+         "name": "Canada",
+         "point": 0.25,
+         "team": "Canada",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.47769,
+         "fair_decimal": 2.0934,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.02073
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03532
+        },
+        {
+         "market": "h2h",
+         "label": "Canada ML",
+         "name": "Canada",
+         "point": null,
+         "team": "Canada",
+         "target_price": 3.5,
+         "target_american": "+250",
+         "target_implied": 0.28571,
+         "fair_p": 0.2724,
+         "fair_decimal": 3.6711,
+         "fair_american": "+267",
+         "fair_source": "pinnacle",
+         "ev": -0.04661
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Canada +0.25 \u00d7 Over 2.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Canada +0.25 \u00d7 Canada ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Canada ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.15553,
+       "p_naive": 0.06713,
+       "premium": 2.317,
+       "fair_decimal": 6.43,
+       "fair_american": "+543",
+       "offered_decimal_est": 5.966,
+       "offered_american_est": "+497",
+       "ev_at_offered": -0.07208,
+       "break_even_boost": 9.3,
+       "effective_legs": 2.07,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "885ba95805db310a7bcc3fb1a7a6dd28",
+     "game": "Scotland vs Brazil",
+     "commence_time": "2026-06-24T22:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Scotland ML",
+         "name": "Scotland",
+         "point": null,
+         "team": "Scotland",
+         "target_price": 6.6,
+         "target_american": "+560",
+         "target_implied": 0.15152,
+         "fair_p": 0.16329,
+         "fair_decimal": 6.1242,
+         "fair_american": "+512",
+         "fair_source": "pinnacle",
+         "ev": 0.0777
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.86,
+         "target_american": "-116",
+         "target_implied": 0.53763,
+         "fair_p": 0.52243,
+         "fair_decimal": 1.9141,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.02828
+        },
+        {
+         "market": "spreads",
+         "label": "Scotland +1.25",
+         "name": "Scotland",
+         "point": 1.25,
+         "team": "Scotland",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.51053,
+         "fair_decimal": 1.9588,
+         "fair_american": "-104",
+         "fair_source": "pinnacle",
+         "ev": -0.06574
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Scotland ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Scotland ML \u00d7 Scotland +1.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Scotland +1.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.0996,
+       "p_naive": 0.04355,
+       "premium": 2.287,
+       "fair_decimal": 10.04,
+       "fair_american": "+904",
+       "offered_decimal_est": 10.506,
+       "offered_american_est": "+951",
+       "ev_at_offered": 0.0464,
+       "break_even_boost": -4.9,
+       "effective_legs": 2.21,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Brazil -1.25",
+         "name": "Brazil",
+         "point": -1.25,
+         "team": "Brazil",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.48947,
+         "fair_decimal": 2.043,
+         "fair_american": "+104",
+         "fair_source": "pinnacle",
+         "ev": 0.00342
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.86,
+         "target_american": "-116",
+         "target_implied": 0.53763,
+         "fair_p": 0.52243,
+         "fair_decimal": 1.9141,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.02828
+        },
+        {
+         "market": "h2h",
+         "label": "Brazil ML",
+         "name": "Brazil",
+         "point": null,
+         "team": "Brazil",
+         "target_price": 1.48,
+         "target_american": "-208",
+         "target_implied": 0.67568,
+         "fair_p": 0.64858,
+         "fair_decimal": 1.5418,
+         "fair_american": "-185",
+         "fair_source": "pinnacle",
+         "ev": -0.0401
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Brazil -1.25 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Brazil -1.25 \u00d7 Brazil ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Brazil ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.27067,
+       "p_naive": 0.16585,
+       "premium": 1.632,
+       "fair_decimal": 3.695,
+       "fair_american": "+269",
+       "offered_decimal_est": 3.577,
+       "offered_american_est": "+258",
+       "ev_at_offered": -0.03178,
+       "break_even_boost": 4.6,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "d1279ce7f33136a33e99ad442fc855e8",
+     "game": "Morocco vs Haiti",
+     "commence_time": "2026-06-24T22:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Haiti ML",
+         "name": "Haiti",
+         "point": null,
+         "team": "Haiti",
+         "target_price": 11.25,
+         "target_american": "+1025",
+         "target_implied": 0.08889,
+         "fair_p": 0.10039,
+         "fair_decimal": 9.9613,
+         "fair_american": "+896",
+         "fair_source": "pinnacle",
+         "ev": 0.12937
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.75",
+         "name": "Over",
+         "point": 2.75,
+         "team": null,
+         "target_price": 1.98,
+         "target_american": "-102",
+         "target_implied": 0.50505,
+         "fair_p": 0.50265,
+         "fair_decimal": 1.9895,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": -0.00476
+        },
+        {
+         "market": "spreads",
+         "label": "Haiti +1.5",
+         "name": "Haiti",
+         "point": 1.5,
+         "team": "Haiti",
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.50789,
+         "fair_decimal": 1.9689,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.05024
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Haiti ML \u00d7 Over 2.75",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Haiti ML \u00d7 Haiti +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.75 \u00d7 Haiti +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.06092,
+       "p_naive": 0.02563,
+       "premium": 2.377,
+       "fair_decimal": 16.416,
+       "fair_american": "+1542",
+       "offered_decimal_est": 18.361,
+       "offered_american_est": "+1736",
+       "ev_at_offered": 0.11848,
+       "break_even_boost": -11.2,
+       "effective_legs": 2.29,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.75",
+         "name": "Over",
+         "point": 2.75,
+         "team": null,
+         "target_price": 1.98,
+         "target_american": "-102",
+         "target_implied": 0.50505,
+         "fair_p": 0.50265,
+         "fair_decimal": 1.9895,
+         "fair_american": "-101",
+         "fair_source": "pinnacle",
+         "ev": -0.00476
+        },
+        {
+         "market": "spreads",
+         "label": "Morocco -1.5",
+         "name": "Morocco",
+         "point": -1.5,
+         "team": "Morocco",
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.49211,
+         "fair_decimal": 2.0321,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.02071
+        },
+        {
+         "market": "h2h",
+         "label": "Morocco ML",
+         "name": "Morocco",
+         "point": null,
+         "team": "Morocco",
+         "target_price": 1.32,
+         "target_american": "-312",
+         "target_implied": 0.75758,
+         "fair_p": 0.71828,
+         "fair_decimal": 1.3922,
+         "fair_american": "-255",
+         "fair_source": "pinnacle",
+         "ev": -0.05187
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.75 \u00d7 Morocco -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.75 \u00d7 Morocco ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Morocco -1.5 \u00d7 Morocco ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.26775,
+       "p_naive": 0.17767,
+       "premium": 1.507,
+       "fair_decimal": 3.735,
+       "fair_american": "+273",
+       "offered_decimal_est": 3.629,
+       "offered_american_est": "+263",
+       "ev_at_offered": -0.02846,
+       "break_even_boost": 4.0,
+       "effective_legs": 2.29,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "0ec28b84ec399bd4dffbe8d1bc72b3c4",
+     "game": "Ecuador vs Germany",
+     "commence_time": "2026-06-25T20:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Ecuador ML",
+         "name": "Ecuador",
+         "point": null,
+         "team": "Ecuador",
+         "target_price": 5.0,
+         "target_american": "+400",
+         "target_implied": 0.2,
+         "fair_p": 0.2124,
+         "fair_decimal": 4.708,
+         "fair_american": "+371",
+         "fair_source": "pinnacle",
+         "ev": 0.06202
+        },
+        {
+         "market": "spreads",
+         "label": "Ecuador +0.75",
+         "name": "Ecuador",
+         "point": 0.75,
+         "team": "Ecuador",
+         "target_price": 1.86,
+         "target_american": "-116",
+         "target_implied": 0.53763,
+         "fair_p": 0.52231,
+         "fair_decimal": 1.9146,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.0285
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.49604,
+         "fair_decimal": 2.016,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.0724
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Ecuador ML \u00d7 Ecuador +0.75",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Ecuador ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Ecuador +0.75 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.12181,
+       "p_naive": 0.05503,
+       "premium": 2.213,
+       "fair_decimal": 8.21,
+       "fair_american": "+721",
+       "offered_decimal_est": 8.134,
+       "offered_american_est": "+713",
+       "ev_at_offered": -0.00926,
+       "break_even_boost": 1.1,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Germany -0.75",
+         "name": "Germany",
+         "point": -0.75,
+         "team": "Germany",
+         "target_price": 2.0,
+         "target_american": "+100",
+         "target_implied": 0.5,
+         "fair_p": 0.47769,
+         "fair_decimal": 2.0934,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.04462
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.49604,
+         "fair_decimal": 2.016,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.0724
+        },
+        {
+         "market": "h2h",
+         "label": "Germany ML",
+         "name": "Germany",
+         "point": null,
+         "team": "Germany",
+         "target_price": 1.73,
+         "target_american": "-137",
+         "target_implied": 0.57803,
+         "fair_p": 0.53283,
+         "fair_decimal": 1.8768,
+         "fair_american": "-114",
+         "fair_source": "pinnacle",
+         "ev": -0.07821
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Germany -0.75 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Germany -0.75 \u00d7 Germany ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Germany ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.23736,
+       "p_naive": 0.12626,
+       "premium": 1.88,
+       "fair_decimal": 4.213,
+       "fair_american": "+321",
+       "offered_decimal_est": 3.695,
+       "offered_american_est": "+270",
+       "ev_at_offered": -0.12292,
+       "break_even_boost": 19.2,
+       "effective_legs": 2.08,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "f3c4657daa143a0c5bd62cb370d01ce4",
+     "game": "Tunisia vs Netherlands",
+     "commence_time": "2026-06-25T23:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Tunisia ML",
+         "name": "Tunisia",
+         "point": null,
+         "team": "Tunisia",
+         "target_price": 7.0,
+         "target_american": "+600",
+         "target_implied": 0.14286,
+         "fair_p": 0.14792,
+         "fair_decimal": 6.7603,
+         "fair_american": "+576",
+         "fair_source": "pinnacle",
+         "ev": 0.03546
+        },
+        {
+         "market": "spreads",
+         "label": "Tunisia +1",
+         "name": "Tunisia",
+         "point": 1.0,
+         "team": "Tunisia",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.47507,
+         "fair_decimal": 2.105,
+         "fair_american": "+110",
+         "fair_source": "pinnacle",
+         "ev": -0.02612
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03016
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Tunisia ML \u00d7 Tunisia +1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Tunisia ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Tunisia +1 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.08965,
+       "p_naive": 0.03625,
+       "premium": 2.473,
+       "fair_decimal": 11.154,
+       "fair_american": "+1015",
+       "offered_decimal_est": 11.23,
+       "offered_american_est": "+1023",
+       "ev_at_offered": 0.00676,
+       "break_even_boost": -0.7,
+       "effective_legs": 2.18,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03016
+        },
+        {
+         "market": "h2h",
+         "label": "Netherlands ML",
+         "name": "Netherlands",
+         "point": null,
+         "team": "Netherlands",
+         "target_price": 1.53,
+         "target_american": "-189",
+         "target_implied": 0.65359,
+         "fair_p": 0.63194,
+         "fair_decimal": 1.5824,
+         "fair_american": "-172",
+         "fair_source": "pinnacle",
+         "ev": -0.03313
+        },
+        {
+         "market": "spreads",
+         "label": "Netherlands -1",
+         "name": "Netherlands",
+         "point": -1.0,
+         "team": "Netherlands",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.52493,
+         "fair_decimal": 1.905,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.03937
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 Netherlands ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Netherlands -1",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Netherlands ML \u00d7 Netherlands -1",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.27998,
+       "p_naive": 0.17113,
+       "premium": 1.636,
+       "fair_decimal": 3.572,
+       "fair_american": "+257",
+       "offered_decimal_est": 3.337,
+       "offered_american_est": "+234",
+       "ev_at_offered": -0.06585,
+       "break_even_boost": 10.1,
+       "effective_legs": 2.16,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "22f6ac06dfcc88a847920f62633e6459",
+     "game": "Paraguay vs Australia",
+     "commence_time": "2026-06-26T02:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Paraguay ML",
+         "name": "Paraguay",
+         "point": null,
+         "team": "Paraguay",
+         "target_price": 2.23,
+         "target_american": "+123",
+         "target_implied": 0.44843,
+         "fair_p": 0.44856,
+         "fair_decimal": 2.2293,
+         "fair_american": "+123",
+         "fair_source": "pinnacle",
+         "ev": 0.00029
+        },
+        {
+         "market": "spreads",
+         "label": "Paraguay -0.25",
+         "name": "Paraguay",
+         "point": -0.25,
+         "team": "Paraguay",
+         "target_price": 1.88,
+         "target_american": "-114",
+         "target_implied": 0.53191,
+         "fair_p": 0.53018,
+         "fair_decimal": 1.8861,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.00325
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 2.04,
+         "target_american": "+104",
+         "target_implied": 0.4902,
+         "fair_p": 0.47757,
+         "fair_decimal": 2.0939,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.02575
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Paraguay ML \u00d7 Paraguay -0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Paraguay ML \u00d7 Over 2.25",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Paraguay -0.25 \u00d7 Over 2.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.21971,
+       "p_naive": 0.11357,
+       "premium": 1.934,
+       "fair_decimal": 4.551,
+       "fair_american": "+355",
+       "offered_decimal_est": 4.442,
+       "offered_american_est": "+344",
+       "ev_at_offered": -0.02415,
+       "break_even_boost": 3.2,
+       "effective_legs": 2.09,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 2.04,
+         "target_american": "+104",
+         "target_implied": 0.4902,
+         "fair_p": 0.47757,
+         "fair_decimal": 2.0939,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.02575
+        },
+        {
+         "market": "h2h",
+         "label": "Australia ML",
+         "name": "Australia",
+         "point": null,
+         "team": "Australia",
+         "target_price": 3.65,
+         "target_american": "+265",
+         "target_implied": 0.27397,
+         "fair_p": 0.25755,
+         "fair_decimal": 3.8827,
+         "fair_american": "+288",
+         "fair_source": "pinnacle",
+         "ev": -0.05993
+        },
+        {
+         "market": "spreads",
+         "label": "Australia +0.25",
+         "name": "Australia",
+         "point": 0.25,
+         "team": "Australia",
+         "target_price": 1.98,
+         "target_american": "-102",
+         "target_implied": 0.50505,
+         "fair_p": 0.46982,
+         "fair_decimal": 2.1285,
+         "fair_american": "+113",
+         "fair_source": "pinnacle",
+         "ev": -0.06976
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 Australia ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Australia +0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Australia ML \u00d7 Australia +0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.1384,
+       "p_naive": 0.05779,
+       "premium": 2.395,
+       "fair_decimal": 7.225,
+       "fair_american": "+623",
+       "offered_decimal_est": 6.629,
+       "offered_american_est": "+563",
+       "ev_at_offered": -0.08251,
+       "break_even_boost": 10.6,
+       "effective_legs": 2.08,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "f41aeac9a8343a84b4950f15ea25fba2",
+     "game": "Turkey vs USA",
+     "commence_time": "2026-06-26T02:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Turkey ML",
+         "name": "Turkey",
+         "point": null,
+         "team": "Turkey",
+         "target_price": 2.63,
+         "target_american": "+163",
+         "target_implied": 0.38023,
+         "fair_p": 0.37682,
+         "fair_decimal": 2.6538,
+         "fair_american": "+165",
+         "fair_source": "pinnacle",
+         "ev": -0.00896
+        },
+        {
+         "market": "spreads",
+         "label": "Turkey +0",
+         "name": "Turkey",
+         "point": 0.0,
+         "team": "Turkey",
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.51316,
+         "fair_decimal": 1.9487,
+         "fair_american": "-105",
+         "fair_source": "pinnacle",
+         "ev": -0.00961
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.5066,
+         "fair_decimal": 1.974,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.02227
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Turkey ML \u00d7 Turkey +0",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Turkey ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Turkey +0 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.2021,
+       "p_naive": 0.09796,
+       "premium": 2.063,
+       "fair_decimal": 4.948,
+       "fair_american": "+395",
+       "offered_decimal_est": 4.805,
+       "offered_american_est": "+380",
+       "ev_at_offered": -0.029,
+       "break_even_boost": 3.8,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.5066,
+         "fair_decimal": 1.974,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.02227
+        },
+        {
+         "market": "h2h",
+         "label": "USA ML",
+         "name": "USA",
+         "point": null,
+         "team": "USA",
+         "target_price": 2.63,
+         "target_american": "+163",
+         "target_implied": 0.38023,
+         "fair_p": 0.35812,
+         "fair_decimal": 2.7923,
+         "fair_american": "+179",
+         "fair_source": "pinnacle",
+         "ev": -0.05813
+        },
+        {
+         "market": "spreads",
+         "label": "USA +0",
+         "name": "USA",
+         "point": 0.0,
+         "team": "USA",
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.48684,
+         "fair_decimal": 2.0541,
+         "fair_american": "+105",
+         "fair_source": "pinnacle",
+         "ev": -0.06039
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 USA ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 USA +0",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "USA ML \u00d7 USA +0",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.19152,
+       "p_naive": 0.08832,
+       "premium": 2.168,
+       "fair_decimal": 5.221,
+       "fair_american": "+422",
+       "offered_decimal_est": 4.805,
+       "offered_american_est": "+380",
+       "ev_at_offered": -0.0798,
+       "break_even_boost": 11.0,
+       "effective_legs": 2.04,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "b86b4d60f773e9e3c46c00e9a6496e79",
+     "game": "Norway vs France",
+     "commence_time": "2026-06-26T19:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Norway ML",
+         "name": "Norway",
+         "point": null,
+         "team": "Norway",
+         "target_price": 4.4,
+         "target_american": "+340",
+         "target_implied": 0.22727,
+         "fair_p": 0.2248,
+         "fair_decimal": 4.4484,
+         "fair_american": "+345",
+         "fair_source": "pinnacle",
+         "ev": -0.01087
+        },
+        {
+         "market": "spreads",
+         "label": "Norway +0.5",
+         "name": "Norway",
+         "point": 0.5,
+         "team": "Norway",
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48158,
+         "fair_decimal": 2.0765,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.02721
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48021,
+         "fair_decimal": 2.0824,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.02997
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Norway ML \u00d7 Norway +0.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Norway ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Norway +0.5 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.12392,
+       "p_naive": 0.05199,
+       "premium": 2.384,
+       "fair_decimal": 8.069,
+       "fair_american": "+707",
+       "offered_decimal_est": 7.766,
+       "offered_american_est": "+677",
+       "ev_at_offered": -0.03763,
+       "break_even_boost": 4.5,
+       "effective_legs": 2.12,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 2.02,
+         "target_american": "+102",
+         "target_implied": 0.49505,
+         "fair_p": 0.48021,
+         "fair_decimal": 2.0824,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.02997
+        },
+        {
+         "market": "spreads",
+         "label": "France -0.5",
+         "name": "France",
+         "point": -0.5,
+         "team": "France",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.51842,
+         "fair_decimal": 1.9289,
+         "fair_american": "-108",
+         "fair_source": "pinnacle",
+         "ev": -0.04092
+        },
+        {
+         "market": "h2h",
+         "label": "France ML",
+         "name": "France",
+         "point": null,
+         "team": "France",
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.51102,
+         "fair_decimal": 1.9569,
+         "fair_american": "-105",
+         "fair_source": "pinnacle",
+         "ev": -0.0546
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 France -0.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 France ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "France -0.5 \u00d7 France ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.23679,
+       "p_naive": 0.12722,
+       "premium": 1.861,
+       "fair_decimal": 4.223,
+       "fair_american": "+322",
+       "offered_decimal_est": 3.898,
+       "offered_american_est": "+290",
+       "ev_at_offered": -0.07695,
+       "break_even_boost": 11.2,
+       "effective_legs": 2.1,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "dcff2e31c0bce001a4db5caaf4fa8822",
+     "game": "Uruguay vs Spain",
+     "commence_time": "2026-06-27T00:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Uruguay ML",
+         "name": "Uruguay",
+         "point": null,
+         "team": "Uruguay",
+         "target_price": 5.95,
+         "target_american": "+495",
+         "target_implied": 0.16807,
+         "fair_p": 0.18085,
+         "fair_decimal": 5.5295,
+         "fair_american": "+453",
+         "fair_source": "pinnacle",
+         "ev": 0.07605
+        },
+        {
+         "market": "spreads",
+         "label": "Uruguay +0.75",
+         "name": "Uruguay",
+         "point": 0.75,
+         "team": "Uruguay",
+         "target_price": 2.08,
+         "target_american": "+108",
+         "target_implied": 0.48077,
+         "fair_p": 0.4712,
+         "fair_decimal": 2.1222,
+         "fair_american": "+112",
+         "fair_source": "pinnacle",
+         "ev": -0.0199
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.5066,
+         "fair_decimal": 1.974,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.02227
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Uruguay ML \u00d7 Uruguay +0.75",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Uruguay ML \u00d7 Over 2.5",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Uruguay +0.75 \u00d7 Over 2.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.10635,
+       "p_naive": 0.04317,
+       "premium": 2.463,
+       "fair_decimal": 9.403,
+       "fair_american": "+840",
+       "offered_decimal_est": 9.863,
+       "offered_american_est": "+886",
+       "ev_at_offered": 0.0489,
+       "break_even_boost": -5.2,
+       "effective_legs": 2.14,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.5",
+         "name": "Over",
+         "point": 2.5,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.5066,
+         "fair_decimal": 1.974,
+         "fair_american": "-103",
+         "fair_source": "pinnacle",
+         "ev": -0.02227
+        },
+        {
+         "market": "spreads",
+         "label": "Spain -0.75",
+         "name": "Spain",
+         "point": -0.75,
+         "team": "Spain",
+         "target_price": 1.81,
+         "target_american": "-123",
+         "target_implied": 0.55249,
+         "fair_p": 0.5288,
+         "fair_decimal": 1.8911,
+         "fair_american": "-112",
+         "fair_source": "pinnacle",
+         "ev": -0.04288
+        },
+        {
+         "market": "h2h",
+         "label": "Spain ML",
+         "name": "Spain",
+         "point": null,
+         "team": "Spain",
+         "target_price": 1.62,
+         "target_american": "-161",
+         "target_implied": 0.61728,
+         "fair_p": 0.57849,
+         "fair_decimal": 1.7286,
+         "fair_american": "-137",
+         "fair_source": "pinnacle",
+         "ev": -0.06285
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.5 \u00d7 Spain -0.75",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.5 \u00d7 Spain ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Spain -0.75 \u00d7 Spain ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.26738,
+       "p_naive": 0.15497,
+       "premium": 1.725,
+       "fair_decimal": 3.74,
+       "fair_american": "+274",
+       "offered_decimal_est": 3.465,
+       "offered_american_est": "+246",
+       "ev_at_offered": -0.07355,
+       "break_even_boost": 11.2,
+       "effective_legs": 2.12,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "581691da05dcd75b5c6d3be91ee9d2ab",
+     "game": "New Zealand vs Belgium",
+     "commence_time": "2026-06-27T03:00:00Z",
+     "n_candidate_legs": 5,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.75",
+         "name": "Over",
+         "point": 2.75,
+         "team": null,
+         "target_price": 1.9,
+         "target_american": "-111",
+         "target_implied": 0.52632,
+         "fair_p": 0.52368,
+         "fair_decimal": 1.9095,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.005
+        },
+        {
+         "market": "spreads",
+         "label": "Belgium -1.5",
+         "name": "Belgium",
+         "point": -1.5,
+         "team": "Belgium",
+         "target_price": 1.91,
+         "target_american": "-110",
+         "target_implied": 0.52356,
+         "fair_p": 0.51969,
+         "fair_decimal": 1.9242,
+         "fair_american": "-108",
+         "fair_source": "pinnacle",
+         "ev": -0.0074
+        },
+        {
+         "market": "h2h",
+         "label": "Belgium ML",
+         "name": "Belgium",
+         "point": null,
+         "team": "Belgium",
+         "target_price": 1.28,
+         "target_american": "-357",
+         "target_implied": 0.78125,
+         "fair_p": 0.74209,
+         "fair_decimal": 1.3475,
+         "fair_american": "-288",
+         "fair_source": "pinnacle",
+         "ev": -0.05013
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.75 \u00d7 Belgium -1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.75 \u00d7 Belgium ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Belgium -1.5 \u00d7 Belgium ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.29249,
+       "p_naive": 0.20196,
+       "premium": 1.448,
+       "fair_decimal": 3.419,
+       "fair_american": "+242",
+       "offered_decimal_est": 3.361,
+       "offered_american_est": "+236",
+       "ev_at_offered": -0.01691,
+       "break_even_boost": 2.4,
+       "effective_legs": 2.31,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "3e3b5fa2b3c963e74cf044c60db0b573",
+     "game": "Egypt vs Iran",
+     "commence_time": "2026-06-27T03:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Iran +0.25",
+         "name": "Iran",
+         "point": 0.25,
+         "team": "Iran",
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.49474,
+         "fair_decimal": 2.0213,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.01547
+        },
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.97,
+         "target_american": "-103",
+         "target_implied": 0.50761,
+         "fair_p": 0.4934,
+         "fair_decimal": 2.0267,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.02799
+        },
+        {
+         "market": "h2h",
+         "label": "Iran ML",
+         "name": "Iran",
+         "point": null,
+         "team": "Iran",
+         "target_price": 3.6,
+         "target_american": "+260",
+         "target_implied": 0.27778,
+         "fair_p": 0.2641,
+         "fair_decimal": 3.7864,
+         "fair_american": "+279",
+         "fair_source": "pinnacle",
+         "ev": -0.04923
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Iran +0.25 \u00d7 Over 2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Iran +0.25 \u00d7 Iran ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2 \u00d7 Iran ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.14655,
+       "p_naive": 0.06447,
+       "premium": 2.273,
+       "fair_decimal": 6.824,
+       "fair_american": "+582",
+       "offered_decimal_est": 6.361,
+       "offered_american_est": "+536",
+       "ev_at_offered": -0.06782,
+       "break_even_boost": 8.6,
+       "effective_legs": 2.1,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2",
+         "name": "Over",
+         "point": 2.0,
+         "team": null,
+         "target_price": 1.97,
+         "target_american": "-103",
+         "target_implied": 0.50761,
+         "fair_p": 0.4934,
+         "fair_decimal": 2.0267,
+         "fair_american": "+103",
+         "fair_source": "pinnacle",
+         "ev": -0.02799
+        },
+        {
+         "market": "h2h",
+         "label": "Egypt ML",
+         "name": "Egypt",
+         "point": null,
+         "team": "Egypt",
+         "target_price": 2.28,
+         "target_american": "+128",
+         "target_implied": 0.4386,
+         "fair_p": 0.42233,
+         "fair_decimal": 2.3678,
+         "fair_american": "+137",
+         "fair_source": "pinnacle",
+         "ev": -0.03709
+        },
+        {
+         "market": "spreads",
+         "label": "Egypt -0.25",
+         "name": "Egypt",
+         "point": -0.25,
+         "team": "Egypt",
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.50526,
+         "fair_decimal": 1.9792,
+         "fair_american": "-102",
+         "fair_source": "pinnacle",
+         "ev": -0.05516
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2 \u00d7 Egypt ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2 \u00d7 Egypt -0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Egypt ML \u00d7 Egypt -0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.21321,
+       "p_naive": 0.10528,
+       "premium": 2.025,
+       "fair_decimal": 4.69,
+       "fair_american": "+369",
+       "offered_decimal_est": 4.363,
+       "offered_american_est": "+336",
+       "ev_at_offered": -0.0698,
+       "break_even_boost": 9.7,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "537c0997cd899394f47f16545b7068b2",
+     "game": "Croatia vs Ghana",
+     "commence_time": "2026-06-27T21:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Ghana ML",
+         "name": "Ghana",
+         "point": null,
+         "team": "Ghana",
+         "target_price": 6.0,
+         "target_american": "+500",
+         "target_implied": 0.16667,
+         "fair_p": 0.16945,
+         "fair_decimal": 5.9014,
+         "fair_american": "+490",
+         "fair_source": "pinnacle",
+         "ev": 0.0167
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.52895,
+         "fair_decimal": 1.8905,
+         "fair_american": "-112",
+         "fair_source": "pinnacle",
+         "ev": -0.02145
+        },
+        {
+         "market": "spreads",
+         "label": "Ghana +0.75",
+         "name": "Ghana",
+         "point": 0.75,
+         "team": "Ghana",
+         "target_price": 2.09,
+         "target_american": "+109",
+         "target_implied": 0.47847,
+         "fair_p": 0.46475,
+         "fair_decimal": 2.1517,
+         "fair_american": "+115",
+         "fair_source": "pinnacle",
+         "ev": -0.02867
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Ghana ML \u00d7 Over 2.25",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Ghana ML \u00d7 Ghana +0.75",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Ghana +0.75",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.10375,
+       "p_naive": 0.04166,
+       "premium": 2.491,
+       "fair_decimal": 9.639,
+       "fair_american": "+864",
+       "offered_decimal_est": 9.6,
+       "offered_american_est": "+860",
+       "ev_at_offered": -0.00407,
+       "break_even_boost": 0.5,
+       "effective_legs": 2.14,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.85,
+         "target_american": "-118",
+         "target_implied": 0.54054,
+         "fair_p": 0.52895,
+         "fair_decimal": 1.8905,
+         "fair_american": "-112",
+         "fair_source": "pinnacle",
+         "ev": -0.02145
+        },
+        {
+         "market": "h2h",
+         "label": "Croatia ML",
+         "name": "Croatia",
+         "point": null,
+         "team": "Croatia",
+         "target_price": 1.67,
+         "target_american": "-149",
+         "target_implied": 0.5988,
+         "fair_p": 0.58355,
+         "fair_decimal": 1.7137,
+         "fair_american": "-140",
+         "fair_source": "pinnacle",
+         "ev": -0.02548
+        },
+        {
+         "market": "spreads",
+         "label": "Croatia -0.75",
+         "name": "Croatia",
+         "point": -0.75,
+         "team": "Croatia",
+         "target_price": 1.8,
+         "target_american": "-125",
+         "target_implied": 0.55556,
+         "fair_p": 0.53525,
+         "fair_decimal": 1.8683,
+         "fair_american": "-115",
+         "fair_source": "pinnacle",
+         "ev": -0.03655
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 Croatia ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Croatia -0.75",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Croatia ML \u00d7 Croatia -0.75",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.28126,
+       "p_naive": 0.16521,
+       "premium": 1.702,
+       "fair_decimal": 3.555,
+       "fair_american": "+256",
+       "offered_decimal_est": 3.367,
+       "offered_american_est": "+237",
+       "ev_at_offered": -0.05309,
+       "break_even_boost": 8.0,
+       "effective_legs": 2.11,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "4be17c8e1ccfecb0f2a5ef79e045c415",
+     "game": "Panama vs England",
+     "commence_time": "2026-06-27T21:00:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Panama ML",
+         "name": "Panama",
+         "point": null,
+         "team": "Panama",
+         "target_price": 9.5,
+         "target_american": "+850",
+         "target_implied": 0.10526,
+         "fair_p": 0.12277,
+         "fair_decimal": 8.1453,
+         "fair_american": "+715",
+         "fair_source": "pinnacle",
+         "ev": 0.16632
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.75",
+         "name": "Over",
+         "point": 2.75,
+         "team": null,
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.53158,
+         "fair_decimal": 1.8812,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.02721
+        },
+        {
+         "market": "spreads",
+         "label": "Panama +1.5",
+         "name": "Panama",
+         "point": 1.5,
+         "team": "Panama",
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.47769,
+         "fair_decimal": 2.0934,
+         "fair_american": "+109",
+         "fair_source": "pinnacle",
+         "ev": -0.0494
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Panama ML \u00d7 Over 2.75",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Panama ML \u00d7 Panama +1.5",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.75 \u00d7 Panama +1.5",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.0771,
+       "p_naive": 0.03118,
+       "premium": 2.473,
+       "fair_decimal": 12.97,
+       "fair_american": "+1197",
+       "offered_decimal_est": 14.676,
+       "offered_american_est": "+1368",
+       "ev_at_offered": 0.1315,
+       "break_even_boost": -12.5,
+       "effective_legs": 2.22,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "England -1.5",
+         "name": "England",
+         "point": -1.5,
+         "team": "England",
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.52231,
+         "fair_decimal": 1.9146,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": -0.02328
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.75",
+         "name": "Over",
+         "point": 2.75,
+         "team": null,
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.53158,
+         "fair_decimal": 1.8812,
+         "fair_american": "-113",
+         "fair_source": "pinnacle",
+         "ev": -0.02721
+        },
+        {
+         "market": "h2h",
+         "label": "England ML",
+         "name": "England",
+         "point": null,
+         "team": "England",
+         "target_price": 1.31,
+         "target_american": "-323",
+         "target_implied": 0.76336,
+         "fair_p": 0.73179,
+         "fair_decimal": 1.3665,
+         "fair_american": "-273",
+         "fair_source": "pinnacle",
+         "ev": -0.04136
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "England -1.5 \u00d7 Over 2.75",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "England -1.5 \u00d7 England ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.75 \u00d7 England ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.29715,
+       "p_naive": 0.20318,
+       "premium": 1.462,
+       "fair_decimal": 3.365,
+       "fair_american": "+237",
+       "offered_decimal_est": 3.197,
+       "offered_american_est": "+220",
+       "ev_at_offered": -0.05006,
+       "break_even_boost": 7.7,
+       "effective_legs": 2.28,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "67ae5751c401a98409b8566ae4897069",
+     "game": "Colombia vs Portugal",
+     "commence_time": "2026-06-27T23:30:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Portugal ML",
+         "name": "Portugal",
+         "point": null,
+         "team": "Portugal",
+         "target_price": 2.2,
+         "target_american": "+120",
+         "target_implied": 0.45455,
+         "fair_p": 0.44228,
+         "fair_decimal": 2.261,
+         "fair_american": "+126",
+         "fair_source": "pinnacle",
+         "ev": -0.02699
+        },
+        {
+         "market": "spreads",
+         "label": "Portugal -0.25",
+         "name": "Portugal",
+         "point": -0.25,
+         "team": "Portugal",
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.51969,
+         "fair_decimal": 1.9242,
+         "fair_american": "-108",
+         "fair_source": "pinnacle",
+         "ev": -0.02819
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03532
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Portugal ML \u00d7 Portugal -0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Portugal ML \u00d7 Over 2.25",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Portugal -0.25 \u00d7 Over 2.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.23137,
+       "p_naive": 0.11857,
+       "premium": 1.951,
+       "fair_decimal": 4.322,
+       "fair_american": "+332",
+       "offered_decimal_est": 4.063,
+       "offered_american_est": "+306",
+       "ev_at_offered": -0.05984,
+       "break_even_boost": 8.4,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.87,
+         "target_american": "-115",
+         "target_implied": 0.53476,
+         "fair_p": 0.51587,
+         "fair_decimal": 1.9385,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.03532
+        },
+        {
+         "market": "spreads",
+         "label": "Colombia +0.25",
+         "name": "Colombia",
+         "point": 0.25,
+         "team": "Colombia",
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.48031,
+         "fair_decimal": 2.082,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.04417
+        },
+        {
+         "market": "h2h",
+         "label": "Colombia ML",
+         "name": "Colombia",
+         "point": null,
+         "team": "Colombia",
+         "target_price": 3.5,
+         "target_american": "+250",
+         "target_implied": 0.28571,
+         "fair_p": 0.27099,
+         "fair_decimal": 3.6902,
+         "fair_american": "+269",
+         "fair_source": "pinnacle",
+         "ev": -0.05154
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 Colombia +0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Colombia ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Colombia +0.25 \u00d7 Colombia ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.15498,
+       "p_naive": 0.06715,
+       "premium": 2.308,
+       "fair_decimal": 6.452,
+       "fair_american": "+545",
+       "offered_decimal_est": 5.937,
+       "offered_american_est": "+494",
+       "ev_at_offered": -0.07991,
+       "break_even_boost": 10.4,
+       "effective_legs": 2.07,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "13eab94a136b9c264ba974cf437a5f71",
+     "game": "DR Congo vs Uzbekistan",
+     "commence_time": "2026-06-27T23:30:00Z",
+     "n_candidate_legs": 6,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "h2h",
+         "label": "Uzbekistan ML",
+         "name": "Uzbekistan",
+         "point": null,
+         "team": "Uzbekistan",
+         "target_price": 3.3,
+         "target_american": "+230",
+         "target_implied": 0.30303,
+         "fair_p": 0.30764,
+         "fair_decimal": 3.2506,
+         "fair_american": "+225",
+         "fair_source": "pinnacle",
+         "ev": 0.01521
+        },
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 2.09,
+         "target_american": "+109",
+         "target_implied": 0.47847,
+         "fair_p": 0.48549,
+         "fair_decimal": 2.0598,
+         "fair_american": "+106",
+         "fair_source": "pinnacle",
+         "ev": 0.01467
+        },
+        {
+         "market": "spreads",
+         "label": "Uzbekistan +0.25",
+         "name": "Uzbekistan",
+         "point": 0.25,
+         "team": "Uzbekistan",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.51969,
+         "fair_decimal": 1.9242,
+         "fair_american": "-108",
+         "fair_source": "pinnacle",
+         "ev": -0.04898
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Uzbekistan ML \u00d7 Over 2.25",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Uzbekistan ML \u00d7 Uzbekistan +0.25",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Uzbekistan +0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.16586,
+       "p_naive": 0.07762,
+       "premium": 2.137,
+       "fair_decimal": 6.029,
+       "fair_american": "+503",
+       "offered_decimal_est": 6.14,
+       "offered_american_est": "+514",
+       "ev_at_offered": 0.0184,
+       "break_even_boost": -2.2,
+       "effective_legs": 2.11,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 2.09,
+         "target_american": "+109",
+         "target_implied": 0.47847,
+         "fair_p": 0.48549,
+         "fair_decimal": 2.0598,
+         "fair_american": "+106",
+         "fair_source": "pinnacle",
+         "ev": 0.01467
+        },
+        {
+         "market": "spreads",
+         "label": "DR Congo -0.25",
+         "name": "DR Congo",
+         "point": -0.25,
+         "team": "DR Congo",
+         "target_price": 2.04,
+         "target_american": "+104",
+         "target_implied": 0.4902,
+         "fair_p": 0.48031,
+         "fair_decimal": 2.082,
+         "fair_american": "+108",
+         "fair_source": "pinnacle",
+         "ev": -0.02016
+        },
+        {
+         "market": "h2h",
+         "label": "DR Congo ML",
+         "name": "DR Congo",
+         "point": null,
+         "team": "DR Congo",
+         "target_price": 2.36,
+         "target_american": "+136",
+         "target_implied": 0.42373,
+         "fair_p": 0.40974,
+         "fair_decimal": 2.4406,
+         "fair_american": "+144",
+         "fair_source": "pinnacle",
+         "ev": -0.03302
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 DR Congo -0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 DR Congo ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "DR Congo -0.25 \u00d7 DR Congo ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.20191,
+       "p_naive": 0.09555,
+       "premium": 2.113,
+       "fair_decimal": 4.953,
+       "fair_american": "+395",
+       "offered_decimal_est": 4.868,
+       "offered_american_est": "+387",
+       "ev_at_offered": -0.01717,
+       "break_even_boost": 2.2,
+       "effective_legs": 2.04,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "8756200e539155e571557c4f2e0d7f05",
+     "game": "Algeria vs Austria",
+     "commence_time": "2026-06-28T02:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.52243,
+         "fair_decimal": 1.9141,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": 0.00828
+        },
+        {
+         "market": "spreads",
+         "label": "Algeria +0.25",
+         "name": "Algeria",
+         "point": 0.25,
+         "team": "Algeria",
+         "target_price": 2.04,
+         "target_american": "+104",
+         "target_implied": 0.4902,
+         "fair_p": 0.47507,
+         "fair_decimal": 2.105,
+         "fair_american": "+110",
+         "fair_source": "pinnacle",
+         "ev": -0.03087
+        },
+        {
+         "market": "h2h",
+         "label": "Algeria ML",
+         "name": "Algeria",
+         "point": null,
+         "team": "Algeria",
+         "target_price": 3.85,
+         "target_american": "+285",
+         "target_implied": 0.25974,
+         "fair_p": 0.25061,
+         "fair_decimal": 3.9902,
+         "fair_american": "+299",
+         "fair_source": "pinnacle",
+         "ev": -0.03513
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 Algeria +0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Algeria ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Algeria +0.25 \u00d7 Algeria ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.14626,
+       "p_naive": 0.0622,
+       "premium": 2.351,
+       "fair_decimal": 6.837,
+       "fair_american": "+584",
+       "offered_decimal_est": 6.646,
+       "offered_american_est": "+565",
+       "ev_at_offered": -0.02794,
+       "break_even_boost": 3.4,
+       "effective_legs": 2.08,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 2.25",
+         "name": "Over",
+         "point": 2.25,
+         "team": null,
+         "target_price": 1.93,
+         "target_american": "-108",
+         "target_implied": 0.51813,
+         "fair_p": 0.52243,
+         "fair_decimal": 1.9141,
+         "fair_american": "-109",
+         "fair_source": "pinnacle",
+         "ev": 0.00828
+        },
+        {
+         "market": "spreads",
+         "label": "Austria -0.25",
+         "name": "Austria",
+         "point": -0.25,
+         "team": "Austria",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.52493,
+         "fair_decimal": 1.905,
+         "fair_american": "-110",
+         "fair_source": "pinnacle",
+         "ev": -0.03937
+        },
+        {
+         "market": "h2h",
+         "label": "Austria ML",
+         "name": "Austria",
+         "point": null,
+         "team": "Austria",
+         "target_price": 2.18,
+         "target_american": "+118",
+         "target_implied": 0.45872,
+         "fair_p": 0.44005,
+         "fair_decimal": 2.2725,
+         "fair_american": "+127",
+         "fair_source": "pinnacle",
+         "ev": -0.0407
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 2.25 \u00d7 Austria -0.25",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 2.25 \u00d7 Austria ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Austria -0.25 \u00d7 Austria ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.23409,
+       "p_naive": 0.12068,
+       "premium": 1.94,
+       "fair_decimal": 4.272,
+       "fair_american": "+327",
+       "offered_decimal_est": 4.119,
+       "offered_american_est": "+312",
+       "ev_at_offered": -0.03567,
+       "break_even_boost": 4.9,
+       "effective_legs": 2.06,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    },
+    {
+     "id": "54697f453437ab26276d773be1d72e9b",
+     "game": "Jordan vs Argentina",
+     "commence_time": "2026-06-28T02:00:00Z",
+     "n_candidate_legs": 7,
+     "sgps": [
+      {
+       "legs": [
+        {
+         "market": "spreads",
+         "label": "Argentina -2",
+         "name": "Argentina",
+         "point": -2.0,
+         "team": "Argentina",
+         "target_price": 2.05,
+         "target_american": "+105",
+         "target_implied": 0.4878,
+         "fair_p": 0.48285,
+         "fair_decimal": 2.071,
+         "fair_american": "+107",
+         "fair_source": "pinnacle",
+         "ev": -0.01016
+        },
+        {
+         "market": "totals",
+         "label": "Over 3",
+         "name": "Over",
+         "point": 3.0,
+         "team": null,
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.49602,
+         "fair_decimal": 2.016,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.01292
+        },
+        {
+         "market": "h2h",
+         "label": "Argentina ML",
+         "name": "Argentina",
+         "point": null,
+         "team": "Argentina",
+         "target_price": 1.21,
+         "target_american": "-476",
+         "target_implied": 0.82645,
+         "fair_p": 0.80083,
+         "fair_decimal": 1.2487,
+         "fair_american": "-402",
+         "fair_source": "pinnacle",
+         "ev": -0.031
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Argentina -2 \u00d7 Over 3",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Argentina -2 \u00d7 Argentina ML",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        },
+        {
+         "legs": "Over 3 \u00d7 Argentina ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        }
+       ],
+       "p_fair": 0.26275,
+       "p_naive": 0.1918,
+       "premium": 1.37,
+       "fair_decimal": 3.806,
+       "fair_american": "+281",
+       "offered_decimal_est": 3.722,
+       "offered_american_est": "+272",
+       "ev_at_offered": -0.02203,
+       "break_even_boost": 3.1,
+       "effective_legs": 2.43,
+       "low_diversification": false,
+       "psd_repaired": false
+      },
+      {
+       "legs": [
+        {
+         "market": "totals",
+         "label": "Over 3",
+         "name": "Over",
+         "point": 3.0,
+         "team": null,
+         "target_price": 1.99,
+         "target_american": "-101",
+         "target_implied": 0.50251,
+         "fair_p": 0.49602,
+         "fair_decimal": 2.016,
+         "fair_american": "+102",
+         "fair_source": "pinnacle",
+         "ev": -0.01292
+        },
+        {
+         "market": "h2h",
+         "label": "Jordan ML",
+         "name": "Jordan",
+         "point": null,
+         "team": "Jordan",
+         "target_price": 14.0,
+         "target_american": "+1300",
+         "target_implied": 0.07143,
+         "fair_p": 0.06943,
+         "fair_decimal": 14.4032,
+         "fair_american": "+1340",
+         "fair_source": "pinnacle",
+         "ev": -0.02799
+        },
+        {
+         "market": "spreads",
+         "label": "Jordan +2",
+         "name": "Jordan",
+         "point": 2.0,
+         "team": "Jordan",
+         "target_price": 1.83,
+         "target_american": "-120",
+         "target_implied": 0.54645,
+         "fair_p": 0.51715,
+         "fair_decimal": 1.9337,
+         "fair_american": "-107",
+         "fair_source": "pinnacle",
+         "ev": -0.05361
+        }
+       ],
+       "pairs": [
+        {
+         "legs": "Over 3 \u00d7 Jordan ML",
+         "relation": "ml_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Over 3 \u00d7 Jordan +2",
+         "relation": "spread_vs_total",
+         "rho": 0.15
+        },
+        {
+         "legs": "Jordan ML \u00d7 Jordan +2",
+         "relation": "same_team_ml_spread",
+         "rho": 0.9
+        }
+       ],
+       "p_fair": 0.04239,
+       "p_naive": 0.01781,
+       "premium": 2.38,
+       "fair_decimal": 23.591,
+       "fair_american": "+2259",
+       "offered_decimal_est": 22.722,
+       "offered_american_est": "+2172",
+       "ev_at_offered": -0.03682,
+       "break_even_boost": 4.0,
+       "effective_legs": 2.35,
+       "low_diversification": false,
+       "psd_repaired": false
+      }
+     ]
+    }
+   ],
+   "n_sgps": 56
+  }
+ },
+ "last_updated_sport": "soccer"
+}

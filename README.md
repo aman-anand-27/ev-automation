@@ -1,5 +1,12 @@
 # EV Automation
 
+Two on-demand tools share this repo (and one Odds API free-tier budget):
+
+- **Low-Hold Dashboard** (below) — DK×Novig two-way hold scanner.
+- **[Sharp SGP Finder](README_SGP_FINDER.md)** — boosted 3-leg SGPs vs sharp
+  fair value (Pinnacle + exchanges), Gaussian-copula correlation, break-even
+  boost ranking. Dashboard at `…/sgp/`; trigger via Actions → Sharp SGP Finder.
+
 ## Low-Hold Dashboard
 
 A personal CNO replacement. Fetches DraftKings + Novig odds via [The Odds API](https://the-odds-api.com), computes two-way hold for every DK×Novig pair, and publishes a dashboard to GitHub Pages.

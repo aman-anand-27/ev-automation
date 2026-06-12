@@ -1,0 +1,135 @@
+# Sharp SGP Finder configuration (FREE Odds API tier, game-level markets only).
+# Empirical baseline: live free-key probe on 2026-06-12 (scripts/probe_free_tier.py).
+
+odds_api:
+  base_url: https://api.the-odds-api.com/v4
+  oddsFormat: decimal
+
+# --sport CLI aliases. ONE sport per run (credit discipline; never fetch all).
+sports:
+  mlb: baseball_mlb
+  nba: basketball_nba
+  soccer: soccer_fifa_world_cup   # in season 2026-06 (World Cup). Override any
+                                  # alias at run time with --sport-key.
+
+featured_markets: [h2h, spreads, totals]
+
+target_books:
+  # Priority order — the first book that actually returns enough featured
+  # markets becomes the run's target. bet365 confirmed ABSENT on the free key
+  # (probe 2026-06-12, regions uk/eu/au, all sports); it stays first so a plan
+  # upgrade or API change picks it up automatically. Until then the resolved
+  # book is a PROXY for bet365 pricing — the dashboard and log flag this.
+  priority: [bet365, sport888, williamhill, betonlineag, gtbets]
+  labels:
+    bet365: bet365
+    sport888: 888sport
+    williamhill: William Hill
+    betonlineag: BetOnline
+    gtbets: GTbets
+  # A target book must return at least this many distinct featured markets —
+  # SGPs are exactly 3 legs across 3 DISTINCT markets.
+  min_distinct_markets: 3
+  region_priority:
+    bet365: [uk, eu, au]          # per spec
+    default: [eu, uk]
+
+sharp_books:
+  # Fair-value anchors — sharp/line-setting books and exchanges ONLY, never
+  # retail. Pinnacle is the primary anchor; exchanges form the fallback
+  # consensus (median of devigged probs) when Pinnacle lacks a line.
+  # Probe 2026-06-12: pinnacle=eu only; matchbook=uk+eu (full featured);
+  # betfair_ex_*: h2h mostly; smarkets=uk. circasports & bookmaker/betcris do
+  # NOT exist on the free key.
+  anchor: pinnacle
+  exchanges: [matchbook, betfair_ex_eu, betfair_ex_uk, smarkets, betfair_ex_au]
+  labels:
+    pinnacle: Pinnacle
+    matchbook: Matchbook
+    betfair_ex_eu: Betfair Ex (EU)
+    betfair_ex_uk: Betfair Ex (UK)
+    betfair_ex_au: Betfair Ex (AU)
+    smarkets: Smarkets
+
+regions:
+  # Global scan order: cheapest cover first. eu alone serves Pinnacle +
+  # Matchbook + 888sport/BetOnline → a one-region run costs 3 credits.
+  # Widening to uk/au only happens when target or anchor is missing.
+  scan_order: [eu, uk, au]
+  # Set to a book key (e.g. bet365) to keep scanning regions until that exact
+  # book is found, instead of stopping at the first acceptable target.
+  require_target: null
+
+extras:
+  # Per-event additional markets. Free-key reality: only Pinnacle (+ a few
+  # stragglers) returns these — no target-side extras exist — so their job is
+  # widening Pinnacle's line pool to rescue target legs whose main line
+  # mismatches Pinnacle's main line. Each fetched event costs
+  # (markets returned × regions); the run prints the estimate first.
+  enabled: true
+  markets:
+    baseball_mlb: [alternate_spreads, alternate_totals, team_totals]
+    basketball_nba: [alternate_spreads, alternate_totals, team_totals]
+    soccer: [alternate_totals, alternate_spreads, btts, team_totals]
+  region: eu                      # Pinnacle's region (probe-confirmed)
+  max_credits: 12                 # hard per-run cap on extras spend
+  window_hours: 12                # only events starting within this window
+
+devig:
+  method: multiplicative          # or: shin
+
+legs:
+  # Keep mildly -EV legs — the boost can rescue them.
+  min_leg_ev: -0.08
+  top_k_per_game: 8
+
+sgp:
+  legs_per_sgp: 3                 # bet365 boosted SGPs are ALWAYS exactly 3 legs
+  exclude_pair_rho_below: -0.10   # any pair this contradictory kills the triple
+  low_diversification_below: 2.0  # effective-legs threshold for the redundancy flag
+  max_per_game: 6
+  max_total: 60                   # best SGPs kept per run (World Cup slates are huge)
+  min_fair_prob: 0.02             # skip near-impossible triples (fair > +4900)
+
+boost:
+  default_boost_pct: 50           # UI presets: 30 / 50 / 100
+  default_min_odds: "+100"        # UI presets: +100 / +300 (American)
+  gate_on_boosted: false          # min-odds gate keys on the PRE-boost price
+
+# ── Gaussian-copula pairwise correlation library ─────────────────────────────
+# Heuristic industry-standard priors over LATENT correlations — no play-by-play
+# data behind these, they are tunable knobs. Keys are relation names produced
+# by correlation.classify; values are ρ for the POSITIVE pole of each leg
+# (Over / Yes). Complement sides flip the sign exactly (Gaussian latent of
+# "Under hits" is the negation of "Over hits"). Lookup: sport section first,
+# then `default` section, then the `default` scalar.
+correlation:
+  default:
+    same_team_ml_spread: 0.85   # near-redundant: a favorite covering usually implies winning
+    opp_team_ml_spread: -0.85   # contradictory cross-team combo → excluded by threshold
+    ml_vs_ml: -0.95             # both teams to win — impossible; safety net (same market anyway)
+    ml_vs_total: 0.10           # winning mildly co-moves with game scoring; kept small
+    spread_vs_total: 0.12       # covers tend to come with scoring; kept small
+    draw_vs_ml: -0.90           # draw excludes either side winning (same market anyway)
+    draw_vs_spread: -0.80       # draw contradicts a ±0.5 handicap cover
+    draw_vs_total: -0.20        # draws skew low-scoring (0-0 / 1-1)
+    tt_vs_same_ml: 0.45         # a team scoring drives its own win chance — best free-tier combo
+    tt_vs_opp_ml: -0.30         # your scoring hurts the opponent's win chance
+    tt_vs_same_spread: 0.45     # as tt_vs_same_ml, vs that team's handicap
+    tt_vs_opp_spread: -0.30
+    tt_vs_total: 0.55           # team total is half of the game total
+    btts_vs_total: 0.55         # both-teams-score strongly implies goals
+    btts_vs_ml: 0.05            # BTTS vs a one-sided win — weak, structured carefully
+    btts_vs_spread: 0.0         # no strong prior vs handicap cover
+    btts_vs_draw: 0.10          # scoring draws (1-1, 2-2) mildly favour BTTS
+    btts_vs_tt: 0.45            # BTTS implies that team finds the net
+    tt_vs_tt: 0.10              # opposite-team totals weakly couple via game pace
+    default: 0.0
+  baseball_mlb:
+    ml_vs_total: 0.05           # MLB win/total link weaker than NBA pace link
+    spread_vs_total: 0.15       # run-line covers need runs
+  basketball_nba: {}            # defaults fit NBA
+  soccer:
+    same_team_ml_spread: 0.90   # a -0.5 Asian handicap IS the win, near enough
+    ml_vs_total: 0.15           # favorite wins often come with goals
+    spread_vs_total: 0.15

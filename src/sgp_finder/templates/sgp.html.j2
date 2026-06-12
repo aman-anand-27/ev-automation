@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharp SGP Finder</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2128;
+  --border: #21262d;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --red: #f85149;
+  --orange: #e3712a;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, ui-sans-serif, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: var(--sans); font-size: 13px; line-height: 1.5;
+  padding: 1rem 1.25rem 4rem;
+}
+a { color: var(--accent); }
+h1 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+
+.banner {
+  background: rgba(227, 113, 42, 0.08); border: 1px solid rgba(227, 113, 42, 0.45);
+  color: var(--text); border-radius: 8px; padding: 0.55rem 0.9rem;
+  font-size: 0.78rem; margin: 0.6rem 0 1rem;
+}
+.banner b { color: var(--orange); }
+
+.meta-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.35em;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.1em 0.65em; font-size: 0.72rem; color: var(--muted);
+}
+.chip b { color: var(--text); font-weight: 600; }
+.chip .proxy { color: var(--orange); font-weight: 700; }
+
+/* ── Controls ─────────────────────────────────────────────────── */
+.controls {
+  display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: flex-end;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.7rem 1rem; margin-bottom: 1.1rem;
+  position: sticky; top: 0; z-index: 5;
+}
+.control-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.control-label { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.seg { display: inline-flex; gap: 0.25rem; align-items: center; }
+.seg button {
+  background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+  border-radius: 6px; padding: 0.22em 0.7em; font-size: 0.78rem; cursor: pointer;
+  font-family: var(--mono);
+}
+.seg button.active { background: rgba(88, 166, 255, 0.15); border-color: var(--accent); color: var(--accent); }
+.seg input[type=number], .seg input[type=text] {
+  width: 5.2em; background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 0.22em 0.45em; font-family: var(--mono); font-size: 0.78rem;
+}
+.seg input.invalid { border-color: var(--red); }
+.check { display: flex; gap: 0.35em; align-items: center; font-size: 0.75rem; color: var(--muted); cursor: pointer; }
+
+/* ── Cards ────────────────────────────────────────────────────── */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 0.9rem; }
+.sgp-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.sgp-card.below-min { opacity: 0.45; }
+.sgp-card.below-min .qual-badge { background: var(--border); color: var(--muted); }
+.sgp-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem;
+  padding: 0.5rem 0.85rem; background: var(--surface2); border-bottom: 1px solid var(--border);
+}
+.sgp-game { font-weight: 600; font-size: 0.82rem; }
+.sgp-time { color: var(--muted); font-size: 0.72rem; white-space: nowrap; }
+.legs { width: 100%; border-collapse: collapse; }
+.legs td, .legs th {
+  padding: 0.28rem 0.85rem; border-bottom: 1px solid var(--border);
+  font-size: 12px; text-align: left; white-space: nowrap;
+}
+.legs th { color: var(--muted); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; background: var(--surface2); }
+.legs td.num, .metrics .num { font-family: var(--mono); }
+.legs .src { color: var(--muted); font-size: 0.68rem; }
+.metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem 0.8rem;
+  padding: 0.6rem 0.85rem;
+}
+.metric .k { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.metric .v { font-family: var(--mono); font-size: 0.86rem; }
+.metric .sub { color: var(--muted); font-size: 0.7rem; font-family: var(--mono); }
+.pos { color: var(--green); }
+.neg { color: var(--red); }
+.warn { color: var(--yellow); }
+.qual-badge {
+  font-size: 0.66rem; font-weight: 700; border-radius: 10px; padding: 0.08em 0.6em;
+  background: rgba(63, 185, 80, 0.15); color: var(--green); white-space: nowrap;
+}
+.flags { padding: 0 0.85rem 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.flag {
+  font-size: 0.66rem; border-radius: 10px; padding: 0.08em 0.6em;
+  background: rgba(210, 153, 34, 0.12); color: var(--yellow); border: 1px solid rgba(210, 153, 34, 0.35);
+}
+.pairs { padding: 0 0.85rem 0.6rem; color: var(--muted); font-size: 0.68rem; }
+.pairs span { font-family: var(--mono); }
+.override {
+  display: flex; gap: 0.4rem; align-items: center; padding: 0.45rem 0.85rem;
+  border-top: 1px solid var(--border); background: var(--surface2);
+  font-size: 0.7rem; color: var(--muted);
+}
+.override input {
+  width: 5.5em; background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 0.15em 0.4em; font-family: var(--mono); font-size: 0.74rem;
+}
+.override input.invalid { border-color: var(--red); }
+.notes { margin: 0.4rem 0 0.9rem; }
+.notes summary { cursor: pointer; color: var(--muted); font-size: 0.74rem; }
+.notes pre {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.6rem 0.9rem; font-size: 0.72rem; white-space: pre-wrap; margin-top: 0.4rem;
+}
+.empty { color: var(--muted); font-style: italic; padding: 1rem 0; }
+.section-hide { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 Sharp SGP Finder <span style="color:var(--muted);font-weight:400">— boosted 3-leg SGPs vs sharp fair value</span></h1>
+  <div class="banner">
+    <b>Estimates, not quotes.</b> The offered SGP price is modeled (copula over the book's
+    own leg prices), not read from the book — paste the real price per card to override.
+    You must still verify each SGP is actually <b>buildable on bet365</b> (SGP-eligibility
+    rules are unknown to this tool). bet365 itself does not return on the free API key, so
+    legs are priced from the <b>proxy book</b> shown per sport. Correlations are heuristic
+    priors (tunable in <span style="font-family:var(--mono)">config/sgp.yaml</span>).
+  </div>
+</header>
+
+<div class="controls">
+  <div class="control-group">
+    <div class="control-label">Sport</div>
+    <div class="seg" id="sport-seg">
+      {% for alias in sports %}
+      <button data-sport="{{ alias }}">{{ alias|upper }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="control-label">Profit boost %</div>
+    <div class="seg" id="boost-seg">
+      <button data-boost="30">30</button>
+      <button data-boost="50">50</button>
+      <button data-boost="100">100</button>
+      <input type="number" id="boost-input" min="0" max="500" step="5"
+             value="{{ boost_defaults.default_boost_pct }}">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="control-label">Boost min odds (American)</div>
+    <div class="seg" id="minodds-seg">
+      <button data-minodds="+100">+100</button>
+      <button data-minodds="+300">+300</button>
+      <input type="text" id="minodds-input" value="{{ boost_defaults.default_min_odds }}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="check"><input type="checkbox" id="gate-boosted"
+      {{ "checked" if boost_defaults.gate_on_boosted }}> min-odds gate on boosted price</label>
+    <label class="check"><input type="checkbox" id="hide-nonqual"> hide non-qualifying</label>
+  </div>
+</div>
+
+{% for alias, s in sports.items() %}
+<section class="sport-section" data-sport="{{ alias }}">
+  <div class="meta-chips">
+    <span class="chip">updated <b>{{ s.generated_at }}</b></span>
+    <span class="chip">target <b>{{ s.target_label }}</b>
+      {% if s.target_is_proxy %}<span class="proxy">PROXY for bet365</span>{% endif %}
+      ({{ s.target_regions|join(",") }})</span>
+    <span class="chip">anchors
+      {% for b, regs in s.anchors.items() %}<b>{{ b }}</b>&nbsp;({{ regs|join(",") }}){{ "," if not loop.last }} {% endfor %}
+    </span>
+    <span class="chip">regions scanned <b>{{ s.regions_scanned|join(" → ") }}</b></span>
+    <span class="chip">de-vig <b>{{ s.devig_method }}</b></span>
+    <span class="chip">credits ≈<b>{{ s.credits_est }}</b></span>
+    <span class="chip"><b>{{ s.n_sgps }}</b> SGPs / {{ s.games|length }} games</span>
+  </div>
+  <details class="notes"><summary>run log</summary><pre>{% for n in s.notes %}{{ n }}
+{% endfor %}</pre></details>
+
+  {% if not s.games %}
+  <div class="empty">No qualifying SGPs this run.</div>
+  {% endif %}
+
+  <div class="cards">
+    {% for blk in s.games %}{% for sgp in blk.sgps %}
+    <article class="sgp-card"
+             data-pfair="{{ sgp.p_fair }}"
+             data-offered="{{ sgp.offered_decimal_est }}">
+      <div class="sgp-head">
+        <div>
+          <div class="sgp-game">{{ blk.game }}</div>
+          <div class="sgp-time">{{ blk.commence_time|to_et }}</div>
+        </div>
+        <span class="qual-badge">QUALIFIES</span>
+      </div>
+      <table class="legs">
+        <tr><th>Leg</th><th>{{ s.target_label }}</th><th>Sharp fair</th><th>Leg EV</th></tr>
+        {% for leg in sgp.legs %}
+        <tr>
+          <td>{{ leg.label }}<br><span class="src">{{ leg.market }} · fair via {{ leg.fair_source }}</span></td>
+          <td class="num">{{ leg.target_american }}</td>
+          <td class="num">{{ leg.fair_american }} <span class="src">({{ "%.1f"|format(leg.fair_p * 100) }}%)</span></td>
+          <td class="num {{ "pos" if leg.ev >= 0 else "neg" }}">{{ "%+.1f"|format(leg.ev * 100) }}%</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <div class="metrics">
+        <div class="metric"><div class="k">Fair joint (copula)</div>
+          <div class="v">{{ "%.1f"|format(sgp.p_fair * 100) }}%</div>
+          <div class="sub">naive {{ "%.1f"|format(sgp.p_naive * 100) }}% · ×{{ sgp.premium }}</div></div>
+        <div class="metric"><div class="k">Fair SGP odds</div>
+          <div class="v">{{ sgp.fair_american }}</div>
+          <div class="sub">{{ sgp.fair_decimal }} dec</div></div>
+        <div class="metric"><div class="k">Offered (est)</div>
+          <div class="v offered-disp">{{ sgp.offered_american_est }}</div>
+          <div class="sub offered-sub">{{ sgp.offered_decimal_est }} dec · model est</div></div>
+        <div class="metric"><div class="k">Boosted odds</div>
+          <div class="v boosted-odds">—</div>
+          <div class="sub boosted-sub"></div></div>
+        <div class="metric"><div class="k">EV @ your boost</div>
+          <div class="v ev-val">—</div></div>
+        <div class="metric"><div class="k">Break-even boost</div>
+          <div class="v be-val">—</div>
+          <div class="sub margin-sub"></div></div>
+      </div>
+      <div class="flags">
+        <span class="flag" title="Effective independent legs — 3 is fully diversified, 1 is one real bet">eff legs {{ sgp.effective_legs }}</span>
+        {% if sgp.low_diversification %}<span class="flag">⚠ low diversification — near-redundant legs</span>{% endif %}
+        {% if sgp.psd_repaired %}<span class="flag">ρ matrix repaired (PSD)</span>{% endif %}
+      </div>
+      <div class="pairs">
+        {% for p in sgp.pairs %}<div>{{ p.legs }} — {{ p.relation }} <span>ρ={{ p.rho }}</span></div>{% endfor %}
+      </div>
+      <div class="override">
+        real SGP price <input type="text" class="override-input" placeholder="+650">
+        <span>paste the book’s actual price (American) to replace the estimate</span>
+      </div>
+    </article>
+    {% endfor %}{% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<script>
+const DEFAULTS = {
+  boost: Number("{{ boost_defaults.default_boost_pct }}"),
+  minOdds: "{{ boost_defaults.default_min_odds }}",
+};
+const state = {
+  sport: "{{ default_sport }}",
+  boost: DEFAULTS.boost,
+  minOdds: DEFAULTS.minOdds,
+  gateOnBoosted: document.getElementById("gate-boosted").checked,
+  hideNonQual: false,
+};
+
+function am2dec(s) {
+  if (typeof s === "number") s = String(s);
+  s = (s || "").trim().replace(/^\+/, "");
+  const a = parseFloat(s);
+  if (!isFinite(a) || Math.abs(a) < 100) return null; // American odds are ±100+
+  return a > 0 ? 1 + a / 100 : 1 + 100 / Math.abs(a);
+}
+function dec2am(d) {
+  if (d >= 2) return "+" + Math.round((d - 1) * 100);
+  if (d <= 1) return "N/A";
+  return String(Math.round(-100 / (d - 1)));
+}
+const fmtPct = (x, signed) =>
+  (signed && x >= 0 ? "+" : "") + (x * 100).toFixed(1) + "%";
+
+function recomputeCard(card) {
+  const p = parseFloat(card.dataset.pfair);
+  const est = parseFloat(card.dataset.offered);
+  const ovEl = card.querySelector(".override-input");
+  let offered = est, usingOverride = false;
+  const ovRaw = ovEl.value.trim();
+  if (ovRaw) {
+    const ov = am2dec(ovRaw);
+    if (ov === null) { ovEl.classList.add("invalid"); }
+    else { ovEl.classList.remove("invalid"); offered = ov; usingOverride = true; }
+  } else ovEl.classList.remove("invalid");
+
+  card.querySelector(".offered-disp").textContent = dec2am(offered);
+  card.querySelector(".offered-sub").textContent =
+    offered.toFixed(3) + " dec · " + (usingOverride ? "YOUR PRICE" : "model est");
+
+  const boosted = 1 + (offered - 1) * (1 + state.boost / 100);
+  card.querySelector(".boosted-odds").textContent = dec2am(boosted);
+  card.querySelector(".boosted-sub").textContent =
+    boosted.toFixed(3) + " dec @ +" + state.boost + "%";
+
+  const evb = p * (boosted - 1) - (1 - p);
+  const evEl = card.querySelector(".ev-val");
+  evEl.textContent = fmtPct(evb, true);
+  evEl.className = "v ev-val " + (evb >= 0 ? "pos" : "neg");
+
+  const be = offered > 1 ? 100 * ((1 / p - 1) / (offered - 1) - 1) : null;
+  const beEl = card.querySelector(".be-val");
+  const marginEl = card.querySelector(".margin-sub");
+  if (be === null) { beEl.textContent = "—"; marginEl.textContent = ""; }
+  else {
+    beEl.textContent = (be <= 0 ? "+EV unboosted" : "+" + be.toFixed(1) + "%");
+    beEl.className = "v be-val " + (state.boost >= be ? "pos" : "neg");
+    const margin = state.boost - be;
+    marginEl.textContent = "need " + (be <= 0 ? "0" : "+" + be.toFixed(0)) +
+      "%, you have +" + state.boost + "% (" + (margin >= 0 ? "+" : "") +
+      margin.toFixed(0) + "pp)";
+  }
+
+  const gatePrice = state.gateOnBoosted ? boosted : offered;
+  const minDec = am2dec(state.minOdds);
+  const qualifies = minDec === null ? true : gatePrice >= minDec;
+  card.classList.toggle("below-min", !qualifies);
+  card.querySelector(".qual-badge").textContent =
+    qualifies ? "QUALIFIES" : "BELOW MIN ODDS";
+  card.style.display = (!qualifies && state.hideNonQual) ? "none" : "";
+  card._sortEv = qualifies ? evb : -1e9 + evb; // non-qualifying sink to bottom
+}
+
+function recompute() {
+  document.querySelectorAll(".sport-section").forEach(sec => {
+    sec.classList.toggle("section-hide", sec.dataset.sport !== state.sport);
+  });
+  const active = document.querySelector(
+    `.sport-section[data-sport="${state.sport}"]`);
+  if (!active) return;
+  const cards = Array.from(active.querySelectorAll(".sgp-card"));
+  cards.forEach(recomputeCard);
+  // qualifying first, sorted by EV at the chosen boost
+  const grid = active.querySelector(".cards");
+  if (grid) cards.sort((a, b) => b._sortEv - a._sortEv).forEach(c => grid.appendChild(c));
+  document.querySelectorAll("#sport-seg button").forEach(b =>
+    b.classList.toggle("active", b.dataset.sport === state.sport));
+  document.querySelectorAll("#boost-seg button").forEach(b =>
+    b.classList.toggle("active", Number(b.dataset.boost) === state.boost));
+  document.querySelectorAll("#minodds-seg button").forEach(b =>
+    b.classList.toggle("active", b.dataset.minodds === state.minOdds));
+}
+
+document.getElementById("sport-seg").addEventListener("click", e => {
+  if (e.target.dataset.sport) { state.sport = e.target.dataset.sport; recompute(); }
+});
+document.getElementById("boost-seg").addEventListener("click", e => {
+  if (e.target.dataset.boost) {
+    state.boost = Number(e.target.dataset.boost);
+    document.getElementById("boost-input").value = state.boost;
+    recompute();
+  }
+});
+document.getElementById("boost-input").addEventListener("input", e => {
+  const v = parseFloat(e.target.value);
+  if (isFinite(v) && v >= 0) { state.boost = v; recompute(); }
+});
+document.getElementById("minodds-seg").addEventListener("click", e => {
+  if (e.target.dataset.minodds) {
+    state.minOdds = e.target.dataset.minodds;
+    document.getElementById("minodds-input").value = state.minOdds;
+    document.getElementById("minodds-input").classList.remove("invalid");
+    recompute();
+  }
+});
+document.getElementById("minodds-input").addEventListener("input", e => {
+  const ok = am2dec(e.target.value) !== null;
+  e.target.classList.toggle("invalid", !ok);
+  if (ok) { state.minOdds = e.target.value.trim(); recompute(); }
+});
+document.getElementById("gate-boosted").addEventListener("change", e => {
+  state.gateOnBoosted = e.target.checked; recompute();
+});
+document.getElementById("hide-nonqual").addEventListener("change", e => {
+  state.hideNonQual = e.target.checked; recompute();
+});
+document.querySelectorAll(".override-input").forEach(inp =>
+  inp.addEventListener("input", recompute));
+
+recompute();
+</script>
+</body>
+</html>
