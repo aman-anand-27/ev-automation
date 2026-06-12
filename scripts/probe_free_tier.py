@@ -160,6 +160,10 @@ def markets_by_book(games: object) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-credits", type=int, default=40)
+    ap.add_argument("--sports", default=None,
+                    help="comma-separated sport keys (default: mlb,nba,+in-season soccer)")
+    ap.add_argument("--regions", default=None,
+                    help="comma-separated regions for step 1 (default: uk,eu,us2)")
     args = ap.parse_args()
 
     budget = Budget(args.max_credits)
@@ -186,14 +190,17 @@ def main() -> None:
     summary["soccer_chosen"] = soccer_key
     print(f"Soccer in season: {soccer_active}\nChosen soccer key: {soccer_key}")
 
-    probe_sports = []
-    for k in ("baseball_mlb", "basketball_nba"):
-        if k in active:
-            probe_sports.append(k)
-        else:
-            summary["notes"].append(f"{k} not active per /sports — skipped")
-    if soccer_key:
-        probe_sports.append(soccer_key)
+    if args.sports:
+        probe_sports = [s.strip() for s in args.sports.split(",") if s.strip()]
+    else:
+        probe_sports = []
+        for k in ("baseball_mlb", "basketball_nba"):
+            if k in active:
+                probe_sports.append(k)
+            else:
+                summary["notes"].append(f"{k} not active per /sports — skipped")
+        if soccer_key:
+            probe_sports.append(soccer_key)
 
     # ── Per-sport probing ────────────────────────────────────────────────
     for sport in probe_sports:
@@ -204,9 +211,12 @@ def main() -> None:
 
         # Step 1: which books live in which region (h2h only, 1 credit/region)
         region_books: dict[str, set] = {}
-        regions_to_try = ["uk", "eu"]
-        if budget.can_afford(20):       # us2 = optional circa probe, skip when tight
-            regions_to_try.append("us2")
+        if args.regions:
+            regions_to_try = [r.strip() for r in args.regions.split(",") if r.strip()]
+        else:
+            regions_to_try = ["uk", "eu"]
+            if budget.can_afford(20):   # us2 = optional circa probe, skip when tight
+                regions_to_try.append("us2")
         for region in regions_to_try:
             games, st = api_get(f"/sports/{sport}/odds",
                                 {"regions": region, "markets": "h2h",
@@ -221,7 +231,8 @@ def main() -> None:
                                     "books": sorted(bk)}
             print(f"  [{region}] status={st} games={n_games} books={sorted(bk)}")
 
-        if TARGET_BOOK not in region_books.get("uk", set()) | region_books.get("eu", set()):
+        if not args.regions and TARGET_BOOK not in (
+                region_books.get("uk", set()) | region_books.get("eu", set())):
             games, st = api_get(f"/sports/{sport}/odds",
                                 {"regions": "au", "markets": "h2h",
                                  "oddsFormat": "decimal"},

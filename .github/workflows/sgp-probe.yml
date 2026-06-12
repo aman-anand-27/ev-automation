@@ -6,6 +6,12 @@ on:
       max_credits:
         description: Hard cap on API credits the probe may spend
         default: "40"
+      sports:
+        description: Optional comma-separated sport keys (blank = defaults)
+        default: ""
+      regions:
+        description: Optional comma-separated regions (blank = uk,eu,us2)
+        default: ""
 
 concurrency:
   group: sgp-probe
@@ -27,7 +33,11 @@ jobs:
       - name: Probe The Odds API (free tier)
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-        run: python scripts/probe_free_tier.py --max-credits "${{ inputs.max_credits }}"
+        run: >
+          python scripts/probe_free_tier.py
+          --max-credits "${{ inputs.max_credits }}"
+          ${{ inputs.sports && format('--sports "{0}"', inputs.sports) || '' }}
+          ${{ inputs.regions && format('--regions "{0}"', inputs.regions) || '' }}
 
       - name: Upload raw responses + summary
         if: always()
